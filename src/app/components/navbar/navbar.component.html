@@ -1,13 +1,16 @@
-<header class="w-full sticky top-0 z-50 bg-white">
-  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+<header class="w-full sticky top-0 z-50 bg-white shadow">
+  <div class="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-20">
+    
     <!-- LOGO -->
-    <div class="flex-shrink-0 text-2xl font-sans tracking-tight">
+    <a routerLink="/" class="flex-shrink-0 text-4xl md:text-5xl font-sans tracking-tight leading-none cursor-pointer">
       <span class="font-extrabold">MÁS LATINO</span>
       <span class="font-light">NETWORK</span>
-    </div>
+    </a>
+    <nav class="hidden md:flex space-x-10 text-lg font-medium text-black leading-none">
+  </nav>
 
-    <!-- DESKTOP NAV -->
-    <nav class="hidden md:flex space-x-8 text-sm font-medium text-black">
+<!--
+        DESKTOP NAV 
       <a
         routerLink="/"
         routerLinkActive="font-bold"
@@ -45,15 +48,19 @@
       </a>
     </nav>
 
-    <!-- MOBILE MENU TOGGLE -->
+
+
+
+
+    MOBILE MENU TOGGLE 
     <button
       (click)="toggleMenu()"
-      class="md:hidden text-2xl focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-1"
+      class="md:hidden text-3xl focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-0.5"
       [attr.aria-expanded]="menuOpen"
       aria-label="Toggle navigation menu"
     >
       <svg
-        class="w-6 h-6"
+        class="w-7 h-7"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -69,10 +76,10 @@
     </button>
   </div>
 
-  <!-- MOBILE NAV -->
+ MOBILE NAV 
   <nav
     *ngIf="menuOpen"
-    class="md:hidden px-4 pt-2 pb-4 space-y-2 bg-white border-t text-black text-base font-medium transition-all duration-300 ease-in-out"
+    class="md:hidden px-2 pt-2 pb-4 space-y-2 bg-white border-t text-black text-lg font-medium transition-all duration-300 ease-in-out"
   >
     <a
       routerLink="/"
@@ -104,5 +111,5 @@
     >
       contact
     </a>
-  </nav>
-</header>
+  -->
+
