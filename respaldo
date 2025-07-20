@@ -152,10 +152,106 @@
 
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a routerLink="/press-release" class="block group">
+  <section class="bg-white text-gray-800 px-6 md:px-12 lg:px-24 py-16">
+    <!-- Contenedor con efectos -->
+    <div class="relative max-w-5xl mx-auto rounded-xl overflow-hidden transition duration-500">
+      
+      <!-- Overlay difuminado (marco transparente) -->
+      <div class="absolute inset-0 bg-white/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none z-0 rounded-xl ring-1 ring-red-200/60"></div>
+      
+      <!-- Contenido con zoom -->
+      <div class="relative z-10 bg-white transition-transform duration-500 group-hover:scale-[1.015] group-active:scale-[0.99] p-6 md:p-10 lg:p-12 rounded-xl shadow-md">
+        
+        <!-- Encabezado -->
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-blue-900 uppercase">Media Release</h2>
+          <h3 class="text-xl md:text-2xl font-bold mt-4">
+            New England Revolution Partner with Más Latino to Broadcast 2025 Home Games on Spanish Radio
+          </h3>
+          <p class="text-red-600 font-semibold mt-2">
+            Starting July 9 vs. Inter Miami, listen to Spanish radio calls of all nine remaining home games on 99.9 FM & 1300 AM, online, and the Más Latino app
+          </p>
+        </div>
+
+        <!-- Imagen -->
+        <div class="flex justify-center mb-12">
+          <img 
+            src="assets/homeimgs/revolution-maslatino-banner.png" 
+            alt="Revolution Más Latino Banner" 
+            class="w-full max-w-3xl rounded-lg shadow-lg" 
+          />
+        </div>
+
+        <!-- Texto resumen -->
+        <div class="text-justify text-lg leading-relaxed text-black space-y-4">
+          <p><strong class="text-gray-900">BOSTON (July 8, 2025)</strong> – The <strong>New England Revolution</strong> today announced a new Spanish-language radio partnership with <strong>Más Latino</strong>, bringing live match broadcasts, exclusive team content, and player interviews to Boston’s dynamic and ever-growing Latino community.</p>
+          <p class="text-gray-700 font-semibold italic">"Together, we're not just amplifying the passion of fútbol. We're elevating the voices of our community." — Luis Morales Jr.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón "Ver más" -->
+    <div class="mt-10 flex justify-center">
+      <button class="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition duration-300">
+        Ver más
+      </button>
+    </div>
+  </section>
+</a>
+
+
+
+
+
+
+
+
 <!--sección 5-->
 <section class="bg-black py-16 px-4">
   <div class="max-w-6xl mx-auto text-center">
-    
+
     <!-- Título -->
     <h2 class="text-white text-2xl md:text-3xl font-extrabold mb-10">
       BROWSE BY CATEGORY
@@ -163,172 +259,56 @@
 
     <!-- Grid de categorías -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 justify-items-center">
-      
-      <!-- Item -->
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/tech.svg" alt="Technology icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">Technology</span>
+
+      <!-- Reusable Item -->
+      <div class="flex flex-col items-center gap-4 group">
+      <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono1.png" alt="Technology icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/culture.svg" alt="Culture icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">Culture</span>
+      <div class="flex flex-col items-center gap-4 group">
+        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono2.png" alt="Culture icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/music.svg" alt="Music icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">Music</span>
+      <div class="flex flex-col items-center gap-4 group">
+        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono3.png" alt="Music icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/business.svg" alt="Business icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">Business</span>
+      <div class="flex flex-col items-center gap-4 group">
+        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono4.png" alt="Business icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/education.svg" alt="Education icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">Education</span>
+      <div class="flex flex-col items-center gap-4 group">
+        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono5.png" alt="Education icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/comedy.svg" alt="Comedy icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">Comedy</span>
+      <div class="flex flex-col items-center gap-4 group">
+        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono6.png" alt="Comedy icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/news.svg" alt="News icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">News</span>
+      <div class="flex flex-col items-center gap-4 group">
+        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono7.png" alt="News icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <img src="assets/icons/health.svg" alt="Health icon" class="w-10 h-10" />
-        <span class="text-white font-semibold text-sm">Health</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-<!--sección 6-->
-<section class="w-full px-6 md:px-16 py-12 bg-white">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 justify-center">
-
-    <!-- Tarjeta: Business -->
-    <div class="relative flex-1 bg-purple-500 text-white rounded-xl p-6 md:p-8 flex flex-col justify-between shadow-lg">
-      <!-- Decoración superior derecha (opcional: imagen o pseudo-elemento) -->
-      <div class="absolute top-0 right-0">
-        <!-- Aquí puedes agregar una decoración SVG si deseas -->
-      </div>
-
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold max-w-[70%]">Find right for your business</h3>
-        <img src="assets/icons/chat.svg" alt="Chat icon" class="w-6 h-6" />
-      </div>
-
-      <div class="mt-6">
-        <a href="#" class="bg-white text-black font-semibold py-2 px-4 rounded-full inline-block text-sm hover:bg-gray-200 transition">
-          work with us
-        </a>
-      </div>
-    </div>
-
-    <!-- Tarjeta: Career -->
-    <div class="relative flex-1 bg-red-500 text-white rounded-xl p-6 md:p-8 flex flex-col justify-between shadow-lg">
-      <div class="absolute top-0 right-0">
-        <!-- Decoración SVG también puede ir aquí -->
-      </div>
-
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold max-w-[70%]">Find right for your career</h3>
-        <img src="assets/icons/team.svg" alt="Team icon" class="w-6 h-6" />
-      </div>
-
-      <div class="mt-6">
-        <a href="#" class="bg-white text-black font-semibold py-2 px-4 rounded-full inline-block text-sm hover:bg-gray-200 transition">
-          join us
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!--sección 7-->
-<section class="w-full px-6 md:px-0 py-16 bg-white">
-  <div class="max-w-xl mx-auto text-center">
-    
-    <!-- Título -->
-    <h2 class="text-xl md:text-2xl font-extrabold text-black mb-8 uppercase">Contact Us</h2>
-
-    <!-- Formulario -->
-    <form class="space-y-6">
-
-      <!-- Fila de inputs -->
-      <div class="flex flex-col md:flex-row gap-4">
-        <!-- Nombre -->
-        <input 
-          type="text" 
-          placeholder="Nombre" 
-          class="flex-1 border border-black rounded-full px-4 py-2 text-sm focus:outline-none"
-        />
-        <!-- Correo -->
-        <input 
-          type="email" 
-          placeholder="Correo" 
-          class="flex-1 border border-black rounded-full px-4 py-2 text-sm focus:outline-none"
-        />
-      </div>
-
-      <!-- Mensaje -->
-      <textarea 
-        placeholder="Mensaje" 
-        rows="4" 
-        class="w-full border border-black rounded-xl px-4 py-3 text-sm resize-none focus:outline-none"
-      ></textarea>
-
-      <!-- Botón -->
-      <button 
-        type="submit" 
-        class="bg-red-500 hover:bg-red-600 text-white font-bold text-sm px-6 py-2 rounded-full transition"
-      >
-        enviar
-      </button>
-
-    </form>
-  </div>
-</section>
-<!--sección 8-->
-<section class="w-full px-6 md:px-16 py-16 bg-white">
-  <div class="max-w-6xl mx-auto">
-
-    <!-- Encabezado -->
-    <div class="mb-6">
-      <h2 class="text-xl md:text-2xl font-extrabold text-black">FOLLOW US</h2>
-      <div class="flex items-center gap-2 mt-2">
-        <img src="assets/icons/linkedincity.svg" alt="City LinkedIn Logo" class="w-6 h-6" />
-        <span class="text-sm text-black">Our Latest LinkedIn Posts</span>
-      </div>
-    </div>
-
-    <!-- Grid de posts -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-
-      <!-- Tarjeta 1 -->
-      <div class="relative rounded-xl overflow-hidden aspect-square bg-black">
-        <img src="assets/posts/maslatino-panel.jpg" alt="Post 1" class="w-full h-full object-cover" />
-        <img src="assets/icons/linkedin-white.svg" alt="LinkedIn icon" class="absolute bottom-2 right-2 w-6 h-6" />
-      </div>
-
-      <!-- Tarjeta 2 (placeholder negro) -->
-      <div class="relative rounded-xl overflow-hidden aspect-square bg-black">
-        <img src="assets/icons/linkedin-white.svg" alt="LinkedIn icon" class="absolute bottom-2 right-2 w-6 h-6" />
-      </div>
-
-      <!-- Tarjeta 3 (placeholder negro) -->
-      <div class="relative rounded-xl overflow-hidden aspect-square bg-black">
-        <img src="assets/icons/linkedin-white.svg" alt="LinkedIn icon" class="absolute bottom-2 right-2 w-6 h-6" />
+      <div class="flex flex-col items-center gap-4 group">
+        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
+          <img src="assets/iconos/icono8.png" alt="Health icon" class="w-24 h-24 object-contain" />
+        </div>
       </div>
 
     </div>
-
   </div>
 </section>

@@ -9,8 +9,7 @@
     <nav class="hidden md:flex space-x-10 text-lg font-medium text-black leading-none">
   </nav>
 
-<!--
-        DESKTOP NAV 
+
       <a
         routerLink="/"
         routerLinkActive="font-bold"
@@ -25,6 +24,7 @@
       >
         episodes
       </a>
+      <!--
       <a
         routerLink="/news"
         routerLinkActive="font-bold"
@@ -32,6 +32,13 @@
       >
         news
       </a>
+      -->
+          <a
+      routerLink="/about-us"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      About us
+    </a>
       <a
         routerLink="/categories"
         routerLinkActive="font-bold"
@@ -46,13 +53,11 @@
       >
         contact
       </a>
-    </nav>
 
 
 
 
 
-    MOBILE MENU TOGGLE 
     <button
       (click)="toggleMenu()"
       class="md:hidden text-3xl focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-0.5"
@@ -76,7 +81,6 @@
     </button>
   </div>
 
- MOBILE NAV 
   <nav
     *ngIf="menuOpen"
     class="md:hidden px-2 pt-2 pb-4 space-y-2 bg-white border-t text-black text-lg font-medium transition-all duration-300 ease-in-out"
@@ -111,5 +115,11 @@
     >
       contact
     </a>
-  -->
+    <a
+      routerLink="/aboutus"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      About us
+    </a>
 
+    </nav>
