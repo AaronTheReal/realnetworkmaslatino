@@ -1,0 +1,125 @@
+<header class="w-full sticky top-0 z-50 bg-white shadow">
+  <div class="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-20">
+    
+    <!-- LOGO -->
+    <a routerLink="/" class="flex-shrink-0 text-4xl md:text-5xl font-sans tracking-tight leading-none cursor-pointer">
+      <span class="font-extrabold">MÁS LATINO</span>
+      <span class="font-light">NETWORK</span>
+    </a>
+    <nav class="hidden md:flex space-x-10 text-lg font-medium text-black leading-none">
+  </nav>
+
+
+      <a
+        routerLink="/"
+        routerLinkActive="font-bold"
+        class="hover:text-gray-600 hover:underline transition-colors duration-200"
+      >
+        home
+      </a>
+      <a
+        routerLink="/episodes"
+        routerLinkActive="font-bold"
+        class="hover:text-gray-600 hover:underline transition-colors duration-200"
+      >
+        episodes
+      </a>
+      <!--
+      <a
+        routerLink="/news"
+        routerLinkActive="font-bold"
+        class="hover:text-gray-600 hover:underline transition-colors duration-200"
+      >
+        news
+      </a>
+      -->
+          <a
+      routerLink="/about-us"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      About us
+    </a>
+      <a
+        routerLink="/categories"
+        routerLinkActive="font-bold"
+        class="hover:text-gray-600 hover:underline transition-colors duration-200"
+      >
+        categories
+      </a>
+      <a
+        routerLink="/contact"
+        routerLinkActive="font-bold"
+        class="hover:text-gray-600 hover:underline transition-colors duration-200"
+      >
+        contact
+      </a>
+
+
+
+
+
+    <button
+      (click)="toggleMenu()"
+      class="md:hidden text-3xl focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-0.5"
+      [attr.aria-expanded]="menuOpen"
+      aria-label="Toggle navigation menu"
+    >
+      <svg
+        class="w-7 h-7"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <nav
+    *ngIf="menuOpen"
+    class="md:hidden px-2 pt-2 pb-4 space-y-2 bg-white border-t text-black text-lg font-medium transition-all duration-300 ease-in-out"
+  >
+    <a
+      routerLink="/"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      home
+    </a>
+    <a
+      routerLink="/episodes"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      episodes
+    </a>
+    <a
+      routerLink="/news"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      news
+    </a>
+    <a
+      routerLink="/categories"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      categories
+    </a>
+    <a
+      routerLink="/contact"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      contact
+    </a>
+    <a
+      routerLink="/aboutus"
+      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+    >
+      About us
+    </a>
+
+    </nav>
