@@ -1,0 +1,41 @@
+<section class="w-full bg-white py-24 px-6 md:px-12 lg:px-24 text-black">
+  <div class="max-w-5xl mx-auto text-center">
+
+ <form class="form" (ngSubmit)="sendEmail()" #contactForm="ngForm">
+  <div class="title text-2xl font-bold mb-4">Contact us</div>
+
+  <input
+    [(ngModel)]="formData.name"
+    name="name"
+    placeholder="Your name"
+    class="input"
+    required
+  />
+
+  <input
+    [(ngModel)]="formData.email"
+    name="email"
+    placeholder="Your email"
+    type="email"
+    class="input"
+    required
+  />
+
+  <textarea
+    [(ngModel)]="formData.message"
+    name="message"
+    placeholder="Your message"
+    class="input resize-none"
+    required
+  ></textarea>
+
+  <button
+    type="submit"
+    class="mt-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300"
+  >
+    Enviar
+  </button>
+</form>
+
+  </div>
+</section>
