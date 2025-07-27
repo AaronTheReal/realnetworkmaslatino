@@ -1,3 +1,186 @@
+
+
+
+<!-- OUR PARTNERS -->
+<section class="w-full bg-gradient-to-b from-white to-gray-100 py-16 px-6 md:px-12 lg:px-24">
+  <div class="max-w-6xl mx-auto text-center">
+    
+    <!-- Título -->
+    <h2 class="text-2xl md:text-3xl font-extrabold text-black uppercase tracking-wide mb-2">
+      OUR PARTNERS
+    </h2>
+    
+    <!-- Subtítulo -->
+    <p class="text-gray-600 text-base md:text-lg mb-12">
+      Trusted by leading institutions, brands and communities.
+    </p>
+
+    <!-- Grid de logos -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 items-center justify-items-center">
+
+      <!-- Logo 1 -->
+      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
+        <img src="assets/partners/revolution.webp" alt="New England Revolution" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
+      </div>
+
+      <!-- Logo 2 -->
+      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
+        <img src="assets/partners/redsox.jpg" alt="Boston Red Sox" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
+      </div>
+
+      <!-- Logo 3 -->
+      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
+        <img src="assets/partners/neighborhealth.png" alt="NeighborHealth" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
+      </div>
+
+      <!-- Logo 4 -->
+      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
+        <img src="assets/partners/boston.jpg" alt="City of Boston" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
+      </div>
+
+      <!-- Logo 5 -->
+      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
+        <img src="assets/partners/massachusetts.png" alt="Commonwealth of Massachusetts" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--sección 6-->
+<section class="w-full px-6 md:px-16 py-12 bg-white">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 justify-center">
+
+    <!-- Tarjeta: Business -->
+    <div class="relative flex-1 bg-purple-500 text-white rounded-xl p-6 md:p-8 flex flex-col justify-between shadow-lg">
+      <!-- Decoración superior derecha (opcional: imagen o pseudo-elemento) -->
+      <div class="absolute top-0 right-0">
+        <!-- Aquí puedes agregar una decoración SVG si deseas -->
+      </div>
+
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold max-w-[70%]">Find right for your business</h3>
+        <img src="assets/icons/chat.svg" alt="Chat icon" class="w-6 h-6" />
+      </div>
+
+      <div class="mt-6">
+        <a href="#" class="bg-white text-black font-semibold py-2 px-4 rounded-full inline-block text-sm hover:bg-gray-200 transition">
+          work with us
+        </a>
+      </div>
+    </div>
+
+    <!-- Tarjeta: Career -->
+    <div class="relative flex-1 bg-red-500 text-white rounded-xl p-6 md:p-8 flex flex-col justify-between shadow-lg">
+      <div class="absolute top-0 right-0">
+        <!-- Decoración SVG también puede ir aquí -->
+      </div>
+
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold max-w-[70%]">Find right for your career</h3>
+        <img src="assets/icons/team.svg" alt="Team icon" class="w-6 h-6" />
+      </div>
+
+      <div class="mt-6">
+        <a href="#" class="bg-white text-black font-semibold py-2 px-4 rounded-full inline-block text-sm hover:bg-gray-200 transition">
+          join us
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section class="w-full bg-white py-20 px-2 md:px-6 lg:px-12 relative overflow-hidden">
   <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10">
     
