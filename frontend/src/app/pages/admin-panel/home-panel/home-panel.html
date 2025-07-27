@@ -1,0 +1,109 @@
+<section class="w-full min-h-screen bg-gray-100 py-16 px-6 md:px-12 lg:px-24">
+  <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+    <!-- Título -->
+    <h2 class="text-3xl font-bold text-center text-blue-900 mb-6">Panel de Administración - Carrusel Destacado</h2>
+
+    <!-- Formulario de creación / edición -->
+    <form (ngSubmit)="onSubmit()" #carouselForm="ngForm" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+      <!-- Título -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-1">Título *</label>
+        <input type="text" name="title" [(ngModel)]="form.title" required class="w-full border border-gray-300 rounded px-4 py-2">
+      </div>
+
+      <!-- Subtítulo -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-1">Subtítulo</label>
+        <input type="text" name="subtitle" [(ngModel)]="form.subtitle" class="w-full border border-gray-300 rounded px-4 py-2">
+      </div>
+
+      <!-- Descripción -->
+      <div class="md:col-span-2">
+        <label class="block font-medium text-gray-700 mb-1">Descripción</label>
+        <textarea name="description" [(ngModel)]="form.description" maxlength="400" rows="3" class="w-full border border-gray-300 rounded px-4 py-2"></textarea>
+      </div>
+
+      <!-- Tipo -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-1">Tipo *</label>
+        <select name="type" [(ngModel)]="form.type" required class="w-full border border-gray-300 rounded px-4 py-2">
+          <option value="">Selecciona tipo</option>
+          <option value="podcast">Podcast</option>
+          <option value="noticia">Noticia</option>
+          <option value="reel">Reel</option>
+          <option value="video">Video</option>
+          <option value="evento">Evento</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+
+      <!-- Imagen de portada -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-1">Imagen de portada (URL) *</label>
+        <input type="text" name="coverImage" [(ngModel)]="form.coverImage" required class="w-full border border-gray-300 rounded px-4 py-2">
+      </div>
+
+      <!-- URL del contenido -->
+      <div class="md:col-span-2">
+        <label class="block font-medium text-gray-700 mb-1">URL de enlace *</label>
+        <input type="text" name="linkUrl" [(ngModel)]="form.linkUrl" required class="w-full border border-gray-300 rounded px-4 py-2">
+      </div>
+
+      <!-- Opcionales -->
+      <div>
+        <label class="block font-medium text-gray-700 mb-1">URL de video (opcional)</label>
+        <input type="text" name="videoUrl" [(ngModel)]="form.videoUrl" class="w-full border border-gray-300 rounded px-4 py-2">
+      </div>
+
+      <div>
+        <label class="block font-medium text-gray-700 mb-1">URL de audio (opcional)</label>
+        <input type="text" name="audioUrl" [(ngModel)]="form.audioUrl" class="w-full border border-gray-300 rounded px-4 py-2">
+      </div>
+
+      <div>
+        <label class="block font-medium text-gray-700 mb-1">Posición (orden)</label>
+        <input type="number" name="position" [(ngModel)]="form.position" class="w-full border border-gray-300 rounded px-4 py-2">
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <input type="checkbox" id="isActive" name="isActive" [(ngModel)]="form.isActive" class="h-5 w-5 text-blue-600">
+        <label for="isActive" class="text-sm text-gray-700">Activo</label>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="md:col-span-2 text-center mt-4">
+        <button type="submit" [disabled]="!carouselForm.form.valid" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">
+          {{ form._id ? 'Actualizar' : 'Agregar al Carrusel' }}
+        </button>
+      </div>
+    </form>
+
+    <!-- Lista de ítems existentes -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border border-gray-300 text-sm">
+        <thead class="bg-gray-200 text-gray-700">
+          <tr>
+            <th class="px-4 py-2">#</th>
+            <th class="px-4 py-2">Título</th>
+            <th class="px-4 py-2">Tipo</th>
+            <th class="px-4 py-2">Activo</th>
+            <th class="px-4 py-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of carouselItems; let i = index" class="border-t">
+            <td class="px-4 py-2">{{ i + 1 }}</td>
+            <td class="px-4 py-2">{{ item.title }}</td>
+            <td class="px-4 py-2 capitalize">{{ item.type }}</td>
+            <td class="px-4 py-2">{{ item.isActive ? 'Sí' : 'No' }}</td>
+            <td class="px-4 py-2 space-x-2">
+              <button (click)="editItem(item)" class="text-blue-600 hover:underline">Editar</button>
+              <button (click)="deleteItem(item._id)" class="text-red-600 hover:underline">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

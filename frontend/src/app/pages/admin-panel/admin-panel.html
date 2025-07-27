@@ -1,1 +1,80 @@
-<p>admin-panel works!</p>
+<!-- panel-admin.component.html (con Tailwind) -->
+<div class="container mx-auto py-4 px-4">
+  <h2 class="text-2xl md:text-3xl font-semibold text-center mb-6">Panel de Administrador</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    
+    <!-- Noticias -->
+    <a routerLink="/home-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-white bg-blue-600 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-newspaper-fill text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Home panel</span>
+      </div>
+    </a>
+
+    <!-- Podcasts -->
+    <a routerLink="/about-us-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-white bg-green-600 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-mic-fill text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">About Us</span>
+      </div>
+    </a>
+
+    <!-- Calendario -->
+    <a routerLink="/our-voice-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-black bg-yellow-400 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-calendar-event text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Our Voice</span>
+      </div>
+    </a>
+
+    
+  </div>
+</div>
+
+
+<!--
+
+   
+    <a routerLink="/noticias-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-white bg-blue-600 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-newspaper-fill text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Noticias</span>
+      </div>
+    </a>
+
+    <a routerLink="/podcast-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-white bg-green-600 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-mic-fill text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Podcasts</span>
+      </div>
+    </a>
+
+    <a routerLink="/calendario-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-black bg-yellow-400 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-calendar-event text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Calendario</span>
+      </div>
+    </a>
+
+    <a routerLink="/categorias-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-white bg-cyan-500 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-radio text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Categorias</span>
+      </div>
+    </a>
+
+    <a routerLink="/usuarios-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-white bg-red-600 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-people-fill text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Usuarios</span>
+      </div>
+    </a>
+
+    <a routerLink="/multimedia-panel" class="no-underline">
+      <div class="min-h-[200px] p-4 flex flex-col items-center justify-center rounded-xl shadow-md text-white bg-gray-700 hover:-translate-y-1 hover:shadow-lg transition duration-200 text-center cursor-pointer">
+        <i class="bi bi-film text-[2.5rem] mb-2"></i>
+        <span class="text-[1.1rem] font-medium break-words">Multimedia</span>
+      </div>
+    </a>
+-->
