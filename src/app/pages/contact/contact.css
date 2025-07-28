@@ -29,13 +29,12 @@
 }
 
 .input:focus {
-  border-color: royalblue;
-  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.25); /* royalblue */
+  border-color:  rgb(147 51 234);
+  box-shadow: 0 0 0 3px  rgb(147 51 234); /* morado translúcido */
 }
 
 
 .form .title {
-  color: royalblue;
   font-size: 30px;
   font-weight: 600;
   letter-spacing: -1px;
@@ -72,7 +71,7 @@
   border-radius: 8px;
   font-size: 16px;
   font-weight: 500;
-  background-color: royalblue;
+  background-color:   rgb(147 51 234);
   color: #fff;
   cursor: pointer;
 }

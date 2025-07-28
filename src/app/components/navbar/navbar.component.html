@@ -1,125 +1,78 @@
-<header class="w-full sticky top-0 z-50 bg-white shadow">
-  <div class="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-20">
-    
-    <!-- LOGO -->
-    <a routerLink="/" class="flex-shrink-0 text-4xl md:text-5xl font-sans tracking-tight leading-none cursor-pointer">
-      <span class="font-extrabold">MÁS LATINO</span>
-      <span class="font-light">NETWORK</span>
-    </a>
-    <nav class="hidden md:flex space-x-10 text-lg font-medium text-black leading-none">
-  </nav>
-
-
-      <a
-        routerLink="/"
-        routerLinkActive="font-bold"
-        class="hover:text-gray-600 hover:underline transition-colors duration-200"
-      >
-        home
-      </a>
-      <a
-        routerLink="/episodes"
-        routerLinkActive="font-bold"
-        class="hover:text-gray-600 hover:underline transition-colors duration-200"
-      >
-        episodes
-      </a>
-      <!--
-      <a
-        routerLink="/news"
-        routerLinkActive="font-bold"
-        class="hover:text-gray-600 hover:underline transition-colors duration-200"
-      >
-        news
-      </a>
-      -->
-          <a
-      routerLink="/about-us"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      About us
-    </a>
-      <a
-        routerLink="/categories"
-        routerLinkActive="font-bold"
-        class="hover:text-gray-600 hover:underline transition-colors duration-200"
-      >
-        categories
-      </a>
-      <a
-        routerLink="/contact"
-        routerLinkActive="font-bold"
-        class="hover:text-gray-600 hover:underline transition-colors duration-200"
-      >
-        contact
-      </a>
-
-
-
-
-
-    <button
-      (click)="toggleMenu()"
-      class="md:hidden text-3xl focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-0.5"
-      [attr.aria-expanded]="menuOpen"
-      aria-label="Toggle navigation menu"
-    >
-      <svg
-        class="w-7 h-7"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-    </button>
-  </div>
-
-  <nav
-    *ngIf="menuOpen"
-    class="md:hidden px-2 pt-2 pb-4 space-y-2 bg-white border-t text-black text-lg font-medium transition-all duration-300 ease-in-out"
+<header class="fixed top-5 right-5 z-50">
+  <!-- Isla contenedora -->
+  <div
+    class="group relative flex justify-between items-center bg-white shadow-xl rounded-l-2xl transition-all duration-500 w-[280px] hover:w-[600px] h-[60px] overflow-hidden"
   >
+    <!-- Efecto onda -->
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Logo SIEMPRE visible -->
     <a
       routerLink="/"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+      class="relative z-20 pl-6 pr-2 py-2 text-xl md:text-2xl font-sans tracking-tight leading-tight cursor-pointer text-right whitespace-nowrap"
     >
-      home
-    </a>
-    <a
-      routerLink="/episodes"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      episodes
-    </a>
-    <a
-      routerLink="/news"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      news
-    </a>
-    <a
-      routerLink="/categories"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      categories
-    </a>
-    <a
-      routerLink="/contact"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      contact
-    </a>
-    <a
-      routerLink="/aboutus"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      About us
+      <span class="font-extrabold text-purple-600">MÁS LATINO</span><br />
+      <span class="font-light text-purple-600">NETWORK</span>
     </a>
 
+    <!-- Menú con iconos -->
+    <nav class="flex gap-6 pr-6 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10">
+      <div class="group relative">
+        <a routerLink="/">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 hover:text-purple-800 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l9-7 9 7v11a2 2 0 01-2 2h-4a2 2 0 01-2-2v-5H9v5a2 2 0 01-2 2H5a2 2 0 01-2-2V10z" />
+          </svg>
+        </a>
+
+      </div>
+
+  <div class="group relative">
+  <a routerLink="/press-release">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 hover:text-purple-800 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7V3a1 1 0 00-1.447-.894l-11 5A1 1 0 003 8v8a1 1 0 00.553.894l11 5A1 1 0 0016 21v-4.382a3 3 0 002-2.818V10a3 3 0 00-2-2.818V7z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 12h-2" />
+    </svg>
+  </a>
+</div>
+
+
+
+      <div class="group relative">
+        <a routerLink="/our-impact">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 hover:text-purple-800 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10M4 18h10" />
+          </svg>
+        </a>
+
+      </div>
+
+      <div class="group relative">
+        <a routerLink="/contact">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 hover:text-purple-800 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8a2 2 0 00-2-2H5a2 2 0 00-2 2v12l4-4h12a2 2 0 002-2V8z" />
+          </svg>
+        </a>
+
+      </div>
+
+      <div class="group relative">
+        <a routerLink="/about-us">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 hover:text-purple-800 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+          </svg>
+        </a>
+
+      </div>
+       <div class="group relative">
+        <a routerLink="/our-voice">
+           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 hover:text-purple-800 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v11a3 3 0 006 0V6a3 3 0 00-6 0m-6 5a6 6 0 0012 0m-6 6v4m0 0h3m-3 0H9" />
+    </svg>
+        </a>
+
+      </div>
     </nav>
+  </div>
+</header>

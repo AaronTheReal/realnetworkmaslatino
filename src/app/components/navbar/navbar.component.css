@@ -1,0 +1,36 @@
+.nav-link {
+  @apply text-sm font-medium text-gray-700 hover:text-purple-600 transition duration-200;
+}
+
+.nav-link:hover {
+  background-color: rgba(128, 90, 213, 0.4); /* morado translúcido (purple-500 aprox.) */
+  color: white;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20em;
+}
+
+.loader {
+  position: relative;
+  margin-left: 2rem;
+  width: 2rem;
+  height: 2rem;
+  box-shadow: 0px 20px 40px #ff4646, 0px -20px 40px #8949ff, 20px 0px 40px#ff07fb, -20px 0px 40px #ff07fb;  /* Rosa neón a la derecha */
+  border-radius: 10em;
+  animation: rotate 1s linear infinite;
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
