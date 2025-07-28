@@ -70,12 +70,25 @@
         <input type="checkbox" id="isActive" name="isActive" [(ngModel)]="form.isActive" class="h-5 w-5 text-blue-600">
         <label for="isActive" class="text-sm text-gray-700">Activo</label>
       </div>
+        <!-- iframeUrl opcional manual -->
+        <div class="md:col-span-2">
+          <label class="block font-medium text-gray-700 mb-1">URL de iframe (opcional)</label>
+          <input type="text" name="iframeUrl" [(ngModel)]="form.iframeUrl" class="w-full border border-gray-300 rounded px-4 py-2">
+        </div>
+          <!-- Mensaje de error por múltiples medios -->
+          <div *ngIf="mediaErrorMessage" class="md:col-span-2 text-red-600 font-medium text-center">
+            {{ mediaErrorMessage }}
+          </div>
 
       <!-- Botón de envío -->
       <div class="md:col-span-2 text-center mt-4">
-        <button type="submit" [disabled]="!carouselForm.form.valid" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">
-          {{ form._id ? 'Actualizar' : 'Agregar al Carrusel' }}
-        </button>
+          <button
+            type="submit"
+            [disabled]="!carouselForm.form.valid || mediaErrorMessage"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg"
+          >
+            {{ form._id ? 'Actualizar' : 'Agregar al Carrusel' }}
+          </button>
       </div>
     </form>
 

@@ -1,9 +1,9 @@
-// controllers/BestController.js
 import CarouselItem from '../models/BestContent.js';
+import { computeIframeUrl, detectProvider } from '../utils/embed.js';
 
 export default class BestController {
-  static async apiGetTests(req, res, next) {
-    res.json("HOLA");
+  static async apiGetTests(req, res) {
+    res.json('HOLA');
   }
 
   static async apiGetAll(req, res) {
@@ -15,9 +15,32 @@ export default class BestController {
     }
   }
 
+  // 👉 helper para adjuntar iframe en create/update
+  static attachIframeFields(payload) {
+    const data = { ...payload };
+
+    // Si ya viene un iframeUrl explícito, solo detectamos provider
+    if (data.iframeUrl) {
+      data.embedProvider = detectProvider(data.iframeUrl);
+      return data;
+    }
+
+    const { iframeUrl, provider } = computeIframeUrl({
+      type: data.type,
+      videoUrl: data.videoUrl,
+      audioUrl: data.audioUrl,
+      linkUrl: data.linkUrl,
+    });
+
+    data.iframeUrl = iframeUrl || null;
+    data.embedProvider = provider || null;
+    return data;
+  }
+
   static async apiCreate(req, res) {
     try {
-      const item = new CarouselItem(req.body);
+      const data = BestController.attachIframeFields(req.body);
+      const item = new CarouselItem(data);
       await item.save();
       res.status(201).json(item);
     } catch (err) {
@@ -28,7 +51,8 @@ export default class BestController {
   static async apiUpdate(req, res) {
     try {
       const { id } = req.params;
-      const updated = await CarouselItem.findByIdAndUpdate(id, req.body, { new: true });
+      const data = BestController.attachIframeFields(req.body);
+      const updated = await CarouselItem.findByIdAndUpdate(id, data, { new: true });
       if (!updated) return res.status(404).json({ error: 'Item no encontrado' });
       res.status(200).json(updated);
     } catch (err) {
@@ -55,6 +79,29 @@ export default class BestController {
       res.status(200).json(item);
     } catch (err) {
       res.status(400).json({ error: 'Error al buscar item', details: err.message });
+    }
+  }
+
+  // (Opcional) endpoint para recalcular iframes en masa
+  static async apiRefreshEmbeds(req, res) {
+    try {
+      const items = await CarouselItem.find();
+      const ops = await Promise.all(
+        items.map(async (doc) => {
+          const { iframeUrl, provider } = computeIframeUrl({
+            type: doc.type,
+            videoUrl: doc.videoUrl,
+            audioUrl: doc.audioUrl,
+            linkUrl: doc.linkUrl,
+          });
+          doc.iframeUrl = iframeUrl || null;
+          doc.embedProvider = provider || null;
+          return doc.save();
+        })
+      );
+      res.status(200).json({ updated: ops.length });
+    } catch (err) {
+      res.status(500).json({ error: 'Error regenerando iframes', details: err.message });
     }
   }
 }

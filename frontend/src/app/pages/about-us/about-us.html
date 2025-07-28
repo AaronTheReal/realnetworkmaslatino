@@ -47,114 +47,16 @@
     <p class="text-lg text-gray-700 mb-16 max-w-3xl mx-auto">
       Meet the passionate voices, visionaries, and community builders behind Más Latino Network.
     </p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-
-      <!-- Repite esto para cada miembro del equipo -->
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/lmj.jpg" alt="Luis Morales Jr." class="w-full h-full object-cover">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+        <div *ngFor="let member of teamMembers" class="flex flex-col items-center text-center group">
+          <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
+            <img [src]="member.imageUrl" [alt]="member.name" class="w-full h-full object-cover" />
+          </div>
+          <h3 class="text-xl font-semibold text-blue-900">{{ member.name }}</h3>
+          <p class="text-sm text-gray-600">{{ member.position }}</p>
         </div>
-        <h3 class="text-xl font-semibold text-blue-900">Luis Morales Jr.</h3>
-        <p class="text-sm text-gray-600">Chief Executive Officer</p>
       </div>
 
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/marta.jpg" alt="Marta Lopez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Marta Lopez</h3>
-        <p class="text-sm text-gray-600">Chief of Staff</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/yadira.jpg" alt="Yadira Rodriguez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Yadira Rodriguez</h3>
-        <p class="text-sm text-gray-600">Marketing Lead</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/viviana.jpg" alt="Viviana Gonzalez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Viviana Gonzalez</h3>
-        <p class="text-sm text-gray-600">Lead Editor / On Air Talent</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/alessandra.jpg" alt="Alessandra Mejia" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Alessandra Mejia</h3>
-        <p class="text-sm text-gray-600">Branding / Graphic Designer</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/aaron.jpg" alt="Aaron Rodriguez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Aaron Rodriguez</h3>
-        <p class="text-sm text-gray-600">Web / App Developer</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/alejandro.jpg" alt="Alejandro Garcia" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Alejandro Garcia</h3>
-        <p class="text-sm text-gray-600">Traffic Coordinator</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/michell.jpg" alt="Michell Oliveros" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Michell Oliveros</h3>
-        <p class="text-sm text-gray-600">Content Creator</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/cecy.jpg" alt="Cecy del Carmen" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Cecy del Carmen</h3>
-        <p class="text-sm text-gray-600">On Air Talent</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/mia.jpg" alt="Mia Lagunas" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Mia Lagunas</h3>
-        <p class="text-sm text-gray-600">Public Relations Intern</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/nicol.jpg" alt="Nicol Mai" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Nicol Mai</h3>
-        <p class="text-sm text-gray-600">Content Creator Intern</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/stephany.jpg" alt="Stephany Gonzalez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Stephany Gonzalez</h3>
-        <p class="text-sm text-gray-600">Film / Video Intern</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/sandra.jpg" alt="Sandra Rivadeneira" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Sandra Rivadeneira</h3>
-        <p class="text-sm text-gray-600">Sports Intern</p>
-      </div>
-
-    </div>
+    
   </div>
 </section>

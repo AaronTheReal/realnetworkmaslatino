@@ -183,9 +183,11 @@
     </p>
 
     <!-- Contenedor de carrusel -->
-    <div class="rounded-2xl border border-gray-200 shadow-xl overflow-hidden p-2 bg-white">
-      <swiper-container #swiperEl class="w-full h-full"></swiper-container>
-    </div>
+<div class="rounded-2xl border border-gray-200 shadow-xl overflow-hidden p-2 bg-white">
+  <swiper-container #swiperEl class="w-full h-full"></swiper-container>
+</div>
+
+
   </div>
 </section>
 
@@ -279,11 +281,10 @@
 
 
 
-
 <!-- SECCIÓN FULL WIDTH CON FONDO SVG REAL -->
 <section class="relative w-full bg-gradient-to-b from-white to-gray-50 py-24 overflow-hidden">
 
-  <!-- Fondo SVG ocupa toda la pantalla horizontal -->
+  <!-- Fondo SVG -->
   <div class="absolute top-0 left-0 right-0 bottom-0 w-full h-full opacity-5 z-0 pointer-events-none">
     <svg class="absolute top-0 left-0 w-screen h-full" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none">
       <defs>
@@ -295,12 +296,9 @@
     </svg>
   </div>
 
-
   <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
-
-    <!-- Título + icono -->
+    <!-- Título -->
     <div class="flex flex-col items-center justify-center mb-6">
- 
       <h2 class="text-3xl md:text-4xl font-extrabold text-black uppercase tracking-wide">
         Contact Us
       </h2>
@@ -309,27 +307,36 @@
       </p>
     </div>
 
-    <!-- Tarjeta del formulario -->
-    <div class="bg-white rounded-2xl shadow-xl p-8 mt-10 space-y-8 border border-gray-200">
-
+    <!-- FORMULARIO FUNCIONAL -->
+    <form 
+      action="https://formspree.io/f/xwpqbnrj" 
+      method="POST"
+      class="bg-white rounded-2xl shadow-xl p-8 mt-10 space-y-8 border border-gray-200"
+    >
       <!-- Fila: Nombre + Correo -->
       <div class="flex flex-col md:flex-row gap-6">
         <input 
           type="text" 
+          name="name"
           placeholder="Tu nombre completo" 
+          required
           class="flex-1 border border-gray-300 rounded-full px-6 py-4 text-base focus:outline-none focus:ring-2 focus:ring-red-400"
         />
         <input 
           type="email" 
+          name="email"
           placeholder="Tu correo electrónico" 
+          required
           class="flex-1 border border-gray-300 rounded-full px-6 py-4 text-base focus:outline-none focus:ring-2 focus:ring-red-400"
         />
       </div>
 
       <!-- Campo de mensaje -->
       <textarea 
+        name="message"
         placeholder="Escribe tu mensaje aquí..." 
         rows="6" 
+        required
         class="w-full border border-gray-300 rounded-xl px-6 py-5 text-base resize-none focus:outline-none focus:ring-2 focus:ring-red-400"
       ></textarea>
 
@@ -343,9 +350,19 @@
         </svg>
         ENVIAR MENSAJE
       </button>
-    </div>
+    </form>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
 
 <!-- FOLLOW US REIMAGINADO - FONDO SVG COMPLETO -->
 <section class="relative w-full bg-gradient-to-b from-white to-gray-50 py-20 overflow-hidden">
@@ -424,44 +441,88 @@
 
 
 
-
-
-
-
-
-<!-- Modal para iframe o video -->
+<!-- Modal unificado para video, iframe o audio -->
 <div *ngIf="selectedCard" class="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4">
   <div class="relative w-full max-w-6xl aspect-video bg-black rounded-xl overflow-hidden">
 
-    <button class="absolute top-3 right-3 text-white text-3xl z-10" (click)="closeModal()">✖</button>
+    <!-- Imagen de fondo oscurecida -->
+    <img
+      [src]="selectedCard.coverImage"
+      class="absolute w-full h-full object-cover brightness-50"
+      alt="Fondo"
+    />
 
-    <!-- Mostrar iframe si existe -->
-    <ng-container *ngIf="selectedCard.iframeUrl; else showVideo">
-      <iframe
-        [src]="selectedCard.iframeUrl | safe"
-        class="w-full h-full"
-        frameborder="0"
-        allowfullscreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </ng-container>
+    <!-- Botón de cerrar -->
+    <button class="absolute top-3 right-3 text-white text-3xl z-20" (click)="closeModal()">✖</button>
 
-    <!-- Mostrar video si no hay iframe -->
-    <ng-template #showVideo>
-      <video
-        class="w-full h-full"
-        controls
-        autoplay
-        muted
-      >
-        <source [src]="selectedCard.videoUrl" type="video/mp4" />
-        Tu navegador no soporta la reproducción de video.
-      </video>
-    </ng-template>
+    <!-- Contenido del modal -->
+    <div class="relative z-10 w-full h-full flex items-center justify-center text-white bg-black/60">
+      <!-- AUDIO MODAL -->
+      <ng-container *ngIf="selectedCard.type === 'podcast' && selectedCard.audioUrl; else mediaContent">
+        <div class="flex flex-col items-center justify-center text-center px-6 space-y-4 w-full">
+          <div>
+            <h2 class="text-2xl font-bold">{{ selectedCard.title }}</h2>
+            <p class="text-base opacity-90" *ngIf="selectedCard.subtitle">{{ selectedCard.subtitle }}</p>
+            <p class="text-sm opacity-80 mt-1" *ngIf="selectedCard.description">{{ selectedCard.description }}</p>
+          </div>
 
+          <audio
+            class="w-full max-w-xl"
+            controls
+            autoplay
+          >
+            <source [src]="selectedCard.audioUrl" type="audio/mpeg" />
+            Tu navegador no soporta audio.
+          </audio>
+        </div>
+      </ng-container>
+
+      <!-- VIDEO / IFRAME / HTML EMBED -->
+      <ng-template #mediaContent>
+        <div class="w-full h-full p-4">
+          <!-- HTML embebido tipo blockquote -->
+          <ng-container *ngIf="selectedCard.iframeUrl?.includes('<blockquote'); else fallbackContent">
+            <div class="w-full h-full overflow-auto max-h-full bg-white text-black p-2 rounded">
+              <div [innerHTML]="selectedCard.iframeUrl"></div>
+            </div>
+          </ng-container>
+
+          <!-- Iframe normal o video -->
+          <ng-template #fallbackContent>
+            <ng-container *ngIf="selectedCard.iframeUrl; else showVideo">
+              <iframe
+                [src]="selectedCard.iframeUrl | safe"
+                class="w-full h-full"
+                frameborder="0"
+                allowfullscreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </ng-container>
+
+            <!-- Video directo -->
+            <ng-template #showVideo>
+              <video
+                class="w-full h-full"
+                controls
+                autoplay
+                muted
+              >
+                <source [src]="selectedCard.videoUrl" type="video/mp4" />
+                Tu navegador no soporta la reproducción de video.
+              </video>
+            </ng-template>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>
+
+
+
+
+
 
 
     <!--

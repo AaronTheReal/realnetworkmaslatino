@@ -1,4 +1,3 @@
-// home.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -18,6 +17,8 @@ export interface CarouselItem {
   isActive?: boolean;
   tags?: string[];
   createdAt?: string;
+  iframeUrl?: string;
+  embedProvider?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -44,5 +45,10 @@ export class HomeService {
 
   deleteCarouselItem(id: string): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`${this.baseUrl}/${id}`);
+  }
+
+  // 🔁 NUEVO: Regenerar todos los iframeUrl desde el backend
+  regenerateAllEmbeds(): Observable<{ updated: number }> {
+    return this.http.post<{ updated: number }>(`${this.baseUrl}/refresh-embeds`, {});
   }
 }

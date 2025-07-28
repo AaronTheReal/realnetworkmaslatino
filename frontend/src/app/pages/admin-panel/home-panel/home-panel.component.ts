@@ -17,6 +17,7 @@ export class HomePanelComponent implements OnInit {
   carouselItems: CarouselItem[] = [];
   form: CarouselItem = this.getEmptyForm();
   isLoading = false;
+  mediaErrorMessage: string | null = null;
 
   constructor(private homeService: HomeService) {}
 
@@ -38,30 +39,41 @@ export class HomePanelComponent implements OnInit {
     });
   }
 
+  isValidMediaInput(): boolean {
+  const filled = [this.form.videoUrl, this.form.audioUrl, this.form.iframeUrl].filter(Boolean);
+  return filled.length <= 1;
+  } 
   onSubmit() {
-    if (this.form._id) {
-      this.homeService.updateCarouselItem(this.form._id, this.form).subscribe({
-        next: (updated) => {
-          const index = this.carouselItems.findIndex(i => i._id === updated._id);
-          if (index !== -1) this.carouselItems[index] = updated;
-          this.resetForm();
-        },
-        error: (err) => {
-          console.error('Error al actualizar:', err);
-        }
-      });
-    } else {
-      this.homeService.createCarouselItem(this.form).subscribe({
-        next: (created) => {
-          this.carouselItems.push(created);
-          this.resetForm();
-        },
-        error: (err) => {
-          console.error('Error al crear:', err);
-        }
-      });
-    }
+  this.mediaErrorMessage = null;
+
+  if (!this.isValidMediaInput()) {
+    this.mediaErrorMessage = 'Solo puedes ingresar uno entre Video, Audio o Iframe.';
+    return;
   }
+
+  if (this.form._id) {
+    this.homeService.updateCarouselItem(this.form._id, this.form).subscribe({
+      next: (updated) => {
+        const index = this.carouselItems.findIndex(i => i._id === updated._id);
+        if (index !== -1) this.carouselItems[index] = updated;
+        this.resetForm();
+      },
+      error: (err) => {
+        console.error('Error al actualizar:', err);
+      }
+    });
+  } else {
+    this.homeService.createCarouselItem(this.form).subscribe({
+      next: (created) => {
+        this.carouselItems.push(created);
+        this.resetForm();
+      },
+      error: (err) => {
+        console.error('Error al crear:', err);
+      }
+    });
+  }
+}
 
   editItem(item: CarouselItem) {
     this.form = { ...item };

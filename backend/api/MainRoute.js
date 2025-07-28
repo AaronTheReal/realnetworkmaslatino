@@ -6,6 +6,8 @@ import path from 'path';
 import MainController from './MainController.js';
 import AuthController from './AuthController.js';
 import BestController from './BestController.js';
+import TeamController from './TeamMemberController.js';
+import VoiceController from './MeetController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,6 +37,43 @@ export default class MainRoute {
     router.route('/best-content').post(BestController.apiCreate);
     router.route('/best-content/:id').put(BestController.apiUpdate);
     router.route('/best-content/:id').delete(BestController.apiDelete);
+    router.route('/best-content/refresh-embeds').post(BestController.apiRefreshEmbeds);
+
+
+
+
+    // CRUD
+    router.route('/team')
+      .get(TeamController.apiGetAll)
+      .post(TeamController.apiCreate);
+
+    router.route('/team/:id')
+      .get(TeamController.apiGetById)
+      .put(TeamController.apiUpdate)
+      .delete(TeamController.apiDelete);
+
+    // Reordenar (bulk)
+    router.route('/team/reorder').put(TeamController.apiReorder);
+
+
+    // Test
+    router.get('/voices/test', VoiceController.apiGetTests);
+
+    // CRUD
+    router
+      .route('/voices')
+      .get(VoiceController.apiGetAll)
+      .post(VoiceController.apiCreate);
+
+    router
+      .route('/voices/:id')
+      .get(VoiceController.apiGetById)
+      .put(VoiceController.apiUpdate)
+      .delete(VoiceController.apiDelete);
+
+    // Reordenar
+    router.put('/voices/reorder', VoiceController.apiReorder);
+
 
     return router;
   }
