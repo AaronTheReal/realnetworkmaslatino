@@ -15,7 +15,8 @@ export interface TeamMember {
 
 @Injectable({ providedIn: 'root' })
 export class TeamService {
-  private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/team';
+  //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/team';
+  private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/team';
 
   constructor(private http: HttpClient) {}
 
