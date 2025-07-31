@@ -2,11 +2,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VoiceService, VoiceMember } from '../../services/meet-service'; // Asegúrate de usar el mismo servicio
+import {OurVoiceFeatures} from '../our-voice/our-voice-features/our-voice-features'
+import {OurVoiceMeet} from '../our-voice/our-voice-meet/our-voice-meet'
 
 @Component({
   selector: 'app-our-voice',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    OurVoiceFeatures,
+    OurVoiceMeet
+  ],
   templateUrl: './our-voice.html',
   styleUrls: ['./our-voice.css']
 })

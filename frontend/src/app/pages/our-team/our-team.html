@@ -1,0 +1,89 @@
+<section class="w-full bg-white py-16 px-2 md:px-[9rem]">
+  <h2 class="text-4xl md:text-5xl font-black text-center mb-10">
+    OUR TEAM
+  </h2>
+
+  <!-- Mostrar al primer miembro en sección destacada -->
+  <ng-container *ngIf="teamMembers.length">
+    <div class="flex flex-col md:flex-row items-center gap-8 mb-16">
+      <!-- Imagen grande a la izquierda -->
+      <div class="w-full md:w-1/2">
+        <img
+          [src]="teamMembers[0].imageUrl"
+          [alt]="teamMembers[0].name"
+          class="w-full h-auto rounded-3xl object-cover object-center"
+        />
+   
+      </div>
+
+      <!-- Texto a la derecha -->
+      <div class="w-full md:w-1/2 text-left md:pl-20">
+        <h3 class="text-2xl font-bold mb-4">{{ teamMembers[0].name }}</h3>
+        <p class="text-gray-700 text-base leading-relaxed">
+          {{ teamMembers[0].position || 'No description available.' }}
+        </p>
+        <!-- Ícono redondeado alineado igual que el texto -->
+            <div class="w-20 h-20 rounded-xl overflow-hidden">
+                <img
+                src="assets/ourteam/foto1.png"
+                alt="Decoración"
+                class="w-full h-full object-cover opacity-80"
+                />
+            </div>
+      </div>
+    </div>
+
+    <!-- Miembros restantes en grid de 3 por fila -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-7xl mx-auto">
+      <div
+        *ngFor="let member of teamMembers.slice(1)"
+        class="flex flex-col"
+      >
+        <!-- Imagen rectangular ligeramente más alta -->
+        <div class="w-full aspect-[1.01] overflow-hidden rounded-[2rem] mb-2">
+            
+          <img
+            [src]="member.imageUrl"
+            [alt]="member.name"
+            class="w-full h-full object-cover object-center"
+          />
+        </div>
+
+ <div class="flex flex-col text-left">
+  <!-- Nombre -->
+  <h3 class="text-xl font-extrabold mb-1">{{ member.name }}</h3>
+
+  <!-- Posición -->
+  <p class="text-sm text-gray-700 mb-2">
+    {{ member.position }}
+  </p>
+
+  <!-- Icono perfectamente alineado con el texto -->
+  <div class="w-10 h-10 rounded-lg overflow-hidden">
+    <img
+      src="assets/ourteam/foto1.png"
+      alt="Decoración"
+      class="w-full h-full object-cover opacity-80"
+    />
+  </div>
+</div>
+
+
+
+
+      </div>
+
+      
+    </div>
+  </ng-container>
+
+  <!-- Imagen decorativa flotante -->
+  <div class="absolute bottom-[230px] right-10 w-64 md:w-80 transform scale-[1.2] z-10">
+    <img src="assets/ourteam/foto2.png" alt="Decoración derecha" class="w-full h-auto opacity-90" />
+  </div>
+
+  <!-- Si no hay miembros -->
+  <div *ngIf="!teamMembers.length" class="text-center text-gray-400 italic mt-6">
+    No team member available at the moment.
+  </div>
+</section>

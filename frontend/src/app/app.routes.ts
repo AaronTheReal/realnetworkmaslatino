@@ -11,6 +11,7 @@ import { OurVoicePanel } from '../app/pages/admin-panel/our-voice-panel/our-voic
 
 import { Contact } from '../app/pages/contact/contact';
 import { OurImpact } from '../app/pages/our-impact/our-impact';
+import { OurTeam } from '../app/pages/our-team/our-team';
 
 export const routes: Routes = [
 
@@ -22,6 +23,9 @@ export const routes: Routes = [
       { path: 'home-panel', component: HomePanelComponent },
       { path: 'our-voice', component: OurVoice },
       { path: 'our-voice-panel', component: OurVoicePanel },
+      { path: 'our-team', component: OurTeam },
+
+      
 
       { path: 'our-impact', component: OurImpact },
       { path: 'contact', component: Contact },

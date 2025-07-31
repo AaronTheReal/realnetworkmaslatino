@@ -4,7 +4,15 @@ export default {
     "./src/**/*.{html,ts}"
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.image-render-pixelated': {
+          'image-rendering': 'pixelated'
+        }
+      });
+    }
+  ]
 }

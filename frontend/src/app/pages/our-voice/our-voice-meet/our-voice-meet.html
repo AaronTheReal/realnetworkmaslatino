@@ -1,0 +1,41 @@
+<section class="w-full bg-white py-16 px-2 md:px-[9rem]">
+  <h2 class="text-4xl md:text-5xl font-black text-center mb-10">
+    Meet Our Voices
+  </h2>
+
+  <div *ngIf="loading" class="text-center text-gray-500 text-lg mb-6">
+    Loading team...
+  </div>
+
+  <div *ngIf="!loading && voiceMembers.length" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-7xl mx-auto">
+
+    <div
+      *ngFor="let member of voiceMembers"
+      class="flex flex-col"
+    >
+      <!-- Imagen con aspecto 3:4 y bordes redondeados -->
+  <div class="w-full aspect-[4/4] overflow-hidden rounded-[2rem] mb-2">
+        <img
+          [src]="member.imageUrl"
+          [alt]="member.name"
+          class="w-full h-full object-cover object-center"
+        />
+      </div>
+
+      <!-- Nombre en grande, negritas, alineado a la izquierda -->
+      <h3 class="text-xl font-extrabold text-left mb-1">{{ member.name }}</h3>
+
+      <!-- Lista alineada a la izquierda -->
+      <ul class="text-left text-sm text-gray-700 space-y-1">
+        <li *ngIf="member.role">{{ member.role }}</li>
+        <li *ngIf="member.bio">{{ member.bio }}</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div *ngIf="!loading && !voiceMembers.length" class="text-center text-gray-400 italic mt-6">
+    No voices available at the moment.
+  </div>
+</section>
+

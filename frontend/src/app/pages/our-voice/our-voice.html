@@ -1,74 +1,48 @@
-<section class="w-full bg-white pt-32 pb-20 px-6 md:px-16 text-black">
-  <div class="max-w-6xl mx-auto">
+<section class="w-full min-h-screen flex flex-col items-center justify-start bg-white text-black pt-24">
+  <!-- Título centrado -->
+<h2 class="text-6xl md:text-7xl lg:text-7xl font-black text-center mb-12 uppercase">OUR VOICE</h2>
 
-    <!-- HERO SECTION -->
-    <div class="relative text-center max-w-3xl mx-auto mb-16">
-      <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]"></div>
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6">
-        Where Latino <span class="text-red-500">stories</span>, <span class="text-purple-600">perspectives</span>, and <span class="relative text-yellow-500">
-          talent
-          <span class="absolute left-0 -bottom-1 h-1 w-full bg-gradient-to-r from-red-500 to-purple-600 rounded-full"></span>
-        </span> come to life.
-      </h1>
-      <p class="text-lg text-gray-700">
-        At Más Latino, our voice is our superpower. Through FM radio, digital video, and podcasts, we bring real stories from real Latinos to the forefront — unfiltered, authentic, and bilingual.
-        <br class="hidden md:block" /> Whether you're here to listen, watch, or partner — welcome to the sound of our <strong>cultura</strong>.
-      </p>
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <button class="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-full">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          Listen Live
-        </button>
-        <button class="inline-flex items-center gap-2 border border-black text-black hover:bg-black hover:text-white font-semibold px-6 py-3 rounded-full transition">
-          Sponsor our voice
-        </button>
-      </div>
-      <!--
-      <div class="mt-6 flex items-center justify-center gap-4 opacity-60">
-        <img src="assets/icons/spotify.svg" class="h-6" alt="Spotify" />
-        <img src="assets/icons/applepodcasts.svg" class="h-6" alt="Apple Podcasts" />
-        <img src="assets/icons/youtube.svg" class="h-6" alt="YouTube" />
-      </div>
-      -->
+  <!-- Contenido dividido en 2 columnas -->
+  <div class="flex flex-col md:flex-row w-full h-full">
+    
+    <!-- Imagen 100% pegada a la izquierda -->
+    <div class="w-full md:w-1/2 flex items-center">
+      <img
+        src="assets/ourvoice/foto1.png"
+        alt="Imagen Our Voice"
+        class="w-[600px] h-[700px] object-cover object-left"
+      />
     </div>
 
-    <!-- FEATURED SHOWS & PODCASTS -->
-    <div class="mb-24">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase">🎙️ Featured Shows & Podcasts</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Podcast Tile -->
-        <div class="bg-gray-100 rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform duration-300">
-          <div>
-            <h3 class="text-xl font-semibold mb-2">🎧 Café con Cultura</h3>
-            <p class="text-sm text-gray-600 mb-1">Format: Weekly Podcast</p>
-            <p class="text-sm text-gray-600 mb-1">Host: Michell Morales</p>
-            <p class="text-sm text-gray-700 mt-3">
-              Candid conversations with Latino changemakers over coffee — from Boston to beyond.
-            </p>
-          </div>
-          <div class="flex gap-4 mt-6">
-            <button class="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-600">Listen Now</button>
-            <button class="bg-black text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-800">Sponsor This Show</button>
-          </div>
-        </div>
+    <!-- Texto (posición actual respetada) -->
+    <div class="w-full md:w-1/2 flex items-center justify-start relative">
+      <div class="absolute top-1/2 transform -translate-y-1/2 translate-x-[-40px] pl-4 md:pl-6 text-left">
+        <p class="font-extrabold text-5xl md:text-6xl leading-tight uppercase mb-6">
+          <span class="text-purple-700">AT MÁS<br />LATINO</span><span class="text-black">, OUR</span><br />
+          <span class="text-black">VOICE IS OUR<br />SUPERPOWER.</span>
+        </p>
+
+        <p class="text-lg md:text-xl font-[Times_New_Roman] text-gray-700">
+          Through FM radio, digital video, and podcasts,<br />
+          we bring real stories from real Latinos to the<br />
+          forefront — unfiltered, authentic, and bilingual.<br />
+          Whether you're here to listen, watch, or partner<br />
+          — welcome to the sound of our cultura.
+        </p>
       </div>
     </div>
-
-      <!-- MEET OUR VOICES SECTION -->
-<div class="bg-gray-50 rounded-2xl py-16 px-6 md:px-12">
-  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase">👥 Meet Our Voices</h2>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-    <div *ngFor="let voice of voiceMembers" class="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden flex flex-col text-center items-center p-6">
-      <div class="w-24 h-24 rounded-full bg-gray-300 overflow-hidden mb-4">
-        <img *ngIf="voice.imageUrl" [src]="voice.imageUrl" [alt]="voice.name" class="w-full h-full object-cover" />
-      </div>
-      <h3 class="text-lg font-bold">{{ voice.name }}</h3>
-      <p class="text-sm text-gray-500">{{ voice.role }}</p>
-      <p *ngIf="voice.bio" class="text-sm text-gray-600 mt-2">{{ voice.bio }}</p>
-    </div>
-  </div>
-</div>
-
   </div>
 </section>
+
+<app-our-voice-features></app-our-voice-features>
+
+<app-our-voice-meet></app-our-voice-meet>
+
+
+
+
+
+
+
+
+  
