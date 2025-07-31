@@ -28,7 +28,8 @@ const allowedOrigins = [
   'http://localhost:5000',
   'https://maslatinomobile.netlify.app',
   'https://super-cajeta-50e752.netlify.app',
-  'https://realnetworkmaslatino.onrender.com'
+  'https://realnetworkmaslatino.onrender.com',
+  'https://maslatinonetwork.com'
 
 ];
 
