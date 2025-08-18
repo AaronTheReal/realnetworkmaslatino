@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamService, TeamMember } from '../../services/team-service'; // Asegúrate de que la ruta sea correcta
 import { RouterModule } from '@angular/router';
@@ -8,7 +8,9 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './about-us.html',
-  styleUrl: './about-us.css',
+  styleUrls: ['./about-us.css'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class AboutUsComponent implements OnInit {
   teamMembers: TeamMember[] = [];
