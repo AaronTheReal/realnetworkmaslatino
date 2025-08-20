@@ -1,15 +1,14 @@
-<header class="w-full sticky top-0 z-50 bg-white shadow">
-  <div class="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-20">
+<header class="w-full sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 sm:h-20">
     
     <!-- LOGO -->
-    <a routerLink="/" class="flex-shrink-0 text-4xl md:text-5xl font-sans tracking-tight leading-none cursor-pointer">
+    <a routerLink="/" class="flex-shrink-0 text-3xl sm:text-4xl md:text-5xl font-sans tracking-tight leading-none cursor-pointer">
       <span class="font-extrabold">MÁS LATINO</span>
       <span class="font-light">NETWORK</span>
     </a>
-    <nav class="hidden md:flex space-x-10 text-lg font-medium text-black leading-none">
-  </nav>
 
-
+    <!-- Navegación Desktop -->
+    <nav class="hidden md:flex space-x-6 lg:space-x-10 text-base lg:text-lg font-medium text-black leading-none">
       <a
         routerLink="/"
         routerLinkActive="font-bold"
@@ -24,21 +23,13 @@
       >
         Our voice
       </a>
-      <!--
       <a
-        routerLink="/news"
+        routerLink="/about-us"
         routerLinkActive="font-bold"
         class="hover:text-gray-600 hover:underline transition-colors duration-200"
       >
-        news
+        About us
       </a>
-      -->
-          <a
-      routerLink="/about-us"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      About us
-    </a>
       <a
         routerLink="/our-impact"
         routerLinkActive="font-bold"
@@ -46,7 +37,6 @@
       >
         Our Impact
       </a>
-     
       <a
         routerLink="/our-team"
         routerLinkActive="font-bold"
@@ -54,18 +44,17 @@
       >
         Our Team
       </a>
+    </nav>
 
-
-
-
+    <!-- Botón Hamburguesa para Mobile -->
     <button
       (click)="toggleMenu()"
-      class="md:hidden text-3xl focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-0.5"
+      class="md:hidden text-2xl sm:text-3xl focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-1 transition-transform duration-300"
       [attr.aria-expanded]="menuOpen"
       aria-label="Toggle navigation menu"
     >
       <svg
-        class="w-7 h-7"
+        class="w-6 h-6 sm:w-7 sm:h-7"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -81,45 +70,41 @@
     </button>
   </div>
 
+  <!-- Menú Mobile con Animación -->
   <nav
     *ngIf="menuOpen"
-    class="md:hidden px-2 pt-2 pb-4 space-y-2 bg-white border-t text-black text-lg font-medium transition-all duration-300 ease-in-out"
+    class="md:hidden px-4 pt-4 pb-6 space-y-3 bg-white border-t shadow-lg text-black text-base sm:text-lg font-medium transition-all duration-500 ease-in-out transform origin-top"
+    [ngClass]="{'scale-y-100 opacity-100': menuOpen, 'scale-y-0 opacity-0': !menuOpen}"
   >
     <a
       routerLink="/"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+      class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200"
     >
       home
     </a>
     <a
-      routerLink="/episodes"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+      routerLink="/our-voice"
+      class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200"
     >
-      episodes
+      Our voice
     </a>
     <a
-      routerLink="/news"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      news
-    </a>
-    <a
-      routerLink="/categories"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      categories
-    </a>
-    <a
-      routerLink="/contact"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
-    >
-      contact
-    </a>
-    <a
-      routerLink="/aboutus"
-      class="block hover:bg-gray-100 rounded px-2 py-1 transition-colors duration-200"
+      routerLink="/about-us"
+      class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200"
     >
       About us
     </a>
-
-    </nav>
+    <a
+      routerLink="/our-impact"
+      class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200"
+    >
+      Our Impact
+    </a>
+    <a
+      routerLink="/our-team"
+      class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200"
+    >
+      Our Team
+    </a>
+  </nav>
+</header>

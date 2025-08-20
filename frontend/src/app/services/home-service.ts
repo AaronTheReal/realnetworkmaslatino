@@ -7,12 +7,11 @@ export interface CarouselItem {
   title: string;
   subtitle?: string;
   description?: string;
-  type: 'podcast' | 'noticia' | 'reel' | 'video' | 'evento' | 'custom';
+  type: 'podcast' | 'noticia' | 'reel' | 'video' | 'evento' | 'custom' | '';  
   coverImage: string;
   videoUrl?: string;
   audioUrl?: string;
-  linkUrl: string;
-  relatedId?: string;
+  linkUrl?: string; 
   position?: number;
   isActive?: boolean;
   tags?: string[];
@@ -23,7 +22,7 @@ export interface CarouselItem {
 
 @Injectable({ providedIn: 'root' })
 export class HomeService {
- //  private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/best-content';
+ //private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/best-content';
   //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/best-content';
   private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/best-content'
   constructor(private http: HttpClient) {}

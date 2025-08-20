@@ -13,8 +13,28 @@ import { register } from 'swiper/element/bundle';
 import { SafePipe } from '../../../safe.pipe';
 import { HomeService, CarouselItem } from './../../services/home-service';
 
-register();
+// 🔥 Declarar globals para TikTok, Instagram y Facebook (evita errores TS)
+declare global {
+  interface Window {
+    tiktokEmbed?: {
+      lib: {
+        render: (elements: Element[]) => void;
+      };
+    };
+    instgrm?: {
+      Embeds: {
+        process: () => void;
+      };
+    };
+    FB?: {
+      XFBML: {
+        parse: () => void;
+      };
+    };
+  }
+}
 
+register();
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -25,22 +45,16 @@ register();
 })
 export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
-
   selectedCard: CarouselItem | null = null;
-
   carouselItems: CarouselItem[] = [];
-
   private swiperInitialized = false;
-
   constructor(private homeService: HomeService) {}
-
   ngOnInit(): void {
     this.homeService.getAllCarouselItems().subscribe({
       next: (items) => {
         this.carouselItems = (items || [])
           .filter((i) => i.isActive !== false) // muestra true o undefined
           .sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
-
         // Si el swiper ya está en el DOM, intenta montarlo
         setTimeout(() => this.tryInitSwiper(), 0);
       },
@@ -49,17 +63,14 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked {
       },
     });
   }
-
   ngAfterViewInit(): void {
     // Si ya cargaron los items antes de que exista el swiper en el DOM
     this.tryInitSwiper();
   }
-
   ngAfterViewChecked(): void {
     // fallback por si algo se montó después
     this.tryInitSwiper();
   }
-
   private tryInitSwiper(): void {
     if (
       this.swiperInitialized ||
@@ -68,9 +79,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked {
     ) {
       return;
     }
-
     const swiperContainer = this.swiperEl.nativeElement as any;
-
     // Props del web component
     swiperContainer.slidesPerView = 1;
     swiperContainer.spaceBetween = 20;
@@ -86,18 +95,15 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked {
       768: { slidesPerView: 2 },
       1024: { slidesPerView: 3 },
     };
-
     // Crea las slides desde la BD
     this.carouselItems.forEach((item, index) => {
       const slideEl = document.createElement('swiper-slide');
-
       const title = item.title ?? '';
       const subtitle = item.subtitle ?? '';
       const description = item.description ?? '';
       const image = item.coverImage;
       const alt = item.title ?? 'item';
       const clickIndex = index;
-
       slideEl.innerHTML = `
         <div class="relative overflow-hidden rounded-2xl shadow-lg transform transition duration-300 hover:scale-105 group cursor-pointer" data-index="${clickIndex}">
           <img src="${image}" alt="${alt}" class="w-full h-64 object-cover" />
@@ -117,74 +123,77 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked {
           }
         </div>
       `;
-
       slideEl.addEventListener('click', () => this.openModal(this.carouselItems[index]));
       swiperContainer.appendChild(slideEl);
     });
-
     this.swiperInitialized = true;
   }
-
-openModal(item: CarouselItem) {
-  const iframeUrl = this.resolveIframeUrl(item);
-  this.selectedCard = { ...item, iframeUrl };
-
-  // Si es código HTML de TikTok, cargar el script solo una vez
-  if (
-    iframeUrl?.includes('<blockquote') &&
-    !document.querySelector('script[src*="tiktok.com/embed.js"]')
-  ) {
-    const script = document.createElement('script');
-    script.src = 'https://www.tiktok.com/embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-  }
-}
-
-
-resolveIframeUrl(item: CarouselItem): string | undefined {
-  const url = item.videoUrl || item.audioUrl || item.linkUrl;
-  if (!url) return undefined;
-
-  // Facebook Video
-  if (url.includes('facebook.com/share/')) {
-    return url.replace('/share/', '/embed/');
+  openModal(item: CarouselItem) {
+    if (!item.iframeUrl) {
+      console.warn('No iframeUrl for item:', item);
+      return;
+    }
+    this.selectedCard = { ...item };
+    // Cargar script dinámicamente (forzando recarga para TikTok/Facebook/Instagram)
+    this.loadEmbedScript(item.embedProvider);
   }
 
-  // Spotify
-  if (url.includes('spotify.com/track/')) {
-    return url.replace('/track/', '/embed/track/');
-  }
-
-  // TikTok - SOLO si es video
-  if (url.includes('tiktok.com/video/')) {
-    const videoIdMatch = url.match(/\/video\/(\d+)/);
-    if (videoIdMatch) {
-      return `https://www.tiktok.com/embed/v2/${videoIdMatch[1]}`;
+  private loadEmbedScript(provider?: string) {
+    let scriptSrc: string | undefined;
+    let scriptId: string | undefined;
+    if (provider === 'tiktok') {
+      scriptSrc = 'https://www.tiktok.com/embed.js';
+      scriptId = 'tiktok-embed-script';
+    } else if (provider === 'instagram') {
+      scriptSrc = '//www.instagram.com/embed.js';
+      scriptId = 'instagram-embed-script';
+    } else if (provider === 'facebook') {
+      scriptSrc = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0';
+      scriptId = 'facebook-embed-script';
+    }
+    if (scriptSrc && scriptId && provider) {
+      // Remover script existente para forzar recarga (crucial para TikTok/Facebook dinámico)
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) {
+        existingScript.parentNode?.removeChild(existingScript);
+      }
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = scriptSrc;
+      script.async = true;
+      document.body.appendChild(script);
+      script.onload = () => {
+        console.log(`${provider} script loaded successfully`);
+        // Reinit solo para Instagram/Facebook; para TikTok, la carga procesa automáticamente
+        setTimeout(() => this.reinitEmbeds(provider), 300); // Mayor delay para DOM ready
+      };
+      script.onerror = (err) => console.error(`${provider} script failed to load:`, err);
     }
   }
-
-  // ❌ Bloqueamos photo de TikTok
-  if (url.includes('tiktok.com/photo/')) {
-    return undefined; // forzamos a que no use iframe
+  // 🔥 Método para reinicializar embeds dinámicos
+  private reinitEmbeds(provider?: string) {
+    if (!provider) return;
+    if (provider === 'instagram' && window.instgrm?.Embeds?.process) {
+      window.instgrm.Embeds.process();
+      console.log('Instagram embeds reprocessed');
+    } else if (provider === 'facebook' && window.FB?.XFBML?.parse) {
+      window.FB.XFBML.parse();
+      console.log('Facebook embeds reprocessed');
+    }
+    // Para TikTok, no hay API de reinit; la recarga del script maneja el processing
   }
-
-  // YouTube
-  if (url.includes('youtube.com/watch?v=')) {
-    return url.replace('watch?v=', 'embed/');
+  // getEmbedContent: ya está bien, remueve <script> correctamente
+  getEmbedContent(iframeUrl?: string): string {
+    if (!iframeUrl) return '';
+    return iframeUrl
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
-
-  // Default fallback (si es embebible)
-  return url;
-}
-
-
-
   closeModal() {
     this.selectedCard = null;
   }
-
-  // Helper para resolver el URL que vas a embeber o abrir
+  // Helper para resolver el URL que vas a embeber o abrir (opcional, si necesitas fallback para non-embed types)
   resolveMediaUrl(item: CarouselItem): string | undefined {
     if (item.type === 'video' && item.videoUrl) return item.videoUrl;
     if (item.type === 'podcast' && item.audioUrl) return item.audioUrl;

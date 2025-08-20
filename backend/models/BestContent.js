@@ -13,13 +13,12 @@ const CarouselItemSchema = new Schema({
   coverImage: { type: String, required: true },
   videoUrl: { type: String },
   audioUrl: { type: String },
-  linkUrl: { type: String, required: true },
-
+  linkUrl: { type: String },
   // 🔥 NUEVOS CAMPOS
   iframeUrl: { type: String, default: null },
   embedProvider: {
     type: String,
-    enum: ['youtube', 'facebook', 'spotify', 'tiktok', 'vimeo', 'soundcloud', 'custom', null],
+    enum: ['youtube', 'facebook', 'spotify', 'tiktok', 'vimeo', 'soundcloud', 'instagram', 'custom', null],
     default: null,
   },
 
@@ -30,14 +29,32 @@ const CarouselItemSchema = new Schema({
 }, {
   timestamps: true,
 });
+// Validator custom en schema (se ejecuta antes de save)
+CarouselItemSchema.pre('validate', function(next) {
+  const { type, linkUrl, videoUrl, audioUrl } = this;
 
-// ---- Helpers para generar el iframeUrl automáticamente ----
+  if (type === 'reel' && (!linkUrl || linkUrl.trim() === '')) {
+    return next(new Error('linkUrl es requerido para tipo "reel"'));
+  }
+  if (type === 'video' && (!videoUrl || videoUrl.trim() === '')) {
+    return next(new Error('videoUrl es requerido para tipo "video"'));
+  }
+  if (type === 'podcast' && (!audioUrl || audioUrl.trim() === '')) {
+    return next(new Error('audioUrl es requerido para tipo "podcast"'));
+  }
+  if (['noticia', 'evento', 'custom'].includes(type) && (!linkUrl || linkUrl.trim() === '')) {
+    return next(new Error('linkUrl es requerido para este tipo'));
+  }
+
+  next();
+});
+
 import { computeIframeUrl, detectProvider } from '../utils/embed.js';
 
-CarouselItemSchema.pre('save', function(next) {
+CarouselItemSchema.pre('save', async function(next) {
   // Solo autogenera si no lo mandaste tú explícito
   if (!this.iframeUrl) {
-    const { iframeUrl, provider } = computeIframeUrl({
+    const { iframeUrl, provider } = await computeIframeUrl({
       type: this.type,
       videoUrl: this.videoUrl,
       audioUrl: this.audioUrl,

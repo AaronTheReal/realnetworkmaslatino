@@ -1,0 +1,85 @@
+<!-- featured-shows-panel.html -->
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6 text-center">Panel de Contenido Destacado</h1>
+
+  <!-- Botón para agregar nuevo -->
+  <div class="flex justify-end mb-4">
+    <button (click)="toggleForm()" class="px-4 py-2 bg-green-600 text-white font-semibold rounded-md shadow-sm hover:bg-green-700">
+      {{ showForm ? 'Cancelar' : 'Agregar Nuevo Contenido' }}
+    </button>
+  </div>
+
+  <!-- Formulario para agregar/editar -->
+  <div *ngIf="showForm" class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8">
+    <h2 class="text-2xl font-bold mb-6 text-center">{{ isEditMode ? 'Editar Contenido' : 'Agregar Contenido Destacado' }}</h2>
+    <form (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label for="title" class="block text-sm font-medium text-gray-700">Título (requerido)</label>
+        <input type="text" id="title" name="title" [(ngModel)]="selectedPage.title" required
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+      <div>
+        <label for="subtitle" class="block text-sm font-medium text-gray-700">Subtítulo</label>
+        <input type="text" id="subtitle" name="subtitle" [(ngModel)]="selectedPage.subtitle"
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+      <div>
+        <label for="imageUrl" class="block text-sm font-medium text-gray-700">URL de la Imagen (requerido)</label>
+        <input type="url" id="imageUrl" name="imageUrl" [(ngModel)]="selectedPage.imageUrl" required
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+      <div>
+        <label for="author" class="block text-sm font-medium text-gray-700">Autor</label>
+        <input type="text" id="author" name="author" [(ngModel)]="selectedPage.author"
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+      <div>
+        <label for="description" class="block text-sm font-medium text-gray-700">Descripción (requerido)</label>
+        <textarea id="description" name="description" [(ngModel)]="selectedPage.description" required rows="4"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+      </div>
+
+      <div>
+        <label for="order" class="block text-sm font-medium text-gray-700">Orden</label>
+        <input type="number" id="order" name="order" [(ngModel)]="selectedPage.order" min="0"
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+      <div class="flex justify-end space-x-2">
+        <button type="button" (click)="resetForm()" class="px-4 py-2 bg-gray-600 text-white font-semibold rounded-md shadow-sm hover:bg-gray-700">
+          Cancelar
+        </button>
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700">
+          {{ isEditMode ? 'Actualizar' : 'Subir' }} Contenido
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de contenidos destacados -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let page of featuredPages" class="bg-white shadow-md rounded-lg p-4">
+      <img [src]="page.imageUrl" alt="Imagen de {{page.title}}" class="w-full h-48 object-cover rounded-md mb-4">
+      <h3 class="text-xl font-semibold mb-2">{{ page.title }}</h3>
+      <p class="text-gray-600 mb-2">{{ page.subtitle }}</p>
+      <p class="text-gray-500 mb-2">Autor: {{ page.author || 'N/A' }}</p>
+      <p class="text-gray-700 mb-4">{{ page.description | slice:0:100 }}...</p>
+      <p class="text-sm text-gray-500">Orden: {{ page.order }}</p>
+      <div class="flex justify-end space-x-2 mt-4">
+        <button (click)="editPage(page)" class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">Editar</button>
+        <button (click)="deletePage(page._id)" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para guardar orden (si se implementa drag/drop o edición manual de orden en lista) -->
+  <div class="flex justify-end mt-6">
+    <button (click)="saveOrder()" class="px-4 py-2 bg-yellow-600 text-white font-semibold rounded-md shadow-sm hover:bg-yellow-700">
+      Guardar Orden
+    </button>
+  </div>
+</div>

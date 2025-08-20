@@ -31,11 +31,26 @@
       <!-- Métrica 1 -->
       <div class="group bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-transform hover:-translate-y-1">
         <div class="flex flex-col items-center gap-4">
-          <div class="bg-purple-100 p-6 rounded-full">
-            <svg class="w-12 h-12 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20h9M3 20h9M4 4h16v12H4z" />
-            </svg>
-          </div>
+            
+<!-- Versión con color inline (aprox. Tailwind purple-600) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Social reach across platforms" fill="none" stroke="#9333ea" stroke-width="2">
+  <circle cx="24" cy="24" r="18" opacity="0.2" fill="#9333ea" stroke="none"/>
+  <circle cx="24" cy="6" r="2" fill="#9333ea" stroke="none"/>
+  <circle cx="42" cy="24" r="2" fill="#9333ea" stroke="none"/>
+  <circle cx="24" cy="42" r="2" fill="#9333ea" stroke="none"/>
+  <circle cx="6" cy="24" r="2" fill="#9333ea" stroke="none"/>
+  <circle cx="38.5" cy="12" r="2" fill="#9333ea" stroke="none"/>
+  <circle cx="38.5" cy="36" r="2" fill="#9333ea" stroke="none"/>
+  <circle cx="9.5" cy="12" r="2" fill="#9333ea" stroke="none"/>
+  <circle cx="9.5" cy="36" r="2" fill="#9333ea" stroke="none"/>
+
+  <path d="M24 8v6M40 24h-6M24 40v-6M8 24h6M35.8 14.2l-4.2 4.2M35.8 33.8l-4.2-4.2M12.2 33.8l4.2-4.2M12.2 14.2l4.2 4.2" stroke-linecap="round"/>
+  <circle cx="24" cy="20" r="4"/>
+  <path d="M16 32c2.5-3.5 6-5 8-5s5.5 1.5 8 5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 11c0 0 5 3 5 13s-5 13-5 13" opacity="0.5" stroke-linecap="round"/>
+  <path d="M24 11c0 0-5 3-5 13s5 13 5 13" opacity="0.5" stroke-linecap="round"/>
+</svg>
+
           <h3 class="text-lg font-semibold text-black text-center">14M+ Social Reach</h3>
           <p class="text-xs text-gray-500 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             Across all major platforms
@@ -154,6 +169,19 @@
 </section>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- SECCIÓN DE CARRUSEL DESTACADO - CÍRCULOS REALES -->
 <section class="relative w-full bg-gradient-to-b from-white to-gray-50 py-24 overflow-hidden">
 
@@ -183,13 +211,59 @@
     </p>
 
     <!-- Contenedor de carrusel -->
-<div class="rounded-2xl border border-gray-200 shadow-xl overflow-hidden p-2 bg-white">
-  <swiper-container #swiperEl class="w-full h-full"></swiper-container>
-</div>
-
+    <div class="rounded-2xl border border-gray-200 shadow-xl overflow-hidden p-2 bg-white">
+      <swiper-container #swiperEl class="w-full h-full"></swiper-container>
+    </div>
 
   </div>
 </section>
+
+
+<!-- Modal para mostrar el contenido seleccionado -->
+<ng-template *ngIf="selectedCard">
+  <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" (click)="closeModal()">
+    <div class="bg-white p-6 rounded-2xl shadow-xl max-w-3xl w-full mx-4 relative" (click)="$event.stopPropagation()">
+      <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" (click)="closeModal()">✕</button>
+      <h3 class="text-2xl font-bold mb-4">{{ selectedCard.title }}</h3>
+      <p *ngIf="selectedCard.subtitle" class="text-gray-600 mb-2">{{ selectedCard.subtitle }}</p>
+      <p *ngIf="selectedCard.description" class="text-gray-600 mb-4">{{ selectedCard.description }}</p>
+     
+      <!-- Render basado en embedProvider -->
+      <div class="w-full h-[500px] overflow-hidden">
+        <ng-container [ngSwitch]="selectedCard.embedProvider">
+          <!-- Para TikTok/Instagram: blockquote via innerHTML (script cargado por separado) -->
+          <div *ngSwitchCase="'tiktok'" [innerHTML]="getEmbedContent(selectedCard.iframeUrl!) | safe: 'html'"></div>
+          <div *ngSwitchCase="'instagram'" [innerHTML]="getEmbedContent(selectedCard.iframeUrl!) | safe: 'html'"></div>
+         
+          <!-- Para otros (YouTube, etc.): iframe -->
+          <iframe *ngSwitchDefault [src]="selectedCard.iframeUrl! | safe: 'resourceUrl'" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -440,21 +514,17 @@
 
 
 
-
 <!-- Modal unificado para video, iframe o audio -->
 <div *ngIf="selectedCard" class="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4">
   <div class="relative w-full max-w-6xl aspect-video bg-black rounded-xl overflow-hidden">
-
     <!-- Imagen de fondo oscurecida -->
     <img
       [src]="selectedCard.coverImage"
       class="absolute w-full h-full object-cover brightness-50"
       alt="Fondo"
     />
-
     <!-- Botón de cerrar -->
     <button class="absolute top-3 right-3 text-white text-3xl z-20" (click)="closeModal()">✖</button>
-
     <!-- Contenido del modal -->
     <div class="relative z-10 w-full h-full flex items-center justify-center text-white bg-black/60">
       <!-- AUDIO MODAL -->
@@ -465,7 +535,6 @@
             <p class="text-base opacity-90" *ngIf="selectedCard.subtitle">{{ selectedCard.subtitle }}</p>
             <p class="text-sm opacity-80 mt-1" *ngIf="selectedCard.description">{{ selectedCard.description }}</p>
           </div>
-
           <audio
             class="w-full max-w-xl"
             controls
@@ -476,48 +545,62 @@
           </audio>
         </div>
       </ng-container>
-
       <!-- VIDEO / IFRAME / HTML EMBED -->
-      <ng-template #mediaContent>
-        <div class="w-full h-full p-4">
-          <!-- HTML embebido tipo blockquote -->
-          <ng-container *ngIf="selectedCard.iframeUrl?.includes('<blockquote'); else fallbackContent">
-            <div class="w-full h-full overflow-auto max-h-full bg-white text-black p-2 rounded">
-              <div [innerHTML]="selectedCard.iframeUrl"></div>
-            </div>
-          </ng-container>
-
-          <!-- Iframe normal o video -->
-          <ng-template #fallbackContent>
-            <ng-container *ngIf="selectedCard.iframeUrl; else showVideo">
-              <iframe
-                [src]="selectedCard.iframeUrl | safe"
-                class="w-full h-full"
-                frameborder="0"
-                allowfullscreen
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-              ></iframe>
-            </ng-container>
-
-            <!-- Video directo -->
-            <ng-template #showVideo>
-              <video
-                class="w-full h-full"
-                controls
-                autoplay
-                muted
-              >
-                <source [src]="selectedCard.videoUrl" type="video/mp4" />
-                Tu navegador no soporta la reproducción de video.
-              </video>
-            </ng-template>
-          </ng-template>
-        </div>
-      </ng-template>
+     <ng-template #mediaContent>
+  <div class="w-full h-full p-0">  <!-- Changed p-4 to p-0 for no extra padding -->
+    <!-- HTML embebido tipo blockquote/div (para TikTok/Instagram/Facebook) -->
+    <ng-container *ngIf="selectedCard.embedProvider === 'tiktok' || selectedCard.embedProvider === 'instagram' || selectedCard.embedProvider === 'facebook'">
+      <div class="w-full h-full flex items-center justify-center overflow-hidden">  <!-- Removed bg-white, p-2, rounded, text-black; added flex center -->
+        <div [innerHTML]="getEmbedContent(selectedCard.iframeUrl) | safe: 'html'"></div>
+      </div>
+    </ng-container>
+    <!-- Fallback para iframes normales o video -->
+    <ng-container *ngIf="selectedCard.iframeUrl && !selectedCard.iframeUrl?.includes('<blockquote'); else showVideo">
+      <iframe
+        [src]="selectedCard.iframeUrl | safe: 'resourceUrl'"
+        class="w-full h-full"
+        frameborder="0"
+        allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </ng-container>
+    <!-- Video directo -->
+    <ng-template #showVideo>
+      <video
+        class="w-full h-full"
+        controls
+        autoplay
+        muted
+      >
+        <source [src]="selectedCard.videoUrl | safe: 'resourceUrl'" type="video/mp4" />
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </ng-template>
+  </div>
+</ng-template>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,668 +1,73 @@
-<section class="w-full bg-white py-24 px-6 md:px-12 lg:px-24 text-black">
-  <div class="max-w-5xl mx-auto text-center">
 
-    <!-- Subtítulo destacado -->
-    <p class="text-xl md:text-2xl font-semibold text-red-600 uppercase mb-4 tracking-wide">
-      About Us
-    </p>
-
-    <!-- Título grande -->
-    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-blue-900 mb-10">
-      Not just a media company — a cultural force.
-    </h2>
-
-    <!-- Bloque de texto principal -->
-    <div class="text-lg leading-relaxed text-justify space-y-6 text-gray-800">
-      <p>
-        <strong>Más Latino Network</strong> is the leading bilingual media platform amplifying Latino voices, culture, and community from the heart of Boston to audiences across the United States. We are proudly Latino-owned, rooted in authenticity, and driven by purpose.
-      </p>
-      <p>
-        Founded by <strong>Luis Morales Jr.</strong>, a second-generation entrepreneur and community builder, Más Latino was created to disrupt the way media connects with one of the fastest-growing and most influential demographics in the U.S. — the Latino community.
-      </p>
-      <p>
-        Through a powerful ecosystem that includes FM/AM radio (Más Latino 99.9FM & 1300AM), original podcasts, viral video content, a custom mobile app, and live cultural events, we reach millions of bilingual and bicultural Latinos who are shaping the future of America.
-      </p>
-      <p class="italic text-gray-700">
-        We’re not just storytellers — we’re community architects, culture translators, and brand partners.
-      </p>
-      <p>
-        Whether we’re interviewing politicians, livestreaming soccer matches, or hosting conversations about business, family, and faith — everything we create is rooted in representation, connection, and elevation.
-      </p>
-      <p>
-        <strong>Más Latino is where influence meets identity</strong> — and where brands, agencies, and institutions come to build meaningful relationships with Latino audiences.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-
-
-<section class="w-full bg-white py-24 px-6 md:px-12 lg:px-24">
-  <div class="max-w-7xl mx-auto text-center">
-
-    <h2 class="text-4xl md:text-5xl font-extrabold text-purple-600 tracking-wide uppercase mb-6">
-      Our Team
-    </h2>
-    <p class="text-lg text-gray-700 mb-16 max-w-3xl mx-auto">
-      Meet the passionate voices, visionaries, and community builders behind Más Latino Network.
-    </p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-
-      <!-- Repite esto para cada miembro del equipo -->
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/lmj.jpg" alt="Luis Morales Jr." class="w-full h-full object-cover">
+<!-- Modal unificado para video, iframe o audio -->
+<div *ngIf="selectedCard" class="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4">
+  <div class="relative w-full max-w-6xl aspect-video bg-black rounded-xl overflow-hidden">
+    <!-- Imagen de fondo oscurecida -->
+    <img
+      [src]="selectedCard.coverImage"
+      class="absolute w-full h-full object-cover brightness-50"
+      alt="Fondo"
+    />
+    <!-- Botón de cerrar -->
+    <button class="absolute top-3 right-3 text-white text-3xl z-20" (click)="closeModal()">✖</button>
+    <!-- Contenido del modal -->
+    <div class="relative z-10 w-full h-full flex items-center justify-center text-white bg-black/60">
+      <!-- AUDIO MODAL -->
+      <ng-container *ngIf="selectedCard.type === 'podcast' && selectedCard.audioUrl; else mediaContent">
+        <div class="flex flex-col items-center justify-center text-center px-6 space-y-4 w-full">
+          <div>
+            <h2 class="text-2xl font-bold">{{ selectedCard.title }}</h2>
+            <p class="text-base opacity-90" *ngIf="selectedCard.subtitle">{{ selectedCard.subtitle }}</p>
+            <p class="text-sm opacity-80 mt-1" *ngIf="selectedCard.description">{{ selectedCard.description }}</p>
+          </div>
+          <audio
+            class="w-full max-w-xl"
+            controls
+            autoplay
+          >
+            <source [src]="selectedCard.audioUrl" type="audio/mpeg" />
+            Tu navegador no soporta audio.
+          </audio>
         </div>
-        <h3 class="text-xl font-semibold text-blue-900">Luis Morales Jr.</h3>
-        <p class="text-sm text-gray-600">Chief Executive Officer</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/marta.jpg" alt="Marta Lopez" class="w-full h-full object-cover">
+      </ng-container>
+      <!-- VIDEO / IFRAME / HTML EMBED -->
+      <ng-template #mediaContent>
+        <div class="w-full h-full p-4">
+          <!-- HTML embebido tipo blockquote/div (para TikTok/Instagram/Facebook) -->
+          <ng-container *ngIf="selectedCard.embedProvider === 'tiktok' || selectedCard.embedProvider === 'instagram' || selectedCard.embedProvider === 'facebook'">
+            <div class="w-full h-full overflow-auto max-h-full bg-white text-black p-2 rounded">
+              <div [innerHTML]="getEmbedContent(selectedCard.iframeUrl) | safe: 'html'"></div>
+            </div>
+          </ng-container>
+          <!-- Fallback para iframes normales o video -->
+          <ng-container *ngIf="selectedCard.iframeUrl && !selectedCard.iframeUrl?.includes('<blockquote'); else showVideo">
+            <iframe
+              [src]="selectedCard.iframeUrl | safe: 'resourceUrl'"
+              class="w-full h-full"
+              frameborder="0"
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </ng-container>
+          <!-- Video directo -->
+          <ng-template #showVideo>
+            <video
+              class="w-full h-full"
+              controls
+              autoplay
+              muted
+            >
+              <source [src]="selectedCard.videoUrl | safe: 'resourceUrl'" type="video/mp4" />
+              Tu navegador no soporta la reproducción de video.
+            </video>
+          </ng-template>
         </div>
-        <h3 class="text-xl font-semibold text-blue-900">Marta Lopez</h3>
-        <p class="text-sm text-gray-600">Chief of Staff</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/yadira.jpg" alt="Yadira Rodriguez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Yadira Rodriguez</h3>
-        <p class="text-sm text-gray-600">Marketing Lead</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/viviana.jpg" alt="Viviana Gonzalez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Viviana Gonzalez</h3>
-        <p class="text-sm text-gray-600">Lead Editor / On Air Talent</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/alessandra.jpg" alt="Alessandra Mejia" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Alessandra Mejia</h3>
-        <p class="text-sm text-gray-600">Branding / Graphic Designer</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/aaron.jpg" alt="Aaron Rodriguez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Aaron Rodriguez</h3>
-        <p class="text-sm text-gray-600">Web / App Developer</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/alejandro.jpg" alt="Alejandro Garcia" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Alejandro Garcia</h3>
-        <p class="text-sm text-gray-600">Traffic Coordinator</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/michell.jpg" alt="Michell Oliveros" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Michell Oliveros</h3>
-        <p class="text-sm text-gray-600">Content Creator</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/cecy.jpg" alt="Cecy del Carmen" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Cecy del Carmen</h3>
-        <p class="text-sm text-gray-600">On Air Talent</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/mia.jpg" alt="Mia Lagunas" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Mia Lagunas</h3>
-        <p class="text-sm text-gray-600">Public Relations Intern</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/nicol.jpg" alt="Nicol Mai" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Nicol Mai</h3>
-        <p class="text-sm text-gray-600">Content Creator Intern</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/stephany.jpg" alt="Stephany Gonzalez" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Stephany Gonzalez</h3>
-        <p class="text-sm text-gray-600">Film / Video Intern</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center group">
-        <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg mb-4 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/team/sandra.jpg" alt="Sandra Rivadeneira" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold text-blue-900">Sandra Rivadeneira</h3>
-        <p class="text-sm text-gray-600">Sports Intern</p>
-      </div>
-
+      </ng-template>
     </div>
   </div>
-</section>
+</div>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- OUR PARTNERS -->
-<section class="w-full bg-gradient-to-b from-white to-gray-100 py-16 px-6 md:px-12 lg:px-24">
-  <div class="max-w-6xl mx-auto text-center">
-    
-    <!-- Título -->
-    <h2 class="text-2xl md:text-3xl font-extrabold text-black uppercase tracking-wide mb-2">
-      OUR PARTNERS
-    </h2>
-    
-    <!-- Subtítulo -->
-    <p class="text-gray-600 text-base md:text-lg mb-12">
-      Trusted by leading institutions, brands and communities.
-    </p>
-
-    <!-- Grid de logos -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 items-center justify-items-center">
-
-      <!-- Logo 1 -->
-      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
-        <img src="assets/partners/revolution.webp" alt="New England Revolution" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
-      </div>
-
-      <!-- Logo 2 -->
-      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
-        <img src="assets/partners/redsox.jpg" alt="Boston Red Sox" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
-      </div>
-
-      <!-- Logo 3 -->
-      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
-        <img src="assets/partners/neighborhealth.png" alt="NeighborHealth" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
-      </div>
-
-      <!-- Logo 4 -->
-      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
-        <img src="assets/partners/boston.jpg" alt="City of Boston" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
-      </div>
-
-      <!-- Logo 5 -->
-      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
-        <img src="assets/partners/massachusetts.png" alt="Commonwealth of Massachusetts" class="w-full h-auto max-h-16 object-contain mx-auto filter grayscale hover:filter-none transition duration-300" />
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--sección 6-->
-<section class="w-full px-6 md:px-16 py-12 bg-white">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 justify-center">
-
-    <!-- Tarjeta: Business -->
-    <div class="relative flex-1 bg-purple-500 text-white rounded-xl p-6 md:p-8 flex flex-col justify-between shadow-lg">
-      <!-- Decoración superior derecha (opcional: imagen o pseudo-elemento) -->
-      <div class="absolute top-0 right-0">
-        <!-- Aquí puedes agregar una decoración SVG si deseas -->
-      </div>
-
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold max-w-[70%]">Find right for your business</h3>
-        <img src="assets/icons/chat.svg" alt="Chat icon" class="w-6 h-6" />
-      </div>
-
-      <div class="mt-6">
-        <a href="#" class="bg-white text-black font-semibold py-2 px-4 rounded-full inline-block text-sm hover:bg-gray-200 transition">
-          work with us
-        </a>
-      </div>
-    </div>
-
-    <!-- Tarjeta: Career -->
-    <div class="relative flex-1 bg-red-500 text-white rounded-xl p-6 md:p-8 flex flex-col justify-between shadow-lg">
-      <div class="absolute top-0 right-0">
-        <!-- Decoración SVG también puede ir aquí -->
-      </div>
-
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold max-w-[70%]">Find right for your career</h3>
-        <img src="assets/icons/team.svg" alt="Team icon" class="w-6 h-6" />
-      </div>
-
-      <div class="mt-6">
-        <a href="#" class="bg-white text-black font-semibold py-2 px-4 rounded-full inline-block text-sm hover:bg-gray-200 transition">
-          join us
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="w-full bg-white py-20 px-2 md:px-6 lg:px-12 relative overflow-hidden">
-  <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10">
-    
-    <!-- Columna de texto -->
-    <div class="text-center md:text-left flex-1">
-      <h1 class="text-5xl md:text-6xl font-extrabold text-black leading-tight tracking-tight">
-        CONÉCTATE<br />
-        CON TUS <br />
-        <span class="text-purple-500">RAÍCES <br />LATINAS</span>
-      </h1>
-    </div>
-
-    <!-- Imagen + logo ornamental -->
-    <div class="relative flex-1 flex justify-center md:justify-end">
-      <img 
-        src="assets/homeimgs/foto1.png" 
-        alt="Pareja usando smartphones" 
-        class="w-full max-w-xl rounded-[40px] object-cover"
-      />
-
-
-    </div>
-    
-  </div>
-</section>
-<!--Sección 2-->
-<section class="relative w-full bg-black py-32 px-4">
-  <!-- Texto central más angosto -->
-  <div class="max-w-2xl mx-auto text-center">
-    <h2 class="text-white text-4xl md:text-5xl font-extrabold leading-snug tracking-tight">
-      We put social at the center<br class="hidden md:block" />
-      of everything we do.
-    </h2>
-  </div>
-
-  <!-- Icono decorativo izquierdo (grande, visible y pegado) -->
-  <div class="absolute top-0 left-0 w-60 z-10">
-    <img src="assets/homeimgs/foto2.png" alt="Decoración izquierda" class="w-full h-auto" />
-  </div>
-
-  <!-- Icono decorativo derecho (ligeramente más pequeño y pegado) -->
-  <div class="absolute bottom-0 right-0 w-48 z-10">
-    <img src="assets/homeimgs/foto3.png" alt="Decoración derecha" class="w-full h-auto" />
-  </div>
-</section>
-
-
-
-
-<!--sección 3-->
-<section class="relative w-full bg-white py-28 px-6 md:px-16 overflow-hidden">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-
-    <!-- Columna izquierda: texto -->
-    <div class="flex-1 text-center md:text-left">
-      <p class="text-base font-medium text-black uppercase mb-4 tracking-wide">
-        Creative
-      </p>
-      <h2 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-black mb-6">
-        CONÉCTATE <br />CON TUS
-      </h2>
-      <p class="text-gray-700 mb-8 max-w-md leading-relaxed mx-auto md:mx-0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit.
-      </p>
-      <a href="#" class="inline-block bg-[#FF3C1F] hover:bg-red-600 text-white font-bold text-lg py-4 px-8 rounded-full transition">
-        learn more
-      </a>
-    </div>
-
-    <!-- Columna derecha: imagen decorativa -->
-    <div class="flex-1 flex items-center justify-center relative">
-      <img
-        src="assets/homeimgs/foto4.png"
-        alt="Icono de bocina violeta"
-        class="w-[300px] md:w-[400px] h-auto"
-      />
-      <!-- Icono de "+" negro superpuesto -->
-      <span class="absolute top-[40%] left-[60%] text-black text-7xl font-black pointer-events-none select-none">+</span>
-    </div>
-
-  </div>
-</section>
-
-
-<!---->
-<!--sección 4-->
-<section class="w-full px-6 md:px-16 py-16 bg-white">
-  <div class="max-w-7xl mx-auto">
-    
-    <!-- Título -->
-    <h2 class="text-2xl md:text-3xl font-extrabold text-black mb-8">
-      FEATURES NEWS
-    </h2>
-
-    <!-- Grid de noticias -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-      <!-- Tarjeta grande (col-span) -->
-      <div class="col-span-2 row-span-2 relative rounded-xl overflow-hidden h-64 sm:h-72 lg:h-96">
-        <img src="assets/news/foto1.jpg" alt="Podcasting Trends" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex flex-col justify-end">
-          <h3 class="text-white text-lg font-semibold">Podcasting Trends to watch</h3>
-          <p class="text-sm text-white">June 20, 2026</p>
-        </div>
-      </div>
-
-      <!-- Tarjeta vertical -->
-      <div class="relative rounded-xl overflow-hidden h-40 sm:h-48">
-        <img src="assets/news/foto2.jpg" alt="Media Landscape" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-3 flex flex-col justify-end">
-          <h3 class="text-white text-sm font-semibold">How Podcasts are Changing the Media Landscape</h3>
-          <p class="text-xs text-white">June 20, 2026</p>
-        </div>
-      </div>
-
-      <!-- Tarjeta vertical -->
-      <div class="relative rounded-xl overflow-hidden h-40 sm:h-48">
-        <img src="assets/news/foto3.jpg" alt="Audio Content" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-3 flex flex-col justify-end">
-          <h3 class="text-white text-sm font-semibold">The Future of Audio Content</h3>
-          <p class="text-xs text-white">June 20, 2026</p>
-        </div>
-      </div>
-
-      <!-- Tarjeta horizontal -->
-      <div class="col-span-2 sm:col-span-1 relative rounded-xl overflow-hidden h-40 sm:h-44">
-        <img src="assets/news/foto4.jpg" alt="Behind the Scenes 1" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-black/40 p-3 flex flex-col justify-end">
-          <h3 class="text-white text-sm font-semibold">Behind the Scenes of Podcast Production</h3>
-          <p class="text-xs text-white">June 20, 2026</p>
-        </div>
-      </div>
-
-      <!-- Tarjeta horizontal -->
-      <div class="col-span-2 sm:col-span-1 relative rounded-xl overflow-hidden h-40 sm:h-44">
-        <img src="assets/news/foto5.jpg" alt="Behind the Scenes 2" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-black/40 p-3 flex flex-col justify-end">
-          <h3 class="text-white text-sm font-semibold">Behind the Scenes of Podcast Production</h3>
-          <p class="text-xs text-white">June 20, 2026</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Botón Load More -->
-    <div class="mt-8 flex justify-center">
-      <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-full transition">
-        load more
-      </button>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a routerLink="/press-release" class="block group">
-  <section class="bg-white text-gray-800 px-6 md:px-12 lg:px-24 py-16">
-    <!-- Contenedor con efectos -->
-    <div class="relative max-w-5xl mx-auto rounded-xl overflow-hidden transition duration-500">
-      
-      <!-- Overlay difuminado (marco transparente) -->
-      <div class="absolute inset-0 bg-white/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none z-0 rounded-xl ring-1 ring-red-200/60"></div>
-      
-      <!-- Contenido con zoom -->
-      <div class="relative z-10 bg-white transition-transform duration-500 group-hover:scale-[1.015] group-active:scale-[0.99] p-6 md:p-10 lg:p-12 rounded-xl shadow-md">
-        
-        <!-- Encabezado -->
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-blue-900 uppercase">Media Release</h2>
-          <h3 class="text-xl md:text-2xl font-bold mt-4">
-            New England Revolution Partner with Más Latino to Broadcast 2025 Home Games on Spanish Radio
-          </h3>
-          <p class="text-red-600 font-semibold mt-2">
-            Starting July 9 vs. Inter Miami, listen to Spanish radio calls of all nine remaining home games on 99.9 FM & 1300 AM, online, and the Más Latino app
-          </p>
-        </div>
-
-        <!-- Imagen -->
-        <div class="flex justify-center mb-12">
-          <img 
-            src="assets/homeimgs/revolution-maslatino-banner.png" 
-            alt="Revolution Más Latino Banner" 
-            class="w-full max-w-3xl rounded-lg shadow-lg" 
-          />
-        </div>
-
-        <!-- Texto resumen -->
-        <div class="text-justify text-lg leading-relaxed text-black space-y-4">
-          <p><strong class="text-gray-900">BOSTON (July 8, 2025)</strong> – The <strong>New England Revolution</strong> today announced a new Spanish-language radio partnership with <strong>Más Latino</strong>, bringing live match broadcasts, exclusive team content, and player interviews to Boston’s dynamic and ever-growing Latino community.</p>
-          <p class="text-gray-700 font-semibold italic">"Together, we're not just amplifying the passion of fútbol. We're elevating the voices of our community." — Luis Morales Jr.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Botón "Ver más" -->
-    <div class="mt-10 flex justify-center">
-      <button class="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition duration-300">
-        Ver más
-      </button>
-    </div>
-  </section>
-</a>
-
-
-
-
-
-
-
-
-<!--sección 5-->
-<section class="bg-black py-16 px-4">
-  <div class="max-w-6xl mx-auto text-center">
-
-    <!-- Título -->
-    <h2 class="text-white text-2xl md:text-3xl font-extrabold mb-10">
-      BROWSE BY CATEGORY
-    </h2>
-
-    <!-- Grid de categorías -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 justify-items-center">
-
-      <!-- Reusable Item -->
-      <div class="flex flex-col items-center gap-4 group">
-      <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono1.png" alt="Technology icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 group">
-        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono2.png" alt="Culture icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 group">
-        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono3.png" alt="Music icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 group">
-        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono4.png" alt="Business icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 group">
-        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono5.png" alt="Education icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 group">
-        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono6.png" alt="Comedy icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 group">
-        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono7.png" alt="News icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 group">
-        <div class="p-6 rounded-xl border border-transparent group-hover:border-white group-hover:bg-white/10 transition-all duration-300 ease-in-out transform group-hover:scale-110">
-          <img src="assets/iconos/icono8.png" alt="Health icon" class="w-24 h-24 object-contain" />
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>

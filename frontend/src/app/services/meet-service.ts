@@ -28,8 +28,8 @@ export interface VoiceMember {
 export class VoiceService {
   //private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/voices';
   //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/voices';
-  //  private baseUrl = '/aaron/maslatinoNetwork/best-content';
-  private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/voices';
+  private baseUrl = '/aaron/maslatinoNetwork/best-content';
+  //private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/voices';
 
   constructor(private http: HttpClient) {}
 

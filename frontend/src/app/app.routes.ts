@@ -8,6 +8,7 @@ import { AboutUsPanelComponent } from '../app/pages/admin-panel/about-us-panel/a
 import { HomePanelComponent } from '../app/pages/admin-panel/home-panel/home-panel.component';
 import { OurVoice } from '../app/pages/our-voice/our-voice';
 import { OurVoicePanel } from '../app/pages/admin-panel/our-voice-panel/our-voice-panel';
+import { FeaturedShowsPanel } from '../app/pages/admin-panel/featured-shows-panel/featured-shows-panel';
 
 import { Contact } from '../app/pages/contact/contact';
 import { OurImpact } from '../app/pages/our-impact/our-impact';
@@ -24,6 +25,8 @@ export const routes: Routes = [
       { path: 'our-voice', component: OurVoice },
       { path: 'our-voice-panel', component: OurVoicePanel },
       { path: 'our-team', component: OurTeam },
+      { path: 'featured-shows', component: FeaturedShowsPanel },
+
 
       
 

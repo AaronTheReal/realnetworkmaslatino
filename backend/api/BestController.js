@@ -16,7 +16,7 @@ export default class BestController {
   }
 
   // 👉 helper para adjuntar iframe en create/update
-  static attachIframeFields(payload) {
+  static async attachIframeFields(payload) {
     const data = { ...payload };
 
     // Si ya viene un iframeUrl explícito, solo detectamos provider
@@ -25,7 +25,7 @@ export default class BestController {
       return data;
     }
 
-    const { iframeUrl, provider } = computeIframeUrl({
+    const { iframeUrl, provider } = await computeIframeUrl({
       type: data.type,
       videoUrl: data.videoUrl,
       audioUrl: data.audioUrl,
@@ -39,7 +39,7 @@ export default class BestController {
 
   static async apiCreate(req, res) {
     try {
-      const data = BestController.attachIframeFields(req.body);
+      const data = await BestController.attachIframeFields(req.body);
       const item = new CarouselItem(data);
       await item.save();
       res.status(201).json(item);
@@ -51,7 +51,7 @@ export default class BestController {
   static async apiUpdate(req, res) {
     try {
       const { id } = req.params;
-      const data = BestController.attachIframeFields(req.body);
+      const data = await BestController.attachIframeFields(req.body);
       const updated = await CarouselItem.findByIdAndUpdate(id, data, { new: true });
       if (!updated) return res.status(404).json({ error: 'Item no encontrado' });
       res.status(200).json(updated);
@@ -88,7 +88,7 @@ export default class BestController {
       const items = await CarouselItem.find();
       const ops = await Promise.all(
         items.map(async (doc) => {
-          const { iframeUrl, provider } = computeIframeUrl({
+          const { iframeUrl, provider } = await computeIframeUrl({
             type: doc.type,
             videoUrl: doc.videoUrl,
             audioUrl: doc.audioUrl,

@@ -1,0 +1,28 @@
+.cross {
+  position: absolute;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.cross::before,
+.cross::after {
+  content: '';
+  position: absolute;
+  background-color: black;
+}
+
+.cross::before {
+  top: 0;
+  left: 50%;
+  width: var(--thickness, 30px); /* Valor por defecto */
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.cross::after {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: var(--thickness, 30px); /* Valor por defecto */
+  transform: translateY(-50%);
+}

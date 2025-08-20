@@ -8,6 +8,7 @@ import AuthController from './AuthController.js';
 import BestController from './BestController.js';
 import TeamController from './TeamMemberController.js';
 import VoiceController from './MeetController.js';
+import FeaturedPageController from './FeaturedController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -74,7 +75,22 @@ export default class MainRoute {
     // Reordenar
     router.put('/voices/reorder', VoiceController.apiReorder);
 
+      // Featured Pages
+      router.route('/featured-pages/test').get(FeaturedPageController.apiGetTests);
 
+      router.route('/featured-pages')
+        .get(FeaturedPageController.apiGetAll)   // Obtener todas
+        .post(FeaturedPageController.apiCreate); // Crear una nueva
+
+      router.route('/featured-pages/:id')
+        .get(FeaturedPageController.apiGetById)   // Obtener por ID
+        .put(FeaturedPageController.apiUpdate)    // Actualizar por ID
+        .delete(FeaturedPageController.apiDelete); // Eliminar por ID
+
+      // Reorder bulk
+      router.route('/featured-pages/reorder').post(FeaturedPageController.apiReorder);
+
+     
     return router;
   }
 }
