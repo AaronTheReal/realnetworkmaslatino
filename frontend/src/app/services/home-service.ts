@@ -23,7 +23,7 @@ export interface CarouselItem {
 @Injectable({ providedIn: 'root' })
 export class HomeService {
  //private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/best-content';
-  //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/best-content';
+ //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/best-content';
   private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/best-content'
   constructor(private http: HttpClient) {}
 

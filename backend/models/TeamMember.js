@@ -17,6 +17,10 @@ const teamMemberSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  linkedinUrl: {
+    type: String,
+    trim: true
+  },
   order: {
     type: Number,
     default: 0

@@ -8,6 +8,7 @@ export interface TeamMember {
   position: string;
   imageUrl: string;
   order?: number;
+  linkedinUrl?: string;
   createdAt?: string;
   bio?: string; // ← añade esto si lo tienes en tu base de datos
   description?: string; // ← opcional si usas otro nombre
