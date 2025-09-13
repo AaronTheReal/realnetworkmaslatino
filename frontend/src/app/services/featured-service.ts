@@ -17,9 +17,9 @@ export interface FeaturedPage {
 @Injectable({ providedIn: 'root' })
 export class FeaturedPageService {
   // Ajusta el endpoint según tu backend
-  private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/featured-pages';
+  //private baseUrl = 'https://realnetworkmaslatino.onrender.com/aaron/maslatinoNetwork/featured-pages';
   //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/featured-pages';
-
+  private baseUrl  = 'https://realnetworkmaslatino-teas.onrender.com/aaron/maslatinoNetwork/featured-pages'; 
   constructor(private http: HttpClient) {}
 
   // READ ALL

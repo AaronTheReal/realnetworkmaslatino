@@ -29,7 +29,8 @@ const allowedOrigins = [
   'https://maslatinomobile.netlify.app',
   'https://super-cajeta-50e752.netlify.app',
   'https://realnetworkmaslatino.onrender.com',
-  'https://maslatinonetwork.com'
+  'https://maslatinonetwork.com',
+  'https://realnetworkmaslatino-teas.onrender.com'
 
 ];
 
