@@ -1,0 +1,59 @@
+<div class="min-h-screen bg-gray-50 py-12 px-4">
+
+  <!-- Título -->
+  <div class="max-w-7xl mx-auto mb-10">
+    <h1 class="text-4xl font-bold text-gray-900 text-center md:text-left">
+      Nuestro Blog
+    </h1>
+  </div>
+
+  <!-- Grid de tarjetas -->
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+    <a *ngFor="let post of pressPosts()"
+       [routerLink]="['/blog', post.slug]"
+       class="group block cursor-pointer bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+
+      <!-- Imagen -->
+      <div class="overflow-hidden rounded-t-3xl">
+        <img
+          [src]="post.meta?.image || 'https://picsum.photos/id/1015/600/400'"
+          [alt]="post.title"
+          class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105">
+      </div>
+
+      <!-- Contenido -->
+      <div class="p-5">
+
+        <!-- Fecha + categorías (máx 2 + badge) -->
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap">
+            {{ post.createdAt | date:'d MMM yyyy' | uppercase }}
+          </span>
+          <span class="text-gray-300 text-xs">·</span>
+          <ng-container *ngFor="let cat of (post.categories || []).slice(0, 2)">
+            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap">
+              {{ cat.name }}
+            </span>
+          </ng-container>
+          <span *ngIf="(post.categories || []).length > 2"
+                class="bg-gray-200 text-gray-500 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap">
+            +{{ (post.categories || []).length - 2 }}
+          </span>
+        </div>
+
+        <!-- Título -->
+        <h2 class="font-bold text-xl text-gray-900 leading-tight mb-2 line-clamp-2">
+          {{ post.title }}
+        </h2>
+
+        <!-- Descripción -->
+        <p class="text-gray-500 text-sm leading-relaxed line-clamp-3">
+          {{ post.extracto || post.summary || 'Descubre más sobre este tema...' }}
+        </p>
+
+      </div>
+    </a>
+
+  </div>
+</div>

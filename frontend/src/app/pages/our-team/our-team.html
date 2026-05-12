@@ -3,16 +3,29 @@
     OUR TEAM
   </h2>
 
-  <!-- Mostrar al primer miembro en sección destacada -->
-  <ng-container *ngIf="teamMembers.length">
+  <!-- Contenido cuando sí hay miembros -->
+  <ng-container *ngIf="teamMembers.length; else loadingTeam">
+    <!-- Miembro destacado -->
     <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8 mb-12 md:mb-16">
       <!-- Imagen grande a la izquierda -->
       <div class="w-full md:w-1/2">
-        <img
-          [src]="teamMembers[0].imageUrl"
-          [alt]="teamMembers[0].name"
-          class="w-full h-auto rounded-3xl object-cover object-center"
-        />
+        <div class="relative w-full aspect-[16/9] overflow-hidden rounded-3xl">
+          <!-- Skeleton -->
+          <div class="absolute inset-0 animate-pulse bg-gray-200"></div>
+
+          <!-- Imagen destacada con prioridad y fade-in -->
+          <img
+            [ngSrc]="teamMembers[0].imageUrl"
+            width="1600" height="900"
+            [alt]="teamMembers[0].name"
+            priority
+            fetchpriority="high"
+            decoding="async"
+            sizes="(min-width: 768px) 50vw, 100vw"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-300 will-change-[opacity]"
+            (load)="$any($event.target)?.classList?.remove('opacity-0')"
+          />
+        </div>
       </div>
 
       <!-- Texto a la derecha -->
@@ -21,49 +34,80 @@
         <p class="text-gray-700 text-sm md:text-base leading-relaxed">
           {{ teamMembers[0].position || 'No description available.' }}
         </p>
-        <!-- Ícono redondeado alineado igual que el texto -->
+        <!-- Ícono redondeado alineado igual que el texto   -->
         <div class="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden mt-4 md:mt-0">
-          <img
-            src="assets/ourteam/foto1.png"
-            alt="Decoración"
-            class="w-full h-full object-cover opacity-80"
-          />
+            <!-- Ícono redondeado alineado igual que el texto --> 
+            <a href="{{ teamMembers[0].linkedinUrl }}" 
+            target="_blank" rel="noopener noreferrer" 
+            class="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden mt-4 md:mt-0 block" > 
+                  <img
+                    ngSrc="assets/ourteam/foto1.png"
+                    width="160"
+                    height="160"
+                    alt="Decoración"
+                    class="w-full h-full object-cover opacity-80"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+          </div>
+        
         </div>
       </div>
-    </div>
 
-    <!-- Miembros restantes en grid de 3 por fila -->
+    <!-- Miembros restantes en grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto">
       <div
-        *ngFor="let member of teamMembers.slice(1)"
+        *ngFor="let member of teamMembers.slice(1); let i = index"
         class="flex flex-col"
       >
-        <!-- Imagen rectangular ligeramente más alta -->
-        <div class="w-full aspect-[1.01] overflow-hidden rounded-[2rem] mb-2">
+        <!-- Contenedor con relación de aspecto para evitar saltos -->
+        <div class="relative w-full aspect-[1.01] overflow-hidden rounded-[2rem] mb-2">
+          <!-- Skeleton -->
+          <div
+            class="absolute inset-0 animate-pulse bg-gray-200"
+            [class.hidden]="loadedIndices.has(i)"
+          ></div>
+
+          <!-- Imagen con lazy + fade-in -->
           <img
-            [src]="member.imageUrl"
+            [ngSrc]="member.imageUrl"
+            width="1000" height="990"
             [alt]="member.name"
-            class="w-full h-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="auto"
+            sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-300"
+            (load)="onLoaded(i); $any($event.target)?.classList?.remove('opacity-0')"
           />
         </div>
 
         <div class="flex flex-col text-left">
-          <!-- Nombre -->
           <h3 class="text-lg md:text-xl font-extrabold mb-1">{{ member.name }}</h3>
-
-          <!-- Posición -->
           <p class="text-xs md:text-sm text-gray-700 mb-2">
             {{ member.position }}
           </p>
 
-          <!-- Icono perfectamente alineado con el texto -->
-          <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg overflow-hidden">
-            <img
-              src="assets/ourteam/foto1.png"
-              alt="Decoración"
-              class="w-full h-full object-cover opacity-80"
-            />
-          </div>
+          <!-- Icono alineado -->
+      <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg overflow-hidden">
+        <a 
+          href="{{ member.linkedinUrl }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block w-full h-full"
+        >
+          <img
+            ngSrc="assets/ourteam/foto1.png"
+            width="80"
+            height="80"
+            alt="LinkedIn"
+            class="w-full h-full object-cover opacity-80 hover:opacity-100 transition"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </div>
         </div>
       </div>
     </div>
@@ -71,11 +115,30 @@
 
   <!-- Imagen decorativa flotante -->
   <div class="absolute bottom-[100px] sm:bottom-[150px] md:bottom-[230px] right-4 sm:right-8 md:right-10 w-48 sm:w-56 md:w-64 lg:w-80 transform scale-[1.2] z-10 hidden md:block">
-    <img src="assets/ourteam/foto2.png" alt="Decoración derecha" class="w-full h-auto opacity-90" />
+    <img
+      ngSrc="assets/ourteam/foto2.png"
+      width="800" height="600"
+      alt="Decoración derecha"
+      class="w-full h-auto opacity-90"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 
-  <!-- Si no hay miembros -->
-  <div *ngIf="!teamMembers.length" class="text-center text-gray-400 italic mt-6">
+  <!-- Fallback de carga (título + grid de skeletons) -->
+  <ng-template #loadingTeam>
+    <div class="max-w-7xl mx-auto">
+      <div class="h-8 w-40 bg-gray-200 animate-pulse rounded mb-6"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="aspect-[1.01] rounded-[2rem] bg-gray-200 animate-pulse"></div>
+        <div class="aspect-[1.01] rounded-[2rem] bg-gray-200 animate-pulse"></div>
+        <div class="aspect-[1.01] rounded-[2rem] bg-gray-200 animate-pulse"></div>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Si no hay miembros (tras cargar) -->
+  <div *ngIf="teamMembers.length === 0" class="text-center text-gray-400 italic mt-6">
     No team member available at the moment.
   </div>
 </section>

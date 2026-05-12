@@ -1,0 +1,130 @@
+<!-- blog-individual.html COMPLETO Y MODIFICADO (solo la columna derecha cambió) -->
+<div class="min-h-screen bg-gray-50 py-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+      <!-- COLUMNA IZQUIERDA - NOTICIA REAL (sin cambios) -->
+      <div class="lg:col-span-9">
+        <div class="bg-white rounded-3xl shadow-sm overflow-hidden">
+
+          <ng-container *ngIf="noticia$ | async as noticia; else loading">
+
+            <!-- HERO -->
+            <div class="relative h-[460px] md:h-[520px] bg-cover bg-center"
+                 [style.background-image]="'url(' + (noticia?.meta?.image || 'https://picsum.photos/1200/600') + ')'">
+              <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70"></div>
+              
+              <div class="absolute top-8 left-8">
+                <span class="bg-blue-600 text-white px-7 py-2.5 rounded-2xl text-sm font-bold tracking-widest">
+                  PRENSA
+                </span>
+              </div>
+
+              <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight">
+                  {{ noticia?.title || 'Título no disponible' }}
+                </h1>
+              </div>
+            </div>
+
+            <!-- CONTENIDO -->
+            <div class="max-w-3xl mx-auto px-8 md:px-12 py-12">
+              <div class="flex items-center gap-3 text-sm text-gray-500 mb-8">
+                <span>Redacción Mas Latino</span>
+                <span class="text-gray-300">•</span>
+                <time>{{ noticia?.createdAt | date:'dd MMMM yyyy' }}</time>
+              </div>
+
+              <p class="text-xl text-gray-700 leading-relaxed mb-12 border-l-4 border-blue-600 pl-6">
+                {{ noticia?.summary || 'Sin resumen disponible' }}
+              </p>
+
+              <!-- BLOQUES -->
+              <div class="prose prose-lg max-w-none text-gray-800">
+                <ng-container *ngFor="let block of (noticia?.content || []); trackBy: trackByIndex">
+                  <ng-container [ngSwitch]="block?.type">
+                    <ng-container *ngSwitchCase="'text'">
+                      <ng-container [ngSwitch]="block?.tag">
+                        <h2 *ngSwitchCase="'h2'" class="text-3xl font-bold mt-12 mb-6" [innerHTML]="block?.html || block?.text"></h2>
+                        <h3 *ngSwitchCase="'h3'" class="text-2xl font-semibold mt-10 mb-5" [innerHTML]="block?.html || block?.text"></h3>
+                        <p *ngSwitchDefault class="mb-8 text-[17px] leading-relaxed" [innerHTML]="block?.html || block?.text"></p>
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'list'">
+                      <ul *ngIf="!block?.ordered" class="mb-8 pl-6 list-disc space-y-3">
+                        <li *ngFor="let item of (block?.items || [])" [innerHTML]="item"></li>
+                      </ul>
+                      <ol *ngIf="block?.ordered" class="mb-8 pl-6 list-decimal space-y-3">
+                        <li *ngFor="let item of (block?.items || [])" [innerHTML]="item"></li>
+                      </ol>
+                    </ng-container>
+
+                    <figure *ngSwitchCase="'image'" class="my-10">
+                      <img [src]="block?.url" [alt]="block?.alt || noticia?.title" class="rounded-2xl w-full shadow-md">
+                      <figcaption *ngIf="block?.caption" class="text-center text-sm text-gray-500 mt-3">
+                        {{ block.caption }}
+                      </figcaption>
+                    </figure>
+
+                    <blockquote *ngSwitchCase="'quote'" class="border-l-4 border-blue-600 pl-6 my-10 text-xl italic text-gray-700">
+                      {{ block?.quote }}
+                    </blockquote>
+
+                    <p *ngSwitchDefault class="text-amber-600">[Bloque no renderizado: {{ block?.type }}]</p>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- LOADING -->
+          <ng-template #loading>
+            <div class="p-12 text-center">
+              <div class="animate-spin mx-auto w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full"></div>
+              <p class="mt-6 text-gray-500">Cargando artículo de prensa...</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- ==================== COLUMNA DERECHA: RECOMENDADOS (AHORA CON DATOS REALES) ==================== -->
+      <div class="lg:col-span-3">
+        <div class="sticky top-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-8">Recomendados</h2>
+
+          <!-- Tarjetas dinámicas (ordenadas de más antigua a más reciente) -->
+          <a *ngFor="let rec of recommended()"
+             [routerLink]="['/blog', rec.slug]"
+             class="group block cursor-pointer mb-10 last:mb-0">
+
+            <div class="overflow-hidden rounded-3xl shadow-md">
+              <img 
+                [src]="rec.meta?.image || 'https://picsum.photos/id/1015/600/400'" 
+                [alt]="rec.title"
+                class="w-full h-52 object-cover transition-all duration-500 group-hover:scale-105">
+            </div>
+            
+            <div class="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500 mb-3">
+              <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">
+                {{ rec.createdAt | date:'d MMM yyyy' | uppercase }}
+              </span>
+              <span>·</span>
+              <span>{{ rec.categories?.[0]?.name || 'Prensa' }}</span>
+            </div>
+            
+            <h3 class="font-bold text-xl text-gray-900 leading-tight mb-3 line-clamp-2">
+              {{ rec.title }}
+            </h3>
+            
+            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+              {{ rec.extracto || rec.summary || 'Descubre más...' }}
+            </p>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

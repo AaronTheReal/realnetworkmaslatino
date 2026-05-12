@@ -12,6 +12,13 @@ import { RouterModule } from '@angular/router';
 import { register } from 'swiper/element/bundle';
 import { SafePipe } from '../../../safe.pipe';
 import { HomeService, CarouselItem } from './../../services/home-service';
+import{ReachPower} from '../home/reach-power/reach-power'
+import {SerpientesCreate} from '../home/serpientes-create/serpientes-create'
+import {WhatMaslatinoIs} from '../what-maslatino-is/what-maslatino-is'
+import {NationalReach} from '../home/national-reach/national-reach'
+import {HowBrands} from '../home/how-brands/how-brands';
+import {OurPartners} from '../home/our-partners/our-partners';
+import {ParterUs} from '../home/parter-us/parter-us'
 
 // 🔥 Declarar globals para TikTok, Instagram y Facebook (evita errores TS)
 declare global {
@@ -38,7 +45,13 @@ register();
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, SafePipe],
+  imports: [CommonModule, RouterModule, SafePipe,ReachPower,
+    SerpientesCreate,
+    WhatMaslatinoIs, 
+    NationalReach,
+    HowBrands,
+    OurPartners,
+    ParterUs],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

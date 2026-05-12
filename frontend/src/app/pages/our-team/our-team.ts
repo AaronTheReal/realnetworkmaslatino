@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TeamService, TeamMember } from '../../services/team-service'; // Asegúrate de que la ruta sea correcta
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { TeamService, TeamMember } from '../../services/team-service';
 
 @Component({
   selector: 'app-our-team',
-  imports: [CommonModule, RouterModule], // puedes agregar FormsModule si se requiere
+  standalone: true,
+  imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './our-team.html',
-  styleUrl: './our-team.css'
+  styleUrls: ['./our-team.css'], // Asegúrate de usar plural
 })
-export class OurTeam  implements OnInit{
+export class OurTeam implements OnInit {
   teamMembers: TeamMember[] = [];
-constructor(private teamService: TeamService) {}
+  loadedIndices = new Set<number>();
+
+  constructor(private teamService: TeamService) {}
 
   ngOnInit(): void {
-      this.teamService.getAll().subscribe({
+    this.teamService.getAll().subscribe({
       next: (res: any) => {
-        const members: TeamMember[] = res.data ?? [];
+        const members: TeamMember[] = res?.data ?? [];
         this.teamMembers = members.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
       },
       error: (err) => {
@@ -25,9 +27,8 @@ constructor(private teamService: TeamService) {}
       }
     });
   }
+
+  onLoaded(i: number) {
+    this.loadedIndices.add(i);
+  }
 }
-
-
-
-
-

@@ -13,17 +13,23 @@ import { FeaturedShowsPanel } from '../app/pages/admin-panel/featured-shows-pane
 import { Contact } from '../app/pages/contact/contact';
 import { OurImpact } from '../app/pages/our-impact/our-impact';
 import { OurTeam } from '../app/pages/our-team/our-team';
+import {BlogComponent} from '../app/pages/blog/blog'
+import {BlogIndividual} from '../app/pages/blog/blog-individual/blog-individual'
 
 export const routes: Routes = [
 
       { path: '', component: HomeComponent },
       { path: 'press-release', component: PressComponent },
       { path: 'about-us', component: AboutUsComponent },
+
       { path: 'admin-panel', component: AdminPanelComponent },
       { path: 'about-us-panel', component: AboutUsPanelComponent },
       { path: 'home-panel', component: HomePanelComponent },
-      { path: 'our-voice', component: OurVoice },
       { path: 'our-voice-panel', component: OurVoicePanel },
+
+      { path: 'our-voice', component: OurVoice },
+
+      
       { path: 'our-team', component: OurTeam },
       { path: 'featured-shows', component: FeaturedShowsPanel },
 
@@ -32,5 +38,9 @@ export const routes: Routes = [
 
       { path: 'our-impact', component: OurImpact },
       { path: 'contact', component: Contact },
+      { path: 'blogs', component: BlogComponent },
+     { path: 'blog/:slug', component: BlogIndividual },
 
+
+      
 ];
