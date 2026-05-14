@@ -1,7 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+
+import { RestaurantsService, Restaurant } from '../../services/places-service';
 
 type CityInfo = {
   name: string;
@@ -27,17 +30,52 @@ const DEFAULT_CITY: CityInfo = { name: 'TU CIUDAD', image: '', highlight: 'TU CI
 
 @Component({
   selector: 'app-restaurantes',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './restaurantes.html',
   styleUrl: './restaurantes.css'
 })
 export class Restaurantes {
   private route = inject(ActivatedRoute);
+  private restaurantsService = inject(RestaurantsService);
 
+  // Señal de la ciudad actual (viene de la URL)
   city = toSignal(
     this.route.paramMap.pipe(
       map(params => CITY_MAP[(params.get('ciudad') || '').toLowerCase()] ?? DEFAULT_CITY)
     ),
     { initialValue: DEFAULT_CITY }
   );
+
+  // Señales para los restaurantes
+  restaurants = signal<Restaurant[]>([]);
+  loading = signal<boolean>(true);
+  error = signal<string | null>(null);
+
+  constructor() {
+    // Cada vez que cambie la ciudad, cargamos los restaurantes
+    effect(() => {
+      const currentCity = this.city();
+      if (currentCity.highlight !== 'TU CIUDAD') {
+        this.loadRestaurants(currentCity.highlight);
+      }
+    });
+  }
+
+  private loadRestaurants(cityName: string) {
+    this.loading.set(true);
+    this.error.set(null);
+
+    this.restaurantsService.getBestRestaurants(cityName).subscribe({
+      next: (response) => {
+        this.restaurants.set(response.restaurants);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error(err);
+        this.error.set('No pudimos cargar los restaurantes en este momento. Inténtalo más tarde.');
+        this.loading.set(false);
+      }
+    });
+  }
 }

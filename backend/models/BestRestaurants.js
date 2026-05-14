@@ -1,10 +1,10 @@
 // models/BestRestaurants.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const PhotoSchema = new mongoose.Schema({
-  url: { type: String, required: true },           // URL lista para usar en <img>
-  authorName: String,                              // opcional (para atribución)
-  authorUri: String,                               // opcional
+  url: { type: String, required: true },
+  authorName: String,
+  authorUri: String,
 });
 
 const RestaurantSchema = new mongoose.Schema({
@@ -18,9 +18,9 @@ const RestaurantSchema = new mongoose.Schema({
   },
   formattedAddress: String,
   rating: Number,
-  priceLevel: String,          // PRICE_LEVEL_MODERATE, PRICE_LEVEL_EXPENSIVE, etc.
+  priceLevel: String,
   googleMapsUri: String,
-  photos: [PhotoSchema],       // Array de fotos
+  photos: [PhotoSchema],
   lastUpdated: { type: Date, default: Date.now }
 });
 
@@ -31,18 +31,14 @@ const BestRestaurantsSchema = new mongoose.Schema({
     unique: true, 
     lowercase: true, 
     trim: true 
-  }, 
-  // Ejemplos: "boston", "atlanta", "new-york", etc.
-  
+  },
   restaurants: [RestaurantSchema],
-  
   lastUpdated: { 
     type: Date, 
     default: Date.now 
   }
 });
 
-// Índice para búsquedas rápidas
 BestRestaurantsSchema.index({ city: 1 });
 
-module.exports = mongoose.model('BestRestaurants', BestRestaurantsSchema);
+export default mongoose.model('BestRestaurants', BestRestaurantsSchema);
