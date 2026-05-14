@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TeamService, TeamMember } from '../../services/team-service';
 import { RouterModule } from '@angular/router';
-
+import {AboutUsWe} from './about-us-we/about-us-we'
+import { OurPartenrs } from "./our-partenrs/our-partenrs";
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, AboutUsWe, OurPartenrs],
   templateUrl: './about-us.html',
   styleUrls: ['./about-us.css'],
   encapsulation: ViewEncapsulation.None,

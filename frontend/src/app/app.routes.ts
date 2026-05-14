@@ -15,6 +15,10 @@ import { OurImpact } from '../app/pages/our-impact/our-impact';
 import { OurTeam } from '../app/pages/our-team/our-team';
 import {BlogComponent} from '../app/pages/blog/blog'
 import {BlogIndividual} from '../app/pages/blog/blog-individual/blog-individual'
+import {Brands} from '../app/pages/brands/brands'
+import {Creators} from './pages/creators/creators'
+import {Restaurantes} from './pages/restaurantes/restaurantes'
+import {Cities} from './pages/cities/cities'
 
 export const routes: Routes = [
 
@@ -32,6 +36,12 @@ export const routes: Routes = [
       
       { path: 'our-team', component: OurTeam },
       { path: 'featured-shows', component: FeaturedShowsPanel },
+      { path: 'brands', component: Brands },
+      { path: 'creators', component: Creators },
+      { path: 'restaurantes/:ciudad', component: Restaurantes },
+      { path: 'cyties', component: Cities },
+
+
 
 
       
