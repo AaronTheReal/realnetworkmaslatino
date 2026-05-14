@@ -9,6 +9,7 @@ import BestController from './BestController.js';
 import TeamController from './TeamMemberController.js';
 import VoiceController from './MeetController.js';
 import FeaturedPageController from './FeaturedController.js';
+import PlacesController from './PlacesController.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -86,6 +87,19 @@ export default class MainRoute {
         .get(FeaturedPageController.apiGetById)   // Obtener por ID
         .put(FeaturedPageController.apiUpdate)    // Actualizar por ID
         .delete(FeaturedPageController.apiDelete); // Eliminar por ID
+
+        //Places
+        router.route('/restaurants/:city')
+          .get(PlacesController.apiGetBestRestaurants);
+
+        router.route('/restaurants/refresh/:city')
+          .post(PlacesController.apiRefreshRestaurants);
+
+        router.route('/restaurants/cities')
+          .get(PlacesController.apiGetAvailableCities);
+
+        router.route('/restaurants/refresh-all')
+          .post(PlacesController.apiRefreshAllCities);
 
       // Reorder bulk
       router.route('/featured-pages/reorder').post(FeaturedPageController.apiReorder);
