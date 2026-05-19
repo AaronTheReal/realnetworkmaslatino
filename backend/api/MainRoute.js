@@ -88,18 +88,19 @@ export default class MainRoute {
         .put(FeaturedPageController.apiUpdate)    // Actualizar por ID
         .delete(FeaturedPageController.apiDelete); // Eliminar por ID
 
-        //Places
-        router.route('/restaurants/:city')
-          .get(PlacesController.apiGetBestRestaurants);
-
-        router.route('/restaurants/refresh/:city')
-          .post(PlacesController.apiRefreshRestaurants);
-
+        // Places / Restaurants
+        // IMPORTANTE: las rutas estáticas van ANTES de la dinámica /:city
         router.route('/restaurants/cities')
           .get(PlacesController.apiGetAvailableCities);
 
         router.route('/restaurants/refresh-all')
           .post(PlacesController.apiRefreshAllCities);
+
+        router.route('/restaurants/refresh/:city')
+          .post(PlacesController.apiRefreshRestaurants);
+
+        router.route('/restaurants/:city')
+          .get(PlacesController.apiGetBestRestaurants);
 
       // Reorder bulk
       router.route('/featured-pages/reorder').post(FeaturedPageController.apiReorder);

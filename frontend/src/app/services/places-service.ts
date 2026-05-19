@@ -31,7 +31,7 @@ export interface CityRestaurantsResponse {
 export class RestaurantsService {
 
   // Cambia esta URL según tu entorno
-  // private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/restaurants';
+   //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/restaurants';
   private baseUrl = 'https://realnetworkmaslatino-teas.onrender.com/aaron/maslatinoNetwork/restaurants';
 
   constructor(private http: HttpClient) {}

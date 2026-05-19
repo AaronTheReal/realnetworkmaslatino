@@ -30,7 +30,8 @@ const allowedOrigins = [
   'https://super-cajeta-50e752.netlify.app',
   'https://realnetworkmaslatino.onrender.com',
   'https://maslatinonetwork.com',
-  'https://realnetworkmaslatino-teas.onrender.com'
+  'https://realnetworkmaslatino-teas.onrender.com',
+  'https://melodic-alfajores-aa5cb7.netlify.app'
 
 ];
 

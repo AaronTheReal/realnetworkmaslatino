@@ -25,12 +25,12 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'press-release', component: PressComponent },
       { path: 'about-us', component: AboutUsComponent },
-
+/*
       { path: 'admin-panel', component: AdminPanelComponent },
       { path: 'about-us-panel', component: AboutUsPanelComponent },
       { path: 'home-panel', component: HomePanelComponent },
       { path: 'our-voice-panel', component: OurVoicePanel },
-
+*/
       { path: 'our-voice', component: OurVoice },
 
       

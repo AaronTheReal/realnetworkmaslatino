@@ -1,1 +1,76 @@
-<p>contact works!</p>
+<!-- CONTACT FORM - FONDO BLANCO TOTAL EN TODA LA PANTALLA -->
+<div class="min-h-screen bg-white w-full">
+
+  <main class="relative mx-auto w-full max-w-[920px] px-5 sm:px-8 py-12 sm:py-16 md:py-20 text-neutral-900 antialiased">
+
+    <!-- Decorative corner curl -->
+    <svg class="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-20 z-0" 
+         viewBox="0 0 64 64" 
+         aria-hidden="true">
+      <path d="M64 0 C 64 28, 48 48, 20 56 C 40 40, 52 24, 56 0 Z" fill="#D1D5DB"/>
+    </svg>
+
+    <!-- TITLE -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-center text-black uppercase tracking-tight leading-tight relative z-10">
+      CONTACT
+    </h1>
+
+    <!-- Intro paragraph -->
+    <p class="mt-6 sm:mt-8 mx-auto max-w-[520px] text-center text-sm sm:text-[13px] leading-[1.65] text-neutral-800 relative z-10">
+      We help Fortune 500 brands scale by blending culture and data to create relevant creative and
+      performance-driven media that delivers real business results. If you're looking for a strategic
+      partner to navigate the complexities of modern marketing, let's talk.
+    </p>
+
+    <!-- FORM -->
+    <form class="mt-10 sm:mt-14 mx-auto max-w-[780px] space-y-4 sm:space-y-5 relative z-10">
+
+      <!-- Row 1 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <input type="text" name="nombre" placeholder="Name"
+               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        
+        <input type="email" name="correo" placeholder="Email"
+               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+      </div>
+
+      <!-- Row 2 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <input type="text" name="company" placeholder="Company name"
+               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        
+        <input type="text" name="jobtitle" placeholder="Job title"
+               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+      </div>
+
+      <!-- Row 3 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <input type="text" name="workname" placeholder="Work name"
+               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        
+        <input type="text" name="region" placeholder="Region"
+               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+      </div>
+
+      <!-- Textarea corta -->
+      <textarea name="help" rows="2" placeholder="How can we help your brand?"
+                class="w-full border border-[#111] rounded-3xl bg-white px-6 py-5 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] outline-none resize-none transition-all"></textarea>
+
+      <!-- Textarea larga -->
+      <textarea name="mensaje" rows="4" placeholder="Message"
+                class="w-full border border-[#111] rounded-3xl bg-white px-6 py-5 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] outline-none resize-none transition-all"></textarea>
+
+      <!-- Submit -->
+      <div class="pt-6 sm:pt-8 flex justify-center">
+        <button type="submit"
+                class="bg-red-500 hover:bg-[#E85A29] active:translate-y-px text-white rounded-full px-10 py-3.5 text-[15px] font-medium tracking-[0.01em] shadow-[0_6px_14px_-6px_rgba(242,107,58,.55)] transition-all"
+                >
+          enviar
+        </button>
+      </div>
+
+    </form>
+
+  </main>
+
+</div>

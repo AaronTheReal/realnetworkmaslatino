@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0A0A0A;
+    --line:#111111;
+    --muted:#4B5563;
+    --orange:#F26B3A;
+    --orange-hover:#E85A29;
+  }
+  html,body{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;}
+  .font-display{font-family:'Inter',sans-serif; letter-spacing:-0.02em;}
+
+  /* Pill input — single hairline black border, fully rounded */
+  .pill{
+    width:100%;
+    border:1px solid #111;
+    border-radius:9999px;
+    padding:14px 22px;
+    font-size:13px;
+    color:#111;
+    background:#fff;
+    outline:none;
+    transition:box-shadow .15s ease, border-color .15s ease;
+  }
+  .pill::placeholder{color:#111; opacity:1;}
+  .pill:focus{box-shadow:0 0 0 3px rgba(242,107,58,.18); border-color:#111;}
+
+  /* Stadium textarea (rounded full on the sides but allows multi-line) */
+  .pill-area{
+    width:100%;
+    border:1px solid #111;
+    border-radius:28px;
+    padding:18px 24px;
+    font-size:13px;
+    color:#111;
+    background:#fff;
+    outline:none;
+    resize:none;
+    transition:box-shadow .15s ease, border-color .15s ease;
+    font-family:inherit;
+  }
+  .pill-area::placeholder{color:#111; opacity:1;}
+  .pill-area:focus{box-shadow:0 0 0 3px rgba(242,107,58,.18);}
+
+  /* Submit pill */
+  .btn-enviar{
+    background:var(--orange);
+    color:#fff;
+    border-radius:9999px;
+    padding:12px 38px;
+    font-size:15px;
+    font-weight:500;
+    letter-spacing:.01em;
+    box-shadow:0 6px 14px -6px rgba(242,107,58,.55);
+    transition:background .15s ease, transform .1s ease, box-shadow .15s ease;
+  }
+  .btn-enviar:hover{background:var(--orange-hover);}
+  .btn-enviar:active{transform:translateY(1px);}
+
+  /* Tiny decorative corner curl in the top-right of the canvas */
+  .corner-curl{
+    position:absolute;
+    top:0; right:0;
+    width:64px; height:64px;
+    pointer-events:none;
+    opacity:.18;
+  }
+</style>
+</head>
+<body class="bg-white text-neutral-900 antialiased">
+
+  <main class="relative mx-auto w-full max-w-[920px] px-5 sm:px-8 py-12 sm:py-16 md:py-20">
+
+    <!-- decorative top-right curl (subtle, like the screenshot) -->
+    <svg class="corner-curl" viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M64 0 C 64 28, 48 48, 20 56 C 40 40, 52 24, 56 0 Z" fill="#D1D5DB"/>
+    </svg>
+
+    <!-- Title -->
+    <h1 class="font-display font-extrabold text-center text-[34px] sm:text-[44px] md:text-[52px] tracking-tight">
+      CONTACT
+    </h1>
+
+    <!-- Intro paragraph -->
+    <p class="mt-6 sm:mt-8 mx-auto max-w-[520px] text-center text-[12.5px] sm:text-[13px] leading-[1.65] text-neutral-800">
+      We help Fortune 500 brands scale by blending culture and data to create relevant creative and
+      performance-driven media that delivers real business results. If you're looking for a strategic
+      partner to navigate the complexities of modern marketing, let's talk.
+    </p>
+
+    <!-- Form -->
+    <form id="contactForm" class="mt-10 sm:mt-14 mx-auto max-w-[780px] space-y-4 sm:space-y-5" novalidate>
+
+      <!-- Row 1: Nombre / Correo -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <input type="text"  name="nombre"  class="pill" placeholder="Nombre" />
+        <input type="email" name="correo"  class="pill" placeholder="Correo" />
+      </div>
+
+      <!-- Row 2: Company name / Job title -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <input type="text" name="company"  class="pill" placeholder="Company name" />
+        <input type="text" name="jobtitle" class="pill" placeholder="Job title" />
+      </div>
+
+      <!-- Row 3: Work name / Region -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <input type="text" name="workname" class="pill" placeholder="Work name" />
+        <input type="text" name="region"   class="pill" placeholder="Region" />
+      </div>
+
+      <!-- Row 4: How can we help your brand? (short multi-line stadium) -->
+      <div>
+        <textarea name="help" rows="2" class="pill-area" placeholder="How can we help your brand?"></textarea>
+      </div>
+
+      <!-- Row 5: Mensaje (taller stadium) -->
+      <div>
+        <textarea name="mensaje" rows="4" class="pill-area" placeholder="Mensaje"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <div class="pt-6 sm:pt-8 flex justify-center">
+        <button type="submit" class="btn-enviar">enviar</button>
+      </div>
+
+    </form>
+
+  </main>
+
+<script>
+  // Light client behavior — collect & log on submit
+  document.getElementById('contactForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    console.log('contact form →', data);
+    const btn = e.target.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.textContent = 'enviado ✓';
+    btn.style.background = '#1FC16B';
+    setTimeout(()=>{
+      btn.textContent = original;
+      btn.style.background = '';
+      e.target.reset();
+    }, 1600);
+  });
+</script>
+</body>
+</html>

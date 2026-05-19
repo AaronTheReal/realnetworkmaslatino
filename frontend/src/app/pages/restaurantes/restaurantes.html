@@ -77,7 +77,7 @@
         <div class="aspect-square w-full rounded-2xl bg-neutral-200 overflow-hidden relative">
           <img 
             *ngIf="resto.photos && resto.photos.length > 0"
-            [src]="resto.photos[0].url + '&maxWidthPx=800'" 
+            [src]="resto.photos[0].url" 
             [alt]="resto.name"
             class="w-full h-full object-cover transition group-hover:scale-105"
           >

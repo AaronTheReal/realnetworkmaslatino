@@ -84,31 +84,34 @@
         <!-- FLEX SPACE -->
         <div class="flex-1 min-h-[44px] sm:min-h-[56px]"></div>
 
-        <!-- BUTTON -->
-        <div class="flex justify-center">
-          <button
-            class="
-              flex
-              h-[64px]
-              w-[250px]
-              items-center
-              justify-center
-              rounded-full
-              bg-white
-              text-black
-              text-[clamp(1.3rem,1.5vw,1.85rem)]
-              font-extrabold
-              leading-none
-              transition-colors
-              hover:bg-white/90
+        <!-- BUTTON - WORK WITH US (VERSIÓN CORREGIDA) -->
+    <div class="flex justify-center">
+      <a
+        [routerLink]="['/contact']"
+        class="
+          flex
+          h-[64px]
+          w-[250px]
+          items-center
+          justify-center
+          rounded-full
+          bg-white
+          text-black
+          text-[clamp(1.3rem,1.5vw,1.85rem)]
+          font-extrabold
+          leading-none
+          transition-all
+          hover:bg-white/90
+          active:scale-95
+          cursor-pointer
 
-              sm:h-[72px]
-              sm:w-[300px]
-            "
-          >
-            work with us
-          </button>
-        </div>
+          sm:h-[72px]
+          sm:w-[300px]
+        "
+      >
+        work with us
+      </a>
+    </div>
       </div>
 
       <!-- CORNER -->
