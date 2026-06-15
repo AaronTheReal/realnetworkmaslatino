@@ -1,7 +1,7 @@
 <!-- blog-individual.html COMPLETO Y MODIFICADO (solo la columna derecha cambió) -->
-<div class="min-h-screen bg-gray-50 py-12 px-4">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<div class="min-h-screen bg-gray-50 py-12 lg:py-16 2xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12">
+  <div class="max-w-7xl 2xl:max-w-screen-2xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 2xl:gap-14">
 
       <!-- COLUMNA IZQUIERDA - NOTICIA REAL (sin cambios) -->
       <div class="lg:col-span-9">
@@ -78,11 +78,52 @@
             </div>
           </ng-container>
 
-          <!-- LOADING -->
+          <!-- LOADING SKELETON -->
           <ng-template #loading>
-            <div class="p-12 text-center">
-              <div class="animate-spin mx-auto w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full"></div>
-              <p class="mt-6 text-gray-500">Cargando artículo de prensa...</p>
+            <div class="animate-pulse">
+              <!-- Hero skeleton -->
+              <div class="relative h-[460px] md:h-[520px] bg-gray-200">
+                <div class="absolute top-8 left-8 h-9 w-28 bg-gray-300 rounded-2xl"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 space-y-4">
+                  <div class="h-9 md:h-11 w-3/4 bg-gray-300 rounded"></div>
+                  <div class="h-9 md:h-11 w-1/2 bg-gray-300 rounded"></div>
+                </div>
+              </div>
+
+              <!-- Content skeleton -->
+              <div class="max-w-3xl mx-auto px-8 md:px-12 py-12">
+                <!-- meta -->
+                <div class="flex items-center gap-3 mb-8">
+                  <div class="h-4 w-40 bg-gray-200 rounded"></div>
+                  <div class="h-4 w-24 bg-gray-200 rounded"></div>
+                </div>
+
+                <!-- lead -->
+                <div class="border-l-4 border-gray-200 pl-6 mb-12 space-y-3">
+                  <div class="h-5 w-full bg-gray-200 rounded"></div>
+                  <div class="h-5 w-11/12 bg-gray-200 rounded"></div>
+                  <div class="h-5 w-2/3 bg-gray-200 rounded"></div>
+                </div>
+
+                <!-- paragraphs -->
+                <div class="space-y-4">
+                  <div class="h-4 w-full bg-gray-200 rounded"></div>
+                  <div class="h-4 w-full bg-gray-200 rounded"></div>
+                  <div class="h-4 w-5/6 bg-gray-200 rounded"></div>
+                  <div class="h-4 w-full bg-gray-200 rounded"></div>
+                  <div class="h-4 w-3/4 bg-gray-200 rounded"></div>
+                </div>
+
+                <!-- subtitle -->
+                <div class="h-7 w-1/2 bg-gray-200 rounded mt-12 mb-6"></div>
+
+                <div class="space-y-4">
+                  <div class="h-4 w-full bg-gray-200 rounded"></div>
+                  <div class="h-4 w-11/12 bg-gray-200 rounded"></div>
+                  <div class="h-4 w-full bg-gray-200 rounded"></div>
+                  <div class="h-4 w-2/3 bg-gray-200 rounded"></div>
+                </div>
+              </div>
             </div>
           </ng-template>
         </div>
@@ -91,7 +132,24 @@
       <!-- ==================== COLUMNA DERECHA: RECOMENDADOS (AHORA CON DATOS REALES) ==================== -->
       <div class="lg:col-span-3">
         <div class="sticky top-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-8">Recomendados</h2>
+          <h2 class="text-2xl 2xl:text-3xl font-bold text-gray-900 mb-8">Recomendados</h2>
+
+          <!-- Skeletons recomendados -->
+          <ng-container *ngIf="recLoading()">
+            <div *ngFor="let s of recSkeletons" class="block mb-10 last:mb-0 animate-pulse">
+              <div class="w-full h-52 bg-gray-200 rounded-3xl"></div>
+              <div class="mt-6 flex items-center justify-center gap-2 mb-3">
+                <div class="h-6 w-24 bg-gray-200 rounded-full"></div>
+                <div class="h-4 w-16 bg-gray-200 rounded"></div>
+              </div>
+              <div class="h-5 w-11/12 bg-gray-200 rounded mb-2.5 mx-auto"></div>
+              <div class="h-5 w-3/4 bg-gray-200 rounded mb-4 mx-auto"></div>
+              <div class="space-y-2.5">
+                <div class="h-3.5 w-full bg-gray-200 rounded"></div>
+                <div class="h-3.5 w-2/3 bg-gray-200 rounded"></div>
+              </div>
+            </div>
+          </ng-container>
 
           <!-- Tarjetas dinámicas (ordenadas de más antigua a más reciente) -->
           <a *ngFor="let rec of recommended()"

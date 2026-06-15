@@ -23,49 +23,96 @@
     </p>
 
     <!-- FORM -->
-    <form class="mt-10 sm:mt-14 mx-auto max-w-[780px] space-y-4 sm:space-y-5 relative z-10">
+    <form 
+      action="https://formspree.io/f/xwpqbnrj"
+      method="POST"
+      class="mt-10 sm:mt-14 mx-auto max-w-[780px] space-y-4 sm:space-y-5 relative z-10"
+    >
 
       <!-- Row 1 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <input type="text" name="nombre" placeholder="Name"
-               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Name"
+          required
+          class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" 
+        />
         
-        <input type="email" name="correo" placeholder="Email"
-               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Email"
+          required
+          class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" 
+        />
       </div>
 
       <!-- Row 2 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <input type="text" name="company" placeholder="Company name"
-               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        <input 
+          type="text" 
+          name="company" 
+          placeholder="Company name"
+          class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" 
+        />
         
-        <input type="text" name="jobtitle" placeholder="Job title"
-               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        <input 
+          type="text" 
+          name="job_title" 
+          placeholder="Job title"
+          class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" 
+        />
       </div>
 
       <!-- Row 3 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <input type="text" name="workname" placeholder="Work name"
-               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        <input 
+          type="text" 
+          name="work_name" 
+          placeholder="Work name"
+          class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" 
+        />
         
-        <input type="text" name="region" placeholder="Region"
-               class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" />
+        <input 
+          type="text" 
+          name="region" 
+          placeholder="Region"
+          class="w-full border border-[#111] rounded-full bg-white px-6 py-4 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] focus:border-[#111] outline-none transition-all" 
+        />
       </div>
 
       <!-- Textarea corta -->
-      <textarea name="help" rows="2" placeholder="How can we help your brand?"
-                class="w-full border border-[#111] rounded-3xl bg-white px-6 py-5 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] outline-none resize-none transition-all"></textarea>
+      <textarea 
+        name="brand_help" 
+        rows="2" 
+        placeholder="How can we help your brand?"
+        class="w-full border border-[#111] rounded-3xl bg-white px-6 py-5 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] outline-none resize-none transition-all"
+      ></textarea>
 
       <!-- Textarea larga -->
-      <textarea name="mensaje" rows="4" placeholder="Message"
-                class="w-full border border-[#111] rounded-3xl bg-white px-6 py-5 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] outline-none resize-none transition-all"></textarea>
+      <textarea 
+        name="message" 
+        rows="4" 
+        placeholder="Message"
+        required
+        class="w-full border border-[#111] rounded-3xl bg-white px-6 py-5 text-sm placeholder:text-[#111] focus:shadow-[0_0_0_3px_rgba(242,107,58,.18)] outline-none resize-none transition-all"
+      ></textarea>
+
+      <!-- Optional: email subject inside Formspree -->
+      <input 
+        type="hidden" 
+        name="_subject" 
+        value="New contact form submission from website"
+      />
 
       <!-- Submit -->
       <div class="pt-6 sm:pt-8 flex justify-center">
-        <button type="submit"
-                class="bg-red-500 hover:bg-[#E85A29] active:translate-y-px text-white rounded-full px-10 py-3.5 text-[15px] font-medium tracking-[0.01em] shadow-[0_6px_14px_-6px_rgba(242,107,58,.55)] transition-all"
-                >
-          enviar
+        <button 
+          type="submit"
+          class="bg-red-500 hover:bg-[#E85A29] active:translate-y-px text-white rounded-full px-10 py-3.5 text-[15px] font-medium tracking-[0.01em] shadow-[0_6px_14px_-6px_rgba(242,107,58,.55)] transition-all"
+        >
+          Send
         </button>
       </div>
 

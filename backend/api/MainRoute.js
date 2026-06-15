@@ -10,6 +10,9 @@ import TeamController from './TeamMemberController.js';
 import VoiceController from './MeetController.js';
 import FeaturedPageController from './FeaturedController.js';
 import PlacesController from './PlacesController.js'
+import PlacesExtraController from './PlacesExtraController.js'
+import EventosController from './EventosController.js'
+import WeatherController from './WeatherController.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -101,6 +104,31 @@ export default class MainRoute {
 
         router.route('/restaurants/:city')
           .get(PlacesController.apiGetBestRestaurants);
+
+        // Weather (Open-Meteo a través de nuestro backend)
+        router.route('/weather/:city')
+          .get(WeatherController.apiGetWeather);
+
+        // Turismo / Hangout / Fanzone (reutilizan Google Places)
+        // IMPORTANTE: las rutas de refresh van ANTES de la dinámica /:city
+        router.route('/turismo/refresh/:city')
+          .post(PlacesExtraController.apiRefreshTurismo);
+        router.route('/turismo/:city')
+          .get(PlacesExtraController.apiGetTurismo);
+
+        router.route('/hangout/refresh/:city')
+          .post(PlacesExtraController.apiRefreshHangout);
+        router.route('/hangout/:city')
+          .get(PlacesExtraController.apiGetHangout);
+
+        router.route('/fanzone/refresh/:city')
+          .post(PlacesExtraController.apiRefreshFanzone);
+        router.route('/fanzone/:city')
+          .get(PlacesExtraController.apiGetFanzone);
+
+        // Eventos (calendario Mundial 2026, dataset estático)
+        router.route('/eventos/:city')
+          .get(EventosController.apiGetEventosByCity);
 
       // Reorder bulk
       router.route('/featured-pages/reorder').post(FeaturedPageController.apiReorder);

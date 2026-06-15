@@ -214,7 +214,8 @@
 
         <!-- BUTTON -->
         <div class="flex justify-center">
-          <button
+          <a
+            [routerLink]="['/creators']"
             class="
               flex
               h-[64px]
@@ -227,15 +228,17 @@
               text-[clamp(1.25rem,1.45vw,1.8rem)]
               font-extrabold
               leading-none
-              transition-colors
+              transition-all
               hover:bg-white/90
+              active:scale-95
+              cursor-pointer
 
               sm:h-[72px]
               sm:w-[300px]
             "
           >
             join us
-          </button>
+          </a>
         </div>
       </div>
 

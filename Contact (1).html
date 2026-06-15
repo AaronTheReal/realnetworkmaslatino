@@ -1,158 +1,113 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Contact</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<style>
-  :root{
-    --ink:#0A0A0A;
-    --line:#111111;
-    --muted:#4B5563;
-    --orange:#F26B3A;
-    --orange-hover:#E85A29;
-  }
-  html,body{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;}
-  .font-display{font-family:'Inter',sans-serif; letter-spacing:-0.02em;}
+<main class="mx-auto w-full max-w-[560px] sm:max-w-3xl md:max-w-5xl lg:max-w-6xl px-5 sm:px-8 pt-8 pb-20 text-neutral-900 antialiased">
 
-  /* Pill input — single hairline black border, fully rounded */
-  .pill{
-    width:100%;
-    border:1px solid #111;
-    border-radius:9999px;
-    padding:14px 22px;
-    font-size:13px;
-    color:#111;
-    background:#fff;
-    outline:none;
-    transition:box-shadow .15s ease, border-color .15s ease;
-  }
-  .pill::placeholder{color:#111; opacity:1;}
-  .pill:focus{box-shadow:0 0 0 3px rgba(242,107,58,.18); border-color:#111;}
+  <!-- HERO CIUDAD -->
+  <section class="relative">
+    <div class="relative w-full h-[300px] sm:h-[380px] md:h-[460px] rounded-[28px] sm:rounded-[32px] overflow-hidden bg-neutral-200">
+      <div
+        class="city-image absolute inset-0 bg-cover bg-center bg-no-repeat"
+        [style.background-image]="'url(' + city().image + ')'"
+      ></div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-white via-white/75 to-transparent"></div>
+    </div>
 
-  /* Stadium textarea (rounded full on the sides but allows multi-line) */
-  .pill-area{
-    width:100%;
-    border:1px solid #111;
-    border-radius:28px;
-    padding:18px 24px;
-    font-size:13px;
-    color:#111;
-    background:#fff;
-    outline:none;
-    resize:none;
-    transition:box-shadow .15s ease, border-color .15s ease;
-    font-family:inherit;
-  }
-  .pill-area::placeholder{color:#111; opacity:1;}
-  .pill-area:focus{box-shadow:0 0 0 3px rgba(242,107,58,.18);}
+    <div class="relative -mt-20 sm:-mt-24 md:-mt-28 text-center px-4">
+      <h2 class="font-bold tracking-[-0.02em] leading-[1.05] text-[32px] sm:text-[42px] md:text-[48px]">
+        ¿Qué está pasando<br/>
+        en <span class="text-[#9333EA]">{{ city().highlight }}?</span>
+      </h2>
+    </div>
 
-  /* Submit pill */
-  .btn-enviar{
-    background:var(--orange);
-    color:#fff;
-    border-radius:9999px;
-    padding:12px 38px;
-    font-size:15px;
-    font-weight:500;
-    letter-spacing:.01em;
-    box-shadow:0 6px 14px -6px rgba(242,107,58,.55);
-    transition:background .15s ease, transform .1s ease, box-shadow .15s ease;
-  }
-  .btn-enviar:hover{background:var(--orange-hover);}
-  .btn-enviar:active{transform:translateY(1px);}
+    <!-- Weather Stats (puedes dejarlo o quitarlo) -->
+    <div class="mt-9 sm:mt-11 grid grid-cols-3 gap-6 sm:gap-8 max-w-xl mx-auto">
+      <div class="flex flex-col items-center gap-3">
+        <p class="text-sm sm:text-base font-extrabold tracking-wide text-neutral-900 text-center">CLIMA</p>
+        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-3xl">☀️</div>
+        <p class="text-3xl sm:text-4xl font-extrabold text-neutral-900">50°</p>
+      </div>
+      <div class="flex flex-col items-center gap-3">
+        <p class="text-sm sm:text-base font-extrabold tracking-wide text-neutral-900 text-center">SE SIENTE</p>
+        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-3xl">🌤️</div>
+        <p class="text-xl sm:text-2xl font-extrabold tracking-wide text-neutral-900">SOLEADO</p>
+      </div>
+      <div class="flex flex-col items-center gap-3">
+        <p class="text-sm sm:text-base font-extrabold tracking-wide text-neutral-900 text-center leading-tight">PROBABILIDAD<br/>DE LLUVIA</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-3xl">🌧️</div>
+          <p class="text-3xl sm:text-4xl font-extrabold text-neutral-900">5%</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  /* Tiny decorative corner curl in the top-right of the canvas */
-  .corner-curl{
-    position:absolute;
-    top:0; right:0;
-    width:64px; height:64px;
-    pointer-events:none;
-    opacity:.18;
-  }
-</style>
-</head>
-<body class="bg-white text-neutral-900 antialiased">
+  <div class="h-12 sm:h-16"></div>
 
-  <main class="relative mx-auto w-full max-w-[920px] px-5 sm:px-8 py-12 sm:py-16 md:py-20">
-
-    <!-- decorative top-right curl (subtle, like the screenshot) -->
-    <svg class="corner-curl" viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M64 0 C 64 28, 48 48, 20 56 C 40 40, 52 24, 56 0 Z" fill="#D1D5DB"/>
-    </svg>
-
-    <!-- Title -->
-    <h1 class="font-display font-extrabold text-center text-[34px] sm:text-[44px] md:text-[52px] tracking-tight">
-      CONTACT
+  <!-- HERO "LOS MEJORES RESTAURANTES" -->
+  <section class="relative overflow-hidden rounded-[36px] sm:rounded-[40px] px-8 sm:px-10 md:px-14 py-9 sm:py-12 md:py-14 bg-gradient-to-b from-[#9747FF] to-[#8B3FE8] shadow-[0_25px_55px_-20px_rgba(139,63,232,0.55)]">
+    <p class="text-white/95 text-sm sm:text-base font-semibold tracking-wide">Para comer</p>
+    <h1 class="font-bold text-white leading-[0.95] tracking-[-0.02em] mt-2 text-[42px] sm:text-6xl md:text-7xl">
+      LOS MEJORES<br/>RESTAURANTES
     </h1>
+    <!-- Cloche SVG (sin cambios) -->
+    <div class="absolute right-6 sm:right-8 md:right-12 top-1/2 -translate-y-1/2 w-[110px] sm:w-[155px] md:w-[195px] drop-shadow-[0_16px_24px_rgba(0,0,0,0.28)]">
+      <svg viewBox="0 0 200 200" class="w-full h-auto" aria-hidden="true"> ... (tu SVG actual) </svg>
+    </div>
+  </section>
 
-    <!-- Intro paragraph -->
-    <p class="mt-6 sm:mt-8 mx-auto max-w-[520px] text-center text-[12.5px] sm:text-[13px] leading-[1.65] text-neutral-800">
-      We help Fortune 500 brands scale by blending culture and data to create relevant creative and
-      performance-driven media that delivers real business results. If you're looking for a strategic
-      partner to navigate the complexities of modern marketing, let's talk.
-    </p>
+  <p class="mt-10 sm:mt-12 mx-auto max-w-[560px] text-center text-sm sm:text-base leading-[1.65] text-neutral-700">
+    Los mejores restaurantes de {{ city().name }} según Google Places. Actualizados automáticamente.
+  </p>
 
-    <!-- Form -->
-    <form id="contactForm" class="mt-10 sm:mt-14 mx-auto max-w-[780px] space-y-4 sm:space-y-5" novalidate>
+  <!-- GRID DINÁMICO -->
+  <section class="mt-8">
+    <div *ngIf="loading()" class="text-center py-12">
+      <p class="text-lg">Cargando los mejores restaurantes de {{ city().name }}...</p>
+    </div>
 
-      <!-- Row 1: Nombre / Correo -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <input type="text"  name="nombre"  class="pill" placeholder="Nombre" />
-        <input type="email" name="correo"  class="pill" placeholder="Correo" />
-      </div>
+    <div *ngIf="error()" class="text-center py-12 text-red-600">
+      {{ error() }}
+    </div>
 
-      <!-- Row 2: Company name / Job title -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <input type="text" name="company"  class="pill" placeholder="Company name" />
-        <input type="text" name="jobtitle" class="pill" placeholder="Job title" />
-      </div>
+    <div *ngIf="!loading() && !error()" 
+         class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      
+      <article *ngFor="let resto of restaurants()" 
+               class="group rounded-3xl border border-neutral-200 bg-white p-4 sm:p-5 transition hover:-translate-y-1 hover:shadow-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_28px_-12px_rgba(0,0,0,0.14)]">
 
-      <!-- Row 3: Work name / Region -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <input type="text" name="workname" class="pill" placeholder="Work name" />
-        <input type="text" name="region"   class="pill" placeholder="Region" />
-      </div>
+        <!-- Foto -->
+        <div class="aspect-square w-full rounded-2xl bg-neutral-200 overflow-hidden relative">
+          <img 
+            *ngIf="resto.photos && resto.photos.length > 0"
+            [src]="resto.photos[0].url" 
+            [alt]="resto.name"
+            class="w-full h-full object-cover transition group-hover:scale-105"
+          >
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+        </div>
 
-      <!-- Row 4: How can we help your brand? (short multi-line stadium) -->
-      <div>
-        <textarea name="help" rows="2" class="pill-area" placeholder="How can we help your brand?"></textarea>
-      </div>
+        <!-- Info -->
+        <div class="pt-4 px-1">
+          <h3 class="text-base font-bold leading-tight">{{ resto.name }}</h3>
+          <p class="text-sm text-neutral-500 line-clamp-2">{{ resto.formattedAddress }}</p>
+          
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-yellow-500 text-xl">★</span>
+            <span class="font-semibold">{{ resto.rating }}</span>
+            <span *ngIf="resto.priceLevel" class="text-neutral-400 text-sm">
+              • {{ resto.priceLevel.replace('PRICE_LEVEL_', '') }}
+            </span>
+          </div>
+        </div>
 
-      <!-- Row 5: Mensaje (taller stadium) -->
-      <div>
-        <textarea name="mensaje" rows="4" class="pill-area" placeholder="Mensaje"></textarea>
-      </div>
-
-      <!-- Submit -->
-      <div class="pt-6 sm:pt-8 flex justify-center">
-        <button type="submit" class="btn-enviar">enviar</button>
-      </div>
-
-    </form>
-
-  </main>
-
-<script>
-  // Light client behavior — collect & log on submit
-  document.getElementById('contactForm').addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target).entries());
-    console.log('contact form →', data);
-    const btn = e.target.querySelector('button[type="submit"]');
-    const original = btn.textContent;
-    btn.textContent = 'enviado ✓';
-    btn.style.background = '#1FC16B';
-    setTimeout(()=>{
-      btn.textContent = original;
-      btn.style.background = '';
-      e.target.reset();
-    }, 1600);
-  });
-</script>
-</body>
-</html>
+        <!-- Botón -->
+        <div class="mt-4 flex justify-center pb-1">
+          <a 
+            [href]="resto.googleMapsUri" 
+            target="_blank"
+            class="rounded-full bg-black text-white text-sm font-semibold px-7 h-9 flex items-center hover:bg-neutral-800 active:scale-[0.97] transition shadow-[0_8px_18px_-8px_rgba(0,0,0,0.45)]">
+            Ver en Maps
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>

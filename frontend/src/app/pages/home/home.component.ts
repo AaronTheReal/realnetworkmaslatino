@@ -19,6 +19,7 @@ import {NationalReach} from '../home/national-reach/national-reach'
 import {HowBrands} from '../home/how-brands/how-brands';
 import {OurPartners} from '../home/our-partners/our-partners';
 import {ParterUs} from '../home/parter-us/parter-us'
+import { OurPartenrs } from "../about-us/our-partenrs/our-partenrs";
 
 // 🔥 Declarar globals para TikTok, Instagram y Facebook (evita errores TS)
 declare global {
@@ -45,13 +46,13 @@ register();
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, SafePipe,ReachPower,
+  imports: [CommonModule, RouterModule, SafePipe, ReachPower,
     SerpientesCreate,
-    WhatMaslatinoIs, 
+    WhatMaslatinoIs,
     NationalReach,
     HowBrands,
     OurPartners,
-    ParterUs],
+    ParterUs, OurPartenrs],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

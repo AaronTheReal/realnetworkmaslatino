@@ -1,113 +1,229 @@
-<main class="mx-auto w-full max-w-[560px] sm:max-w-3xl md:max-w-5xl lg:max-w-6xl px-5 sm:px-8 pt-8 pb-20 text-neutral-900 antialiased">
+<main
+  class="mx-auto w-full max-w-[1500px] px-5 sm:px-8 lg:px-12 xl:px-16 pt-8 sm:pt-10 pb-24 text-neutral-900 antialiased"
+>
 
   <!-- HERO CIUDAD -->
   <section class="relative">
-    <div class="relative w-full h-[300px] sm:h-[380px] md:h-[460px] rounded-[28px] sm:rounded-[32px] overflow-hidden bg-neutral-200">
+    <div
+      class="relative w-full h-[340px] sm:h-[460px] md:h-[560px] lg:h-[640px] xl:h-[700px] rounded-[32px] sm:rounded-[40px] lg:rounded-[52px] overflow-hidden bg-neutral-200"
+    >
       <div
         class="city-image absolute inset-0 bg-cover bg-center bg-no-repeat"
         [style.background-image]="'url(' + city().image + ')'"
       ></div>
-      <div class="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-white via-white/75 to-transparent"></div>
+
+      <div
+        class="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-white via-white/75 to-transparent"
+      ></div>
     </div>
 
-    <div class="relative -mt-20 sm:-mt-24 md:-mt-28 text-center px-4">
-      <h2 class="font-bold tracking-[-0.02em] leading-[1.05] text-[32px] sm:text-[42px] md:text-[48px]">
-        ¿Qué está pasando<br/>
+    <div class="relative -mt-24 sm:-mt-32 md:-mt-40 lg:-mt-48 text-center px-4">
+      <h2
+        class="font-bold tracking-[-0.035em] leading-[1.02] text-[38px] sm:text-[56px] md:text-[72px] lg:text-[88px]"
+      >
+        ¿Qué está pasando<br />
         en <span class="text-[#9333EA]">{{ city().highlight }}?</span>
       </h2>
     </div>
 
-    <!-- Weather Stats (puedes dejarlo o quitarlo) -->
-    <div class="mt-9 sm:mt-11 grid grid-cols-3 gap-6 sm:gap-8 max-w-xl mx-auto">
-      <div class="flex flex-col items-center gap-3">
-        <p class="text-sm sm:text-base font-extrabold tracking-wide text-neutral-900 text-center">CLIMA</p>
-        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-3xl">☀️</div>
-        <p class="text-3xl sm:text-4xl font-extrabold text-neutral-900">50°</p>
-      </div>
-      <div class="flex flex-col items-center gap-3">
-        <p class="text-sm sm:text-base font-extrabold tracking-wide text-neutral-900 text-center">SE SIENTE</p>
-        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-3xl">🌤️</div>
-        <p class="text-xl sm:text-2xl font-extrabold tracking-wide text-neutral-900">SOLEADO</p>
-      </div>
-      <div class="flex flex-col items-center gap-3">
-        <p class="text-sm sm:text-base font-extrabold tracking-wide text-neutral-900 text-center leading-tight">PROBABILIDAD<br/>DE LLUVIA</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-3xl">🌧️</div>
-          <p class="text-3xl sm:text-4xl font-extrabold text-neutral-900">5%</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Weather Stats -->
+    <div
+      class="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-3 gap-6 sm:gap-10 lg:gap-16 max-w-4xl mx-auto"
+    >
+      <div class="flex flex-col items-center gap-4 sm:gap-5">
+        <p
+          class="text-sm sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
+        >
+          CLIMA
+        </p>
 
-  <div class="h-12 sm:h-16"></div>
-
-  <!-- HERO "LOS MEJORES RESTAURANTES" -->
-  <section class="relative overflow-hidden rounded-[36px] sm:rounded-[40px] px-8 sm:px-10 md:px-14 py-9 sm:py-12 md:py-14 bg-gradient-to-b from-[#9747FF] to-[#8B3FE8] shadow-[0_25px_55px_-20px_rgba(139,63,232,0.55)]">
-    <p class="text-white/95 text-sm sm:text-base font-semibold tracking-wide">Para comer</p>
-    <h1 class="font-bold text-white leading-[0.95] tracking-[-0.02em] mt-2 text-[42px] sm:text-6xl md:text-7xl">
-      LOS MEJORES<br/>RESTAURANTES
-    </h1>
-    <!-- Cloche SVG (sin cambios) -->
-    <div class="absolute right-6 sm:right-8 md:right-12 top-1/2 -translate-y-1/2 w-[110px] sm:w-[155px] md:w-[195px] drop-shadow-[0_16px_24px_rgba(0,0,0,0.28)]">
-      <svg viewBox="0 0 200 200" class="w-full h-auto" aria-hidden="true"> ... (tu SVG actual) </svg>
-    </div>
-  </section>
-
-  <p class="mt-10 sm:mt-12 mx-auto max-w-[560px] text-center text-sm sm:text-base leading-[1.65] text-neutral-700">
-    Los mejores restaurantes de {{ city().name }} según Google Places. Actualizados automáticamente.
-  </p>
-
-  <!-- GRID DINÁMICO -->
-  <section class="mt-8">
-    <div *ngIf="loading()" class="text-center py-12">
-      <p class="text-lg">Cargando los mejores restaurantes de {{ city().name }}...</p>
-    </div>
-
-    <div *ngIf="error()" class="text-center py-12 text-red-600">
-      {{ error() }}
-    </div>
-
-    <div *ngIf="!loading() && !error()" 
-         class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-      
-      <article *ngFor="let resto of restaurants()" 
-               class="group rounded-3xl border border-neutral-200 bg-white p-4 sm:p-5 transition hover:-translate-y-1 hover:shadow-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_28px_-12px_rgba(0,0,0,0.14)]">
-
-        <!-- Foto -->
-        <div class="aspect-square w-full rounded-2xl bg-neutral-200 overflow-hidden relative">
-          <img 
-            *ngIf="resto.photos && resto.photos.length > 0"
-            [src]="resto.photos[0].url" 
-            [alt]="resto.name"
-            class="w-full h-full object-cover transition group-hover:scale-105"
-          >
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+        <div
+          class="w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+        >
+          <img
+            [src]="weatherIcon()"
+            [alt]="weather()?.description ?? 'Clima'"
+            class="w-full h-full object-contain p-2"
+          />
         </div>
 
-        <!-- Info -->
-        <div class="pt-4 px-1">
-          <h3 class="text-base font-bold leading-tight">{{ resto.name }}</h3>
-          <p class="text-sm text-neutral-500 line-clamp-2">{{ resto.formattedAddress }}</p>
-          
-          <div class="mt-3 flex items-center gap-2">
-            <span class="text-yellow-500 text-xl">★</span>
-            <span class="font-semibold">{{ resto.rating }}</span>
-            <span *ngIf="resto.priceLevel" class="text-neutral-400 text-sm">
-              • {{ resto.priceLevel.replace('PRICE_LEVEL_', '') }}
-            </span>
+        <div class="flex items-center gap-2">
+          <p class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
+            {{ displayTemperature() ?? '--' }}°
+          </p>
+
+          <div class="flex items-center gap-1 text-xs sm:text-sm font-bold tracking-wide select-none">
+            <span
+              (click)="setUnit('C')"
+              class="cursor-pointer transition-colors duration-200"
+              [class.text-neutral-900]="temperatureUnit() === 'C'"
+              [class.text-neutral-300]="temperatureUnit() !== 'C'"
+            >°C</span>
+            <span class="text-neutral-200">|</span>
+            <span
+              (click)="setUnit('F')"
+              class="cursor-pointer transition-colors duration-200"
+              [class.text-neutral-900]="temperatureUnit() === 'F'"
+              [class.text-neutral-300]="temperatureUnit() !== 'F'"
+            >°F</span>
           </div>
         </div>
+      </div>
 
-        <!-- Botón -->
-        <div class="mt-4 flex justify-center pb-1">
-          <a 
-            [href]="resto.googleMapsUri" 
-            target="_blank"
-            class="rounded-full bg-black text-white text-sm font-semibold px-7 h-9 flex items-center hover:bg-neutral-800 active:scale-[0.97] transition shadow-[0_8px_18px_-8px_rgba(0,0,0,0.45)]">
-            Ver en Maps
-          </a>
+      <div class="flex flex-col items-center gap-4 sm:gap-5">
+        <p
+          class="text-sm sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
+        >
+          SE SIENTE
+        </p>
+
+        <div
+          class="w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+        >
+          <img
+            [src]="feelsLikeIcon"
+            alt="Sensación térmica"
+            class="w-full h-full object-contain p-2"
+          />
         </div>
-      </article>
+
+        <div class="flex items-center gap-2">
+          <p class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
+            {{ displayFeelsLike() ?? '--' }}°
+          </p>
+
+          <div class="flex items-center gap-1 text-xs sm:text-sm font-bold tracking-wide select-none">
+            <span
+              (click)="setUnit('C')"
+              class="cursor-pointer transition-colors duration-200"
+              [class.text-neutral-900]="temperatureUnit() === 'C'"
+              [class.text-neutral-300]="temperatureUnit() !== 'C'"
+            >°C</span>
+            <span class="text-neutral-200">|</span>
+            <span
+              (click)="setUnit('F')"
+              class="cursor-pointer transition-colors duration-200"
+              [class.text-neutral-900]="temperatureUnit() === 'F'"
+              [class.text-neutral-300]="temperatureUnit() !== 'F'"
+            >°F</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-4 sm:gap-5">
+        <p
+          class="text-sm sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center leading-tight"
+        >
+          PROBABILIDAD<br />
+          DE LLUVIA
+        </p>
+
+        <div class="flex items-center gap-3 sm:gap-5">
+          <div
+            class="w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+          >
+            <img
+              [src]="precipitationIcon"
+              alt="Probabilidad de lluvia"
+              class="w-full h-full object-contain p-2"
+            />
+          </div>
+
+          <p class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
+            {{ weather()?.precipitationProbability ?? '--' }}%
+          </p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <div class="h-16 sm:h-20 lg:h-28"></div>
+
+  @if (!carouselMode()) {
+    <app-partes
+      [selectedSection]="selectedSection()"
+      (sectionSelected)="onSectionSelected($event)"
+    ></app-partes>
+  } @else {
+    <section class="relative">
+      <!-- Flecha: sección anterior (fija, siempre visible en modo carrusel) -->
+      <button
+        type="button"
+        (click)="prevSection()"
+        aria-label="Sección anterior"
+        class="fixed left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+
+      <!-- Flecha: sección siguiente (fija, siempre visible en modo carrusel) -->
+      <button
+        type="button"
+        (click)="nextSection()"
+        aria-label="Sección siguiente"
+        class="fixed right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <!-- Contenido de la sección seleccionada -->
+      <div class="px-12 sm:px-16 lg:px-20 pt-10 sm:pt-12 pb-28 sm:pb-32">
+        @switch (selectedSection()) {
+          @case ('eventos') {
+            <div class="carousel-fade"><app-parte-eventos [city]="city()" [citySlug]="citySlug()"></app-parte-eventos></div>
+          }
+          @case ('hangout') {
+            <div class="carousel-fade"><app-parte-hangout [city]="city()" [citySlug]="citySlug()"></app-parte-hangout></div>
+          }
+          @case ('fanzone') {
+            <div class="carousel-fade"><app-parte-fanzone [city]="city()" [citySlug]="citySlug()"></app-parte-fanzone></div>
+          }
+          @case ('turismo') {
+            <div class="carousel-fade"><app-parte-turismo [city]="city()" [citySlug]="citySlug()"></app-parte-turismo></div>
+          }
+          @case ('restaurantes') {
+            <div class="carousel-fade"><app-restaurantes-parte [city]="city()"></app-restaurantes-parte></div>
+          }
+        }
+      </div>
+
+      <!-- Volver al selector + indicador de secciones (fijo en la parte inferior) -->
+      <div class="carousel-pop fixed bottom-6 inset-x-0 z-30 flex flex-col items-center gap-3 pointer-events-none">
+        <div class="flex items-center gap-2 pointer-events-auto">
+          @for (section of sectionOrder; track section) {
+            <button
+              type="button"
+              (click)="selectedSection.set(section)"
+              [attr.aria-label]="'Ir a la sección ' + section"
+              class="rounded-full transition-all duration-300"
+              [class]="selectedSection() === section
+                ? 'w-4 h-4 sm:w-5 sm:h-5'
+                : 'w-2.5 h-2.5 sm:w-3 sm:h-3 bg-neutral-300 hover:bg-neutral-400'"
+              [style.background-color]="selectedSection() === section ? colorFor(section) : null"
+            ></button>
+          }
+        </div>
+
+        <button
+          type="button"
+          (click)="closeCarousel()"
+          class="pointer-events-auto flex items-center gap-2 px-5 py-3 rounded-full bg-white/80 backdrop-blur-md shadow-lg border-2 border-transparent transition-all duration-300 hover:scale-105 active:scale-95"
+          [style.border-color]="activeSectionColor()"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5" [style.color]="activeSectionColor()" aria-hidden="true">
+            <rect x="3" y="3" width="8" height="8" rx="2"/>
+            <rect x="13" y="3" width="8" height="8" rx="2"/>
+            <rect x="3" y="13" width="8" height="8" rx="2"/>
+            <rect x="13" y="13" width="8" height="8" rx="2"/>
+          </svg>
+          <span class="text-sm sm:text-base font-semibold text-neutral-900">Ver categorías</span>
+        </button>
+      </div>
+    </section>
+  }
+
 </main>

@@ -28,6 +28,10 @@ export class BlogIndividual implements OnInit {
 
   // Signal con las 3 recomendaciones reales (ordenadas más antigua → más reciente)
   recommended = signal<Noticia[]>([]);
+  recLoading = signal<boolean>(true);
+
+  // placeholder array used to render skeleton cards while loading
+  recSkeletons = Array.from({ length: 3 });
 
   trackByIndex = (i: number) => i;
 
@@ -44,8 +48,12 @@ export class BlogIndividual implements OnInit {
           .slice(0, 3);
 
         this.recommended.set(sortedOldestFirst);
+        this.recLoading.set(false);
       },
-      error: () => this.recommended.set([])
+      error: () => {
+        this.recommended.set([]);
+        this.recLoading.set(false);
+      }
     });
   }
 }

@@ -1,12 +1,24 @@
-import { Component, inject, signal, effect } from '@angular/core';
+import { Component, inject, signal, effect, computed } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
-import { RestaurantsService, Restaurant } from '../../services/places-service';
+import { RestaurantesParte } from './partes/restaurantes-parte/restaurantes-parte';
+import { Partes, SectionKey } from './partes/partes';
+import { ParteEventos } from './partes/parte-eventos/parte-eventos';
+import { ParteHangout } from './partes/parte-hangout/parte-hangout';
+import { ParteFanzone } from './partes/parte-fanzone/parte-fanzone';
+import { ParteTurismo } from './partes/parte-turismo/parte-turismo';
+import {
+  WeatherService,
+  WeatherData,
+  WEATHER_ICONS,
+  WEATHER_FEELS_LIKE_ICON,
+  WEATHER_PRECIPITATION_ICON,
+} from '../../services/weather-service';
 
-type CityInfo = {
+export type CityInfo = {
   name: string;
   image: string;
   highlight: string;
@@ -28,16 +40,28 @@ const CITY_MAP: Record<string, CityInfo> = {
 
 const DEFAULT_CITY: CityInfo = { name: 'TU CIUDAD', image: '', highlight: 'TU CIUDAD' };
 
+// Orden cíclico de las secciones para la navegación con flechas (modo carrusel)
+const SECTION_ORDER: SectionKey[] = ['eventos', 'hangout', 'fanzone', 'turismo', 'restaurantes'];
+
+// Color representativo de cada sección (acorde al fondo de su hero)
+const SECTION_COLORS: Record<SectionKey, string> = {
+  eventos: '#fe0900',
+  hangout: '#b121fe',
+  fanzone: '#00cf82',
+  turismo: '#fdb700',
+  restaurantes: '#9747FF',
+};
+
 @Component({
   selector: 'app-restaurantes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RestaurantesParte, Partes, ParteEventos, ParteHangout, ParteFanzone, ParteTurismo],
   templateUrl: './restaurantes.html',
   styleUrl: './restaurantes.css'
 })
 export class Restaurantes {
   private route = inject(ActivatedRoute);
-  private restaurantsService = inject(RestaurantsService);
+  private weatherService = inject(WeatherService);
 
   // Señal de la ciudad actual (viene de la URL)
   city = toSignal(
@@ -47,34 +71,117 @@ export class Restaurantes {
     { initialValue: DEFAULT_CITY }
   );
 
-  // Señales para los restaurantes
-  restaurants = signal<Restaurant[]>([]);
-  loading = signal<boolean>(true);
-  error = signal<string | null>(null);
+  // Slug de la ciudad actual (viene de la URL), usado para consultar el clima
+  citySlug = toSignal(
+    this.route.paramMap.pipe(
+      map(params => (params.get('ciudad') || '').toLowerCase())
+    ),
+    { initialValue: '' }
+  );
+
+  // Señales para el clima
+  weather = signal<WeatherData | null>(null);
+  weatherLoading = signal<boolean>(true);
+  weatherError = signal<string | null>(null);
+
+  // Icono según la condición climática actual
+  weatherIcon = computed(() => {
+    const data = this.weather();
+    return data ? WEATHER_ICONS[data.condition] : WEATHER_ICONS['soleado'];
+  });
+
+  // Icono fijo para la sensación térmica
+  feelsLikeIcon = WEATHER_FEELS_LIKE_ICON;
+
+  // Icono fijo para la probabilidad de lluvia
+  precipitationIcon = WEATHER_PRECIPITATION_ICON;
+
+  // Sección seleccionada en el selector de categorías ("Restaurantes" por defecto)
+  selectedSection = signal<SectionKey>('restaurantes');
+
+  // Modo carrusel: oculta app-partes y muestra el contenido con flechas de navegación
+  carouselMode = signal<boolean>(false);
+
+  // Orden de las secciones, expuesto para el indicador de "dots" del template
+  readonly sectionOrder = SECTION_ORDER;
+
+  // Color representativo de la sección activa (acento dinámico del pill/dots)
+  activeSectionColor = computed(() => SECTION_COLORS[this.selectedSection()]);
+
+  // Color representativo de una sección dada (para los dots)
+  colorFor(section: SectionKey): string {
+    return SECTION_COLORS[section];
+  }
+
+  // Selecciona una sección desde app-partes y activa el modo carrusel
+  onSectionSelected(section: SectionKey) {
+    this.selectedSection.set(section);
+    this.carouselMode.set(true);
+  }
+
+  // Vuelve a mostrar el selector de categorías (app-partes)
+  closeCarousel() {
+    this.carouselMode.set(false);
+  }
+
+  // Avanza a la siguiente sección en orden cíclico
+  nextSection() {
+    const currentIndex = SECTION_ORDER.indexOf(this.selectedSection());
+    const nextIndex = (currentIndex + 1) % SECTION_ORDER.length;
+    this.selectedSection.set(SECTION_ORDER[nextIndex]);
+  }
+
+  // Retrocede a la sección anterior en orden cíclico
+  prevSection() {
+    const currentIndex = SECTION_ORDER.indexOf(this.selectedSection());
+    const prevIndex = (currentIndex - 1 + SECTION_ORDER.length) % SECTION_ORDER.length;
+    this.selectedSection.set(SECTION_ORDER[prevIndex]);
+  }
+
+  // Unidad de temperatura seleccionada (por defecto Fahrenheit: ciudades de EE. UU.)
+  temperatureUnit = signal<'C' | 'F'>('F');
+
+  // Temperatura actual mostrada según la unidad seleccionada
+  displayTemperature = computed(() => this.convertTemperature(this.weather()?.temperature));
+
+  // Sensación térmica mostrada según la unidad seleccionada
+  displayFeelsLike = computed(() => this.convertTemperature(this.weather()?.feelsLike));
+
+  setUnit(unit: 'C' | 'F') {
+    this.temperatureUnit.set(unit);
+  }
+
+  // El backend entrega las temperaturas en Fahrenheit; convertimos localmente sin volver a consultar la API
+  private convertTemperature(fahrenheit: number | undefined): number | null {
+    if (fahrenheit == null) return null;
+    return this.temperatureUnit() === 'F'
+      ? Math.round(fahrenheit)
+      : Math.round((fahrenheit - 32) * 5 / 9);
+  }
 
   constructor() {
-    // Cada vez que cambie la ciudad, cargamos los restaurantes
+    // Cada vez que cambie la ciudad, consultamos el clima
     effect(() => {
-      const currentCity = this.city();
-      if (currentCity.highlight !== 'TU CIUDAD') {
-        this.loadRestaurants(currentCity.highlight);
+      const slug = this.citySlug();
+      if (slug && CITY_MAP[slug]) {
+        this.loadWeather(slug);
       }
     });
   }
 
-  private loadRestaurants(cityName: string) {
-    this.loading.set(true);
-    this.error.set(null);
+  private loadWeather(citySlug: string) {
+    this.weatherLoading.set(true);
+    this.weatherError.set(null);
 
-    this.restaurantsService.getBestRestaurants(cityName).subscribe({
-      next: (response) => {
-        this.restaurants.set(response.restaurants);
-        this.loading.set(false);
+    this.weatherService.getWeather(citySlug).subscribe({
+      next: (data) => {
+        this.weather.set(data);
+        this.weatherLoading.set(false);
       },
       error: (err) => {
         console.error(err);
-        this.error.set('No pudimos cargar los restaurantes en este momento. Inténtalo más tarde.');
-        this.loading.set(false);
+        this.weatherError.set('No pudimos cargar el clima en este momento.');
+        this.weatherLoading.set(false);
       }
     });
   }

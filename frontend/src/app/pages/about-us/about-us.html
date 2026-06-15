@@ -1,47 +1,56 @@
-<section class="w-full bg-white py-16 px-6 md:px-[12rem]">
+<section class="w-full bg-white py-16 lg:py-24 2xl:py-32 px-6 sm:px-10 lg:px-16 xl:px-24">
 
-  <!-- TITLE -->
-  <h1 class="text-6xl md:text-7xl font-extrabold text-black text-center uppercase tracking-tight leading-tight mb-12">
-    About
-  </h1>
+  <!-- centered max-width wrapper so content doesn't stretch on big screens -->
+  <div class="mx-auto w-full max-w-screen-xl 2xl:max-w-screen-2xl">
 
-  <!-- TWO-COLUMN: left (label + heading + p1) | right (image) -->
-  <div class="flex flex-col md:flex-row gap-10 items-start mb-10">
+    <!-- TITLE -->
+    <h1 class="text-6xl md:text-7xl 2xl:text-8xl font-extrabold text-black text-center uppercase tracking-tight leading-tight mb-12 2xl:mb-16">
+      About
+    </h1>
 
-    <!-- LEFT -->
-    <div class="md:w-[64%] flex flex-col gap-4">
+    <!-- TWO-COLUMN: left (label + heading + p1) | right (image) -->
+    <div class="flex flex-col md:flex-row gap-10 lg:gap-14 2xl:gap-20 items-start mb-10 2xl:mb-16">
 
-      <!-- Purple label -->
-      <p class="text-[#905cf5] font-bold text-4xl md:text-5xl leading-tight">Who you are</p>
+      <!-- LEFT -->
+      <div class="md:w-[58%] flex flex-col gap-4 2xl:gap-6">
 
-      <!-- Big heading -->
-      <h2 class="text-6xl md:text-7xl font-extrabold text-black uppercase leading-none tracking-tight">
-        NOT JUST<br>A MEDIA<br>COMPANY-<br>A CULTURAL<br>FORCE
-      </h2>
+        <!-- Purple label -->
+        <p class="text-[#905cf5] font-bold text-4xl md:text-5xl 2xl:text-6xl leading-tight">Who you are</p>
 
-      <!-- First paragraph -->
-      <p class="text-lg md:text-xl text-gray-800 leading-relaxed mt-2 pr-10 md:pr-16">
-        Mas Latino Network is the leading bilingual media platform amplifying Latino voices, culture, and community from the heart of Boston to audiences across the United States. We are proudly Latino-owned, rooted in authenticity, and driven by purpose.
+        <!-- Big heading -->
+        <h2 class="text-6xl md:text-7xl 2xl:text-8xl font-extrabold text-black uppercase leading-none tracking-tight">
+          NOT JUST<br>A MEDIA<br>COMPANY-<br>A CULTURAL<br>FORCE
+        </h2>
+
+        <!-- First paragraph -->
+        <p class="text-lg md:text-xl 2xl:text-2xl text-gray-800 leading-relaxed mt-2 max-w-2xl">
+          Mas Latino Network is the leading bilingual media platform amplifying Latino voices, culture, and community from the heart of Boston to audiences across the United States. We are proudly Latino-owned, rooted in authenticity, and driven by purpose.
+        </p>
+      </div>
+
+      <!-- RIGHT: image container -->
+      <div class="md:w-[42%] self-stretch">
+        <div class="w-full h-full min-h-[560px] 2xl:min-h-[680px] bg-white rounded-3xl overflow-hidden">
+          <img
+            src="assets/aboutus/imagen2.png"
+            alt="Woman listening to music"
+            class="w-full h-full min-h-[560px] 2xl:min-h-[680px] object-cover"
+          />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FULL-WIDTH paragraphs -->
+    <div class="flex flex-col gap-6 text-base 2xl:text-lg text-gray-800 leading-relaxed max-w-5xl">
+      <p>
+        Founded by Luis Morales Jr., a second-generation entrepreneur and community builder, Mas Latino was created to disrupt the way media connects with one of the fastest-growing and most influential demographics in the U.S.-the Latino community.
+      </p>
+      <p>
+        Through a powerful ecosystem that includes FM/AM radio (Mas Latino 99.9FM & 1300AM), original podcasts, viral video content, a custom mobile app, and live cultural events, we reach millions of bilingual and bicultural Latinos who are shaping the future of America.
       </p>
     </div>
 
-    <!-- RIGHT: image container -->
-    <div class="md:w-[32%] self-stretch">
-      <div class="w-full h-full min-h-[560px] bg-gray-200 rounded-3xl overflow-hidden">
-        <!-- image goes here -->
-      </div>
-    </div>
-
-  </div>
-
-  <!-- FULL-WIDTH paragraphs -->
-  <div class="flex flex-col gap-6 text-sm md:text-base text-gray-800 leading-relaxed">
-    <p>
-      Founded by Luis Morales Jr., a second-generation entrepreneur and community builder, Mas Latino was created to disrupt the way media connects with one of the fastest-growing and most influential demographics in the U.S.-the Latino community.
-    </p>
-    <p>
-      Through a powerful ecosystem that includes FM/AM radio (Mas Latino 99.9FM & 1300AM), original podcasts, viral video content, a custom mobile app, and live cultural events, we reach millions of bilingual and bicultural Latinos who are shaping the future of America.
-    </p>
   </div>
 
 </section>
