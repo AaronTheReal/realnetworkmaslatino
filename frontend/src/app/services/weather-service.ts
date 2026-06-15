@@ -42,8 +42,8 @@ export const WEATHER_PRECIPITATION_ICON = 'assets/iconospartes/gota.svg';
 export class WeatherService {
 
   // Cambia esta URL según tu entorno
-  private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/weather';
-  //private baseUrl = 'https://realnetworkmaslatino-teas.onrender.com/aaron/maslatinoNetwork/weather';
+  //private baseUrl = 'http://localhost:3000/aaron/maslatinoNetwork/weather';
+  private baseUrl = 'https://realnetworkmaslatino-teas.onrender.com/aaron/maslatinoNetwork/weather';
 
   constructor(private http: HttpClient) {}
 

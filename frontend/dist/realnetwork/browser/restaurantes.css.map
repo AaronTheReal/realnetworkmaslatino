@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/pages/restaurantes/restaurantes.css"],
-  "sourcesContent": ["@keyframes carousel-fade-in {\n  from {\n    opacity: 0;\n    transform: translateY(8px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n.carousel-fade {\n  animation: carousel-fade-in 0.35s ease;\n}\n\n@keyframes carousel-pop-in {\n  from {\n    opacity: 0;\n    transform: translateY(16px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n.carousel-pop {\n  animation: carousel-pop-in 0.35s ease;\n}\n"],
-  "mappings": ";AAAA,WAAW;AACT;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACA;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACF;AAEA,CAAC;AACC,aAAW,iBAAiB,MAAM;AACpC;AAEA,WAAW;AACT;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACA;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACF;AAEA,CAAC;AACC,aAAW,gBAAgB,MAAM;AACnC;",
-  "names": []
-}
