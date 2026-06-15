@@ -2,15 +2,20 @@
   class="mx-auto w-full max-w-[1500px] px-5 sm:px-8 lg:px-12 xl:px-16 pt-8 sm:pt-10 pb-24 text-neutral-900 antialiased"
 >
 
-  <!-- HERO CIUDAD -->
+  <!-- CITY HERO -->
   <section class="relative">
     <div
       class="relative w-full h-[340px] sm:h-[460px] md:h-[560px] lg:h-[640px] xl:h-[700px] rounded-[32px] sm:rounded-[40px] lg:rounded-[52px] overflow-hidden bg-neutral-200"
     >
-      <div
-        class="city-image absolute inset-0 bg-cover bg-center bg-no-repeat"
-        [style.background-image]="'url(' + city().image + ')'"
-      ></div>
+      @if (city().image) {
+        <img
+          [ngSrc]="city().image"
+          [alt]="city().name"
+          fill
+          priority
+          class="object-cover"
+        />
+      }
 
       <div
         class="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-white via-white/75 to-transparent"
@@ -21,8 +26,8 @@
       <h2
         class="font-bold tracking-[-0.035em] leading-[1.02] text-[38px] sm:text-[56px] md:text-[72px] lg:text-[88px]"
       >
-        ¿Qué está pasando<br />
-        en <span class="text-[#9333EA]">{{ city().highlight }}?</span>
+        What's happening<br />
+        in <span class="text-[#9333EA]">{{ city().highlight }}?</span>
       </h2>
     </div>
 
@@ -34,16 +39,17 @@
         <p
           class="text-xs sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
         >
-          CLIMA
+          WEATHER
         </p>
 
         <div
-          class="w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+          class="relative w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
         >
           <img
-            [src]="weatherIcon()"
-            [alt]="weather()?.description ?? 'Clima'"
-            class="w-full h-full object-contain p-2"
+            [ngSrc]="weatherIcon()"
+            [alt]="weather()?.description ?? 'Weather'"
+            fill
+            class="object-contain p-2"
           />
         </div>
 
@@ -74,16 +80,17 @@
         <p
           class="text-xs sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
         >
-          SE SIENTE
+          FEELS LIKE
         </p>
 
         <div
-          class="w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+          class="relative w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
         >
           <img
-            [src]="feelsLikeIcon"
-            alt="Sensación térmica"
-            class="w-full h-full object-contain p-2"
+            [ngSrc]="feelsLikeIcon"
+            alt="Feels like"
+            fill
+            class="object-contain p-2"
           />
         </div>
 
@@ -114,18 +121,19 @@
         <p
           class="text-xs sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center leading-tight"
         >
-          PROBABILIDAD<br />
-          DE LLUVIA
+          CHANCE OF<br />
+          RAIN
         </p>
 
         <div class="flex flex-col items-center gap-2 sm:flex-row sm:gap-5">
           <div
-            class="w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+            class="relative w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
           >
             <img
-              [src]="precipitationIcon"
-              alt="Probabilidad de lluvia"
-              class="w-full h-full object-contain p-2"
+              [ngSrc]="precipitationIcon"
+              alt="Chance of rain"
+              fill
+              class="object-contain p-2"
             />
           </div>
 
@@ -146,11 +154,11 @@
     ></app-partes>
   } @else {
     <section class="relative">
-      <!-- Flecha: sección anterior (fija, siempre visible en modo carrusel) -->
+      <!-- Arrow: previous section (fixed, always visible in carousel mode) -->
       <button
         type="button"
         (click)="prevSection()"
-        aria-label="Sección anterior"
+        aria-label="Previous section"
         class="fixed left-2 sm:left-4 lg:left-[max(2rem,calc(50%-750px+1rem))] top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7">
@@ -158,11 +166,11 @@
         </svg>
       </button>
 
-      <!-- Flecha: sección siguiente (fija, siempre visible en modo carrusel) -->
+      <!-- Arrow: next section (fixed, always visible in carousel mode) -->
       <button
         type="button"
         (click)="nextSection()"
-        aria-label="Sección siguiente"
+        aria-label="Next section"
         class="fixed right-2 sm:right-4 lg:right-[max(2rem,calc(50%-750px+1rem))] top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7">
@@ -170,7 +178,7 @@
         </svg>
       </button>
 
-      <!-- Contenido de la sección seleccionada -->
+      <!-- Selected section content -->
       <div class="px-4 sm:px-12 lg:px-20 pt-10 sm:pt-12 pb-28 sm:pb-32">
         @switch (selectedSection()) {
           @case ('eventos') {
@@ -191,14 +199,14 @@
         }
       </div>
 
-      <!-- Volver al selector + indicador de secciones (fijo en la parte inferior) -->
+      <!-- Back to selector + section indicator (fixed at the bottom) -->
       <div class="carousel-pop fixed bottom-6 inset-x-0 z-30 flex flex-col items-center gap-3 pointer-events-none">
         <div class="flex items-center gap-2 pointer-events-auto">
           @for (section of sectionOrder; track section) {
             <button
               type="button"
               (click)="selectedSection.set(section)"
-              [attr.aria-label]="'Ir a la sección ' + section"
+              [attr.aria-label]="'Go to section ' + section"
               class="rounded-full transition-all duration-300"
               [class]="selectedSection() === section
                 ? 'w-4 h-4 sm:w-5 sm:h-5'

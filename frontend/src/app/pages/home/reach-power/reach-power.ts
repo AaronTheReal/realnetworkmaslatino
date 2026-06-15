@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-reach-power',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './reach-power.html',
   styleUrl: './reach-power.css'
 })

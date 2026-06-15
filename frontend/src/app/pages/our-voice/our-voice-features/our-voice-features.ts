@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FeaturedPageService, FeaturedPage } from '../../../services/featured-service';
 
 @Component({
   selector: 'app-our-voice-features',
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './our-voice-features.html',
   styleUrl: './our-voice-features.css'
 })

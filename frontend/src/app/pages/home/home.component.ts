@@ -7,7 +7,7 @@ import {
   OnInit,
   CUSTOM_ELEMENTS_SCHEMA,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { register } from 'swiper/element/bundle';
 import { SafePipe } from '../../../safe.pipe';
@@ -46,7 +46,7 @@ register();
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, SafePipe, ReachPower,
+  imports: [CommonModule, NgOptimizedImage, RouterModule, SafePipe, ReachPower,
     SerpientesCreate,
     WhatMaslatinoIs,
     NationalReach,

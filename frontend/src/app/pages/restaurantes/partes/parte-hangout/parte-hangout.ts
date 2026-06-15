@@ -1,34 +1,34 @@
 import { Component, inject, input, signal, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { HangoutService, Place } from '../../../../services/hangout-service';
 import { CityInfo } from '../../restaurantes';
 
-const DEFAULT_CITY: CityInfo = { name: 'TU CIUDAD', image: '', highlight: 'TU CIUDAD' };
+const DEFAULT_CITY: CityInfo = { name: 'YOUR CITY', image: '', highlight: 'YOUR CITY' };
 
 @Component({
   selector: 'app-parte-hangout',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './parte-hangout.html',
   styleUrl: './parte-hangout.css',
 })
 export class ParteHangout {
   private hangoutService = inject(HangoutService);
 
-  // Ciudad recibida desde el componente padre
+  // City received from the parent component
   city = input<CityInfo>(DEFAULT_CITY);
 
-  // Slug de la ciudad (ej: 'kansas-city'), usado para consultar el backend
+  // City slug (e.g. 'kansas-city'), used to query the backend
   citySlug = input<string>('');
 
-  // Señales para los lugares de hangout
+  // Signals for the hangout places
   places = signal<Place[]>([]);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
   constructor() {
-    // Cada vez que cambie la ciudad, cargamos los lugares de hangout
+    // Every time the city changes, we load the hangout places
     effect(() => {
       const slug = this.citySlug();
       if (slug) {
@@ -48,7 +48,7 @@ export class ParteHangout {
       },
       error: (err) => {
         console.error(err);
-        this.error.set('No pudimos cargar los lugares para hangout en este momento. Inténtalo más tarde.');
+        this.error.set('We could not load the hangout spots right now. Please try again later.');
         this.loading.set(false);
       }
     });

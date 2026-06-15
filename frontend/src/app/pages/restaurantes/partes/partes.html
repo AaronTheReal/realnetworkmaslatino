@@ -17,11 +17,12 @@
           {{ item.title }}
         </span>
 
-        <div class="w-20 h-20 sm:w-56 sm:h-56 lg:w-72 lg:h-72 flex items-center justify-center shrink-0 overflow-hidden">
+        <div class="relative w-20 h-20 sm:w-56 sm:h-56 lg:w-72 lg:h-72 flex items-center justify-center shrink-0 overflow-hidden">
           <img
-            [src]="item.icon"
+            [ngSrc]="item.icon"
             [alt]="item.title"
-            class="max-w-full max-h-full object-contain"
+            fill
+            class="object-contain"
           />
         </div>
       </button>
@@ -43,15 +44,16 @@
         <span
           class="text-white text-xl sm:text-4xl lg:text-5xl font-extrabold uppercase leading-[0.9] tracking-tight z-10"
         >
-          Los mejores<br />
-          restaurantes
+          The best<br />
+          restaurants
         </span>
 
-        <div class="w-20 h-20 sm:w-56 sm:h-56 lg:w-72 lg:h-72 flex items-center justify-center shrink-0 overflow-hidden">
+        <div class="relative w-20 h-20 sm:w-56 sm:h-56 lg:w-72 lg:h-72 flex items-center justify-center shrink-0 overflow-hidden">
           <img
-            [src]="foodCategory.icon"
+            [ngSrc]="foodCategory.icon"
             [alt]="foodCategory.title"
-            class="max-w-full max-h-full object-contain"
+            fill
+            class="object-contain"
           />
         </div>
       </button>

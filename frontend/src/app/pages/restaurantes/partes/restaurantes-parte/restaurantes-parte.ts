@@ -1,34 +1,34 @@
 import { Component, inject, input, signal, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { RestaurantsService, Restaurant } from '../../../../services/places-service';
 import { CityInfo } from '../../restaurantes';
 
-const DEFAULT_CITY: CityInfo = { name: 'TU CIUDAD', image: '', highlight: 'TU CIUDAD' };
+const DEFAULT_CITY: CityInfo = { name: 'YOUR CITY', image: '', highlight: 'YOUR CITY' };
 
 @Component({
   selector: 'app-restaurantes-parte',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './restaurantes-parte.html',
   styleUrl: './restaurantes-parte.css',
 })
 export class RestaurantesParte {
   private restaurantsService = inject(RestaurantsService);
 
-  // Ciudad recibida desde el componente padre
+  // City received from the parent component
   city = input<CityInfo>(DEFAULT_CITY);
 
-  // Señales para los restaurantes
+  // Signals for the restaurants
   restaurants = signal<Restaurant[]>([]);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
   constructor() {
-    // Cada vez que cambie la ciudad, cargamos los restaurantes
+    // Every time the city changes, we load the restaurants
     effect(() => {
       const currentCity = this.city();
-      if (currentCity.highlight !== 'TU CIUDAD') {
+      if (currentCity.highlight !== 'YOUR CITY') {
         this.loadRestaurants(currentCity.highlight);
       }
     });
@@ -45,7 +45,7 @@ export class RestaurantesParte {
       },
       error: (err) => {
         console.error(err);
-        this.error.set('No pudimos cargar los restaurantes en este momento. Inténtalo más tarde.');
+        this.error.set('We could not load the restaurants right now. Please try again later.');
         this.loading.set(false);
       }
     });

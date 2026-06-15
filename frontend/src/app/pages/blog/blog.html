@@ -42,11 +42,12 @@
        class="group block cursor-pointer bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
 
       <!-- Imagen -->
-      <div class="overflow-hidden rounded-t-3xl">
+      <div class="relative h-52 2xl:h-64 overflow-hidden rounded-t-3xl">
         <img
-          [src]="post.meta?.image || 'https://picsum.photos/id/1015/600/400'"
+          [ngSrc]="post.meta?.image || 'https://picsum.photos/id/1015/600/400'"
           [alt]="post.title"
-          class="w-full h-52 2xl:h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+          fill
+          class="object-cover transition-transform duration-500 group-hover:scale-105">
       </div>
 
       <!-- Contenido -->

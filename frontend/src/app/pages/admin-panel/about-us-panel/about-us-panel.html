@@ -72,8 +72,8 @@
   <div *ngIf="!loading && teamMembers.length > 0">
     <div cdkDropList (cdkDropListDropped)="drop($event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div *ngFor="let member of teamMembers; trackBy: trackById" cdkDrag class="border rounded-lg shadow-sm p-4 flex flex-col items-center text-center bg-white">
-        <div class="w-28 h-28 rounded-full overflow-hidden shadow mb-3">
-          <img [src]="member.imageUrl" [alt]="member.name" class="w-full h-full object-cover" />
+        <div class="relative w-28 h-28 rounded-full overflow-hidden shadow mb-3">
+          <img [ngSrc]="member.imageUrl" [alt]="member.name" fill class="object-cover" />
         </div>
 
         <div class="font-semibold text-blue-900">{{ member.name }}</div>

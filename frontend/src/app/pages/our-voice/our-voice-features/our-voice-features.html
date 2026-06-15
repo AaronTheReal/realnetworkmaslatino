@@ -10,7 +10,7 @@
       <div class="flex w-full max-w-6xl flex-col md:flex-row items-center" [ngClass]="{'md:flex-row-reverse': i % 2 !== 0}">
         <!-- Imagen -->
         <div class="w-full md:w-1/2 flex justify-center md:justify-end md:pr-12 mb-8 md:mb-0">
-          <img [src]="page.imageUrl" [alt]="page.title" class="w-full max-w-[450px] aspect-[450/320] rounded-3xl object-cover">
+          <img [ngSrc]="page.imageUrl" [alt]="page.title" width="450" height="320" class="w-full max-w-[450px] aspect-[450/320] rounded-3xl object-cover">
         </div>
 
         <!-- Texto -->

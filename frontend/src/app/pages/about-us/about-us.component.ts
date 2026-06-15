@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TeamService, TeamMember } from '../../services/team-service';
 import { RouterModule } from '@angular/router';
@@ -8,7 +8,7 @@ import { OurPartenrs } from "./our-partenrs/our-partenrs";
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, AboutUsWe, OurPartenrs],
+  imports: [CommonModule, NgOptimizedImage, RouterModule, FormsModule, AboutUsWe, OurPartenrs],
   templateUrl: './about-us.html',
   styleUrls: ['./about-us.css'],
   encapsulation: ViewEncapsulation.None,

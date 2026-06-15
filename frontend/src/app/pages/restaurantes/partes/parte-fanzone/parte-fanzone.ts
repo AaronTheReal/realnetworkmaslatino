@@ -1,35 +1,35 @@
 import { Component, inject, input, signal, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { FanzoneService, Place, FanFestZone } from '../../../../services/fanzone-service';
 import { CityInfo } from '../../restaurantes';
 
-const DEFAULT_CITY: CityInfo = { name: 'TU CIUDAD', image: '', highlight: 'TU CIUDAD' };
+const DEFAULT_CITY: CityInfo = { name: 'YOUR CITY', image: '', highlight: 'YOUR CITY' };
 
 @Component({
   selector: 'app-parte-fanzone',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './parte-fanzone.html',
   styleUrl: './parte-fanzone.css',
 })
 export class ParteFanzone {
   private fanzoneService = inject(FanzoneService);
 
-  // Ciudad recibida desde el componente padre
+  // City received from the parent component
   city = input<CityInfo>(DEFAULT_CITY);
 
-  // Slug de la ciudad (ej: 'kansas-city'), usado para consultar el backend
+  // City slug (e.g. 'kansas-city'), used to query the backend
   citySlug = input<string>('');
 
-  // Señales para los bares deportivos y la zona oficial de Fan Fest
+  // Signals for the sports bars and the official Fan Fest zone
   places = signal<Place[]>([]);
   fanFest = signal<FanFestZone | null>(null);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
   constructor() {
-    // Cada vez que cambie la ciudad, cargamos los bares deportivos
+    // Every time the city changes, we load the sports bars
     effect(() => {
       const slug = this.citySlug();
       if (slug) {
@@ -50,7 +50,7 @@ export class ParteFanzone {
       },
       error: (err) => {
         console.error(err);
-        this.error.set('No pudimos cargar los bares deportivos en este momento. Inténtalo más tarde.');
+        this.error.set('We could not load the sports bars right now. Please try again later.');
         this.loading.set(false);
       }
     });

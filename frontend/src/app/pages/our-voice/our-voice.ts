@@ -1,6 +1,6 @@
 // src/app/pages/public/our-voice/our-voice.ts
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { VoiceService, VoiceMember } from '../../services/meet-service'; // Asegúrate de usar el mismo servicio
 import {OurVoiceFeatures} from '../our-voice/our-voice-features/our-voice-features'
 import {OurVoiceMeet} from '../our-voice/our-voice-meet/our-voice-meet'
@@ -10,6 +10,7 @@ import {OurVoiceMeet} from '../our-voice/our-voice-meet/our-voice-meet'
   standalone: true,
   imports: [
     CommonModule,
+    NgOptimizedImage,
     OurVoiceFeatures,
     OurVoiceMeet
   ],

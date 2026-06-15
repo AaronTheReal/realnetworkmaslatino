@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -15,7 +15,7 @@ interface TeamForm {
 @Component({
   selector: 'app-about-us-panel',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, DragDropModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, DragDropModule, NgOptimizedImage],
   templateUrl: './about-us-panel.html',
   styleUrls: ['./about-us-panel.css']
 })

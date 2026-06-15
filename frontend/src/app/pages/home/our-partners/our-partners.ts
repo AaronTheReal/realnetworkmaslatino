@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-our-partners',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './our-partners.html',
   styleUrl: './our-partners.css'
 })

@@ -8,7 +8,7 @@ import {
   FormControl,
   FormArray,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { VoiceService, VoiceMember } from '../../../services/meet-service';
@@ -36,7 +36,7 @@ interface VoiceForm {
 @Component({
   selector: 'app-our-voice-panel',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, DragDropModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, DragDropModule, NgOptimizedImage],
   templateUrl: './our-voice-panel.html',
   styleUrls: ['./our-voice-panel.css'],
 })

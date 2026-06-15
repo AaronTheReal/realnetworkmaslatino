@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // 👈 IMPORTANTE
+import { CommonModule, NgOptimizedImage } from '@angular/common'; // 👈 IMPORTANTE
 import { VoiceService, VoiceMember } from '../../../services/meet-service';
 
 @Component({
   selector: 'app-our-voice-meet',
   standalone: true,
-  imports: [CommonModule], // 👈 AÑADIR CommonModule aquí
+  imports: [CommonModule, NgOptimizedImage], // 👈 AÑADIR CommonModule aquí
   templateUrl: './our-voice-meet.html',
   styleUrl: './our-voice-meet.css'
 })

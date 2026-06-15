@@ -156,11 +156,12 @@
              [routerLink]="['/blog', rec.slug]"
              class="group block cursor-pointer mb-10 last:mb-0">
 
-            <div class="overflow-hidden rounded-3xl shadow-md">
-              <img 
-                [src]="rec.meta?.image || 'https://picsum.photos/id/1015/600/400'" 
+            <div class="relative h-52 overflow-hidden rounded-3xl shadow-md">
+              <img
+                [ngSrc]="rec.meta?.image || 'https://picsum.photos/id/1015/600/400'"
                 [alt]="rec.title"
-                class="w-full h-52 object-cover transition-all duration-500 group-hover:scale-105">
+                fill
+                class="object-cover transition-all duration-500 group-hover:scale-105">
             </div>
             
             <div class="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500 mb-3">

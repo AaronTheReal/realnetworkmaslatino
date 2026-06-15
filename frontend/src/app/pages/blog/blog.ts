@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';           // ← NUEVO
 import { NoticiasPressService } from '../../services/press-service';
 import { Noticia } from '../../../models/noticia.model';
@@ -7,7 +7,7 @@ import { Noticia } from '../../../models/noticia.model';
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule, RouterModule],   // ← RouterModule agregado
+  imports: [CommonModule, RouterModule, NgOptimizedImage],   // ← RouterModule agregado
   templateUrl: './blog.html',
   styleUrl: './blog.css'
 })

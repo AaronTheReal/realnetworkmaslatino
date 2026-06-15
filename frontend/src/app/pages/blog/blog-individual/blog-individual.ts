@@ -1,7 +1,7 @@
 // blog-individual.component.ts → VERSIÓN 100% CORREGIDA (sin errores TS)
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 import { NoticiasPressService } from '../../../services/press-service';
@@ -10,7 +10,7 @@ import { Noticia } from '../../../../models/noticia.model';
 @Component({
   selector: 'app-blog-individual',
   standalone: true,
-  imports: [CommonModule, DatePipe, RouterModule],
+  imports: [CommonModule, DatePipe, RouterModule, NgOptimizedImage],
   templateUrl: './blog-individual.html',
   styleUrl: './blog-individual.css'
 })

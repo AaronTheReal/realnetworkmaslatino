@@ -1,42 +1,42 @@
 import { Component, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
-// Identificador de cada sección/categoría seleccionable
+// Identifier for each selectable section/category
 export type SectionKey = 'eventos' | 'hangout' | 'fanzone' | 'turismo' | 'restaurantes';
 
 @Component({
   selector: 'app-partes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './partes.html',
   styleUrl: './partes.css',
 })
 export class Partes {
 categories: { subtitle: string; title: string; bg: string; icon: string; id: SectionKey }[] = [
   {
-    subtitle: 'Para entretener',
-    title: 'Eventos',
+    subtitle: 'For entertainment',
+    title: 'Events',
     bg: 'bg-[#fe0900]',
     icon: 'assets/iconospartes/eventos.webp',
     id: 'eventos',
   },
   {
-    subtitle: 'Para pasar el tiempo',
+    subtitle: 'To pass the time',
     title: 'Hang out',
     bg: 'bg-[#b121fe]',
     icon: 'assets/iconospartes/hangout.webp',
     id: 'hangout',
   },
   {
-    subtitle: 'Vive experiencias',
+    subtitle: 'Live the experience',
     title: 'Fan Zone',
     bg: 'bg-[#00cf82]',
     icon: 'assets/iconospartes/fanzone.webp',
     id: 'fanzone',
   },
   {
-    subtitle: 'Recorre la ciudad',
-    title: 'Turismo',
+    subtitle: 'Tour the city',
+    title: 'Tourism',
     bg: 'bg-[#fdb700]',
     icon: 'assets/iconospartes/turismo.webp',
     id: 'turismo',
@@ -44,16 +44,16 @@ categories: { subtitle: string; title: string; bg: string; icon: string; id: Sec
 ];
 
 foodCategory: { subtitle: string; title: string; bg: string; icon: string; id: SectionKey } = {
-  subtitle: 'Para comer',
-  title: 'Los mejores restaurantes',
+  subtitle: 'To eat',
+  title: 'The best restaurants',
   bg: 'bg-[#b121fe]',
   icon: 'assets/iconospartes/restaurantes.webp',
   id: 'restaurantes',
 };
 
-// Sección actualmente seleccionada (controlada por el componente padre)
+// Currently selected section (controlled by the parent component)
 selectedSection = input<SectionKey>('restaurantes');
 
-// Emite la sección elegida al hacer click en una tarjeta
+// Emits the chosen section when a card is clicked
 sectionSelected = output<SectionKey>();
 }

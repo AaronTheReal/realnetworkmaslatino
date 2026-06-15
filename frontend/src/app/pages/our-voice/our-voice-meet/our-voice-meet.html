@@ -13,15 +13,16 @@
       *ngFor="let member of voiceMembers"
       class="flex flex-col"
     >
-      <!-- Imagen con aspecto 3:4 y bordes redondeados -->
-  <div class="w-full aspect-[4/4] overflow-hidden rounded-[2rem] mb-2">
+      <!-- Imagen con aspecto 3:4 y bordes redondeados 
+  <div class="relative w-full aspect-[4/4] overflow-hidden rounded-[2rem] mb-2">
         <img
-          [src]="member.imageUrl"
+          [ngSrc]="member.imageUrl"
           [alt]="member.name"
-          class="w-full h-full object-cover object-center"
+          fill
+          class="object-cover object-center"
         />
       </div>
-
+-->
       <!-- Nombre en grande, negritas, alineado a la izquierda -->
       <h3 class="text-xl font-extrabold text-left mb-1">{{ member.name }}</h3>
 

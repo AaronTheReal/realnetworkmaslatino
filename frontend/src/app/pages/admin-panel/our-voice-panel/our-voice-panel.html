@@ -130,8 +130,8 @@
   <div *ngIf="!loading && voices.length > 0">
     <div cdkDropList (cdkDropListDropped)="drop($event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div *ngFor="let v of voices; trackBy: trackById" cdkDrag class="border rounded-lg shadow-sm p-4 flex flex-col items-center text-center bg-white">
-        <div class="w-24 h-24 rounded-full overflow-hidden shadow mb-3 bg-gray-200">
-          <img *ngIf="v.imageUrl" [src]="v.imageUrl" [alt]="v.name" class="w-full h-full object-cover" />
+        <div class="relative w-24 h-24 rounded-full overflow-hidden shadow mb-3 bg-gray-200">
+          <img *ngIf="v.imageUrl" [ngSrc]="v.imageUrl" [alt]="v.name" fill class="object-cover" />
         </div>
 
         <div class="font-semibold text-blue-900">{{ v.name }}</div>
