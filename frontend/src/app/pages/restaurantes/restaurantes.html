@@ -28,17 +28,17 @@
 
     <!-- Weather Stats -->
     <div
-      class="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-3 gap-6 sm:gap-10 lg:gap-16 max-w-4xl mx-auto"
+      class="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-3 gap-3 sm:gap-10 lg:gap-16 max-w-4xl mx-auto"
     >
-      <div class="flex flex-col items-center gap-4 sm:gap-5">
+      <div class="flex flex-col items-center gap-3 sm:gap-5">
         <p
-          class="text-sm sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
+          class="text-xs sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
         >
           CLIMA
         </p>
 
         <div
-          class="w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+          class="w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
         >
           <img
             [src]="weatherIcon()"
@@ -47,8 +47,8 @@
           />
         </div>
 
-        <div class="flex items-center gap-2">
-          <p class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
+        <div class="flex flex-col items-center gap-1 sm:flex-row sm:gap-2">
+          <p class="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
             {{ displayTemperature() ?? '--' }}°
           </p>
 
@@ -70,15 +70,15 @@
         </div>
       </div>
 
-      <div class="flex flex-col items-center gap-4 sm:gap-5">
+      <div class="flex flex-col items-center gap-3 sm:gap-5">
         <p
-          class="text-sm sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
+          class="text-xs sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center"
         >
           SE SIENTE
         </p>
 
         <div
-          class="w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+          class="w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
         >
           <img
             [src]="feelsLikeIcon"
@@ -87,8 +87,8 @@
           />
         </div>
 
-        <div class="flex items-center gap-2">
-          <p class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
+        <div class="flex flex-col items-center gap-1 sm:flex-row sm:gap-2">
+          <p class="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
             {{ displayFeelsLike() ?? '--' }}°
           </p>
 
@@ -110,17 +110,17 @@
         </div>
       </div>
 
-      <div class="flex flex-col items-center gap-4 sm:gap-5">
+      <div class="flex flex-col items-center gap-3 sm:gap-5">
         <p
-          class="text-sm sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center leading-tight"
+          class="text-xs sm:text-lg lg:text-xl font-extrabold tracking-wide text-neutral-900 text-center leading-tight"
         >
           PROBABILIDAD<br />
           DE LLUVIA
         </p>
 
-        <div class="flex items-center gap-3 sm:gap-5">
+        <div class="flex flex-col items-center gap-2 sm:flex-row sm:gap-5">
           <div
-            class="w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
+            class="w-10 h-10 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-neutral-100 rounded-3xl flex items-center justify-center"
           >
             <img
               [src]="precipitationIcon"
@@ -129,7 +129,7 @@
             />
           </div>
 
-          <p class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
+          <p class="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900">
             {{ weather()?.precipitationProbability ?? '--' }}%
           </p>
         </div>
@@ -151,7 +151,7 @@
         type="button"
         (click)="prevSection()"
         aria-label="Sección anterior"
-        class="fixed left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
+        class="fixed left-2 sm:left-4 lg:left-[max(2rem,calc(50%-750px+1rem))] top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7">
           <polyline points="15 18 9 12 15 6"/>
@@ -163,7 +163,7 @@
         type="button"
         (click)="nextSection()"
         aria-label="Sección siguiente"
-        class="fixed right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
+        class="fixed right-2 sm:right-4 lg:right-[max(2rem,calc(50%-750px+1rem))] top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm border border-neutral-200 text-neutral-900 shadow-lg transition"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7">
           <polyline points="9 18 15 12 9 6"/>
@@ -171,7 +171,7 @@
       </button>
 
       <!-- Contenido de la sección seleccionada -->
-      <div class="px-12 sm:px-16 lg:px-20 pt-10 sm:pt-12 pb-28 sm:pb-32">
+      <div class="px-4 sm:px-12 lg:px-20 pt-10 sm:pt-12 pb-28 sm:pb-32">
         @switch (selectedSection()) {
           @case ('eventos') {
             <div class="carousel-fade"><app-parte-eventos [city]="city()" [citySlug]="citySlug()"></app-parte-eventos></div>
