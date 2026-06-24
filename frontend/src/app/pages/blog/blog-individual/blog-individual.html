@@ -10,25 +10,23 @@
           <ng-container *ngIf="noticia$ | async as noticia; else loading">
 
             <!-- HERO -->
-            <div class="relative h-[460px] md:h-[520px] bg-cover bg-center"
-                 [style.background-image]="'url(' + (noticia?.meta?.image || 'https://picsum.photos/1200/600') + ')'">
-              <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70"></div>
-              
-              <div class="absolute top-8 left-8">
-                <span class="bg-blue-600 text-white px-7 py-2.5 rounded-2xl text-sm font-bold tracking-widest">
-                  PRENSA
-                </span>
-              </div>
-
-              <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight">
-                  {{ noticia?.title || 'Título no disponible' }}
-                </h1>
-              </div>
-            </div>
+            <img [src]="noticia?.meta?.image || 'https://picsum.photos/1200/600'"
+                 [alt]="noticia?.title"
+                 class="w-full h-auto block">
 
             <!-- CONTENIDO -->
-            <div class="max-w-3xl mx-auto px-8 md:px-12 py-12">
+            <div class="max-w-3xl mx-auto px-6 sm:px-10 md:px-12 py-10 md:py-12">
+
+              <!-- Badge PRESS -->
+              <span class="inline-block bg-blue-600 text-white px-4 py-1.5 rounded-2xl text-xs font-bold tracking-widest mb-5">
+                PRESS
+              </span>
+
+              <!-- Título debajo de la imagen -->
+              <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                {{ noticia?.title || 'Título no disponible' }}
+              </h1>
+
               <div class="flex items-center gap-3 text-sm text-gray-500 mb-8">
                 <span>Redacción Mas Latino</span>
                 <span class="text-gray-300">•</span>
@@ -40,7 +38,7 @@
               </p>
 
               <!-- BLOQUES -->
-              <div class="prose prose-lg max-w-none text-gray-800">
+              <div class="prose prose-lg max-w-none text-gray-800 blog-content">
                 <ng-container *ngFor="let block of (noticia?.content || []); trackBy: trackByIndex">
                   <ng-container [ngSwitch]="block?.type">
                     <ng-container *ngSwitchCase="'text'">
@@ -60,8 +58,8 @@
                       </ol>
                     </ng-container>
 
-                    <figure *ngSwitchCase="'image'" class="my-10">
-                      <img [src]="block?.url" [alt]="block?.alt || noticia?.title" class="rounded-2xl w-full shadow-md">
+                    <figure *ngSwitchCase="'image'" class="my-10 flex flex-col items-center">
+                      <img [src]="block?.url" [alt]="block?.alt || noticia?.title" class="rounded-2xl max-w-full h-auto block shadow-md">
                       <figcaption *ngIf="block?.caption" class="text-center text-sm text-gray-500 mt-3">
                         {{ block.caption }}
                       </figcaption>
@@ -82,16 +80,17 @@
           <ng-template #loading>
             <div class="animate-pulse">
               <!-- Hero skeleton -->
-              <div class="relative h-[460px] md:h-[520px] bg-gray-200">
-                <div class="absolute top-8 left-8 h-9 w-28 bg-gray-300 rounded-2xl"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 space-y-4">
-                  <div class="h-9 md:h-11 w-3/4 bg-gray-300 rounded"></div>
-                  <div class="h-9 md:h-11 w-1/2 bg-gray-300 rounded"></div>
-                </div>
-              </div>
+              <div class="w-full aspect-[16/9] bg-gray-200"></div>
 
               <!-- Content skeleton -->
-              <div class="max-w-3xl mx-auto px-8 md:px-12 py-12">
+              <div class="max-w-3xl mx-auto px-6 sm:px-10 md:px-12 py-10 md:py-12">
+                <!-- badge -->
+                <div class="h-7 w-20 bg-gray-200 rounded-2xl mb-5"></div>
+                <!-- title -->
+                <div class="space-y-3 mb-6">
+                  <div class="h-8 md:h-10 w-full bg-gray-200 rounded"></div>
+                  <div class="h-8 md:h-10 w-3/4 bg-gray-200 rounded"></div>
+                </div>
                 <!-- meta -->
                 <div class="flex items-center gap-3 mb-8">
                   <div class="h-4 w-40 bg-gray-200 rounded"></div>
@@ -132,7 +131,7 @@
       <!-- ==================== COLUMNA DERECHA: RECOMENDADOS (AHORA CON DATOS REALES) ==================== -->
       <div class="lg:col-span-3">
         <div class="sticky top-8">
-          <h2 class="text-2xl 2xl:text-3xl font-bold text-gray-900 mb-8">Recomendados</h2>
+          <h2 class="text-2xl 2xl:text-3xl font-bold text-gray-900 mb-8">Recommended</h2>
 
           <!-- Skeletons recomendados -->
           <ng-container *ngIf="recLoading()">
@@ -169,7 +168,7 @@
                 {{ rec.createdAt | date:'d MMM yyyy' | uppercase }}
               </span>
               <span>·</span>
-              <span>{{ rec.categories?.[0]?.name || 'Prensa' }}</span>
+              <span>{{ rec.categories?.[0]?.name || 'Press' }}</span>
             </div>
             
             <h3 class="font-bold text-xl text-gray-900 leading-tight mb-3 line-clamp-2">

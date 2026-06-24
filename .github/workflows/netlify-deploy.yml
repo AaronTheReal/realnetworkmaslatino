@@ -1,0 +1,32 @@
+name: Deploy to Netlify (SSR)
+
+# Despliega en cada push a main.
+# El build local NO sirve para deploy: Node local (22.16) no cumple el engine de
+# @netlify/angular-runtime@4 (^22.22 || ^24.13 || >=26). Por eso el CI usa Node 24.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build + deploy (prod)
+        working-directory: frontend
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx netlify-cli deploy --build --prod --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID

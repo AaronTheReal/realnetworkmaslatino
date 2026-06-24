@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "serve:ssr:realnetwork": "node dist/realnetwork/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -16,7 +17,9 @@
     "@angular/core": "^20.0.0",
     "@angular/forms": "^20.0.0",
     "@angular/platform-browser": "^20.0.0",
+    "@angular/platform-server": "^20.0.0",
     "@angular/router": "^20.0.0",
+    "@angular/ssr": "^20.0.0",
     "rxjs": "~7.8.0",
     "swiper": "^9.4.1",
     "tslib": "^2.3.0",
@@ -24,6 +27,7 @@
   },
   "devDependencies": {
     "@angular/build": "^20.0.3",
+    "@netlify/angular-runtime": "^4.0.0",
     "@angular/cli": "^20.0.3",
     "@angular/compiler-cli": "^20.0.0",
     "@types/jasmine": "~5.1.0",

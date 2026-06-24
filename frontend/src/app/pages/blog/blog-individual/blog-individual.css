@@ -1,0 +1,16 @@
+/* Links dentro del contenido del blog (renderizado vía [innerHTML]) */
+:host ::ng-deep .blog-content a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+:host ::ng-deep .blog-content a:hover {
+  color: #1d4ed8;
+}
+
+/* Resumen/lead con link azul también */
+:host ::ng-deep p a,
+:host ::ng-deep blockquote a {
+  color: #2563eb;
+  text-decoration: underline;
+}

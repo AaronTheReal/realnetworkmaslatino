@@ -29,8 +29,8 @@
         class="hover:text-gray-600 hover:underline transition-colors duration-200">Our Impact</a>
       <a routerLink="/our-team" routerLinkActive="font-bold"
         class="hover:text-gray-600 hover:underline transition-colors duration-200">Our Team</a>
-      <a routerLink="/cyties" routerLinkActive="font-bold"
-        class="hover:text-gray-600 hover:underline transition-colors duration-200">Cyties</a>
+      <a routerLink="/cities" routerLinkActive="font-bold"
+        class="hover:text-gray-600 hover:underline transition-colors duration-200">Cities</a>
     </nav>
 
     <!-- Botón Hamburguesa (< lg) -->
@@ -51,18 +51,12 @@
     *ngIf="menuOpen"
     class="lg:hidden px-4 pt-4 pb-6 space-y-1 bg-white border-t shadow-lg text-black text-base font-medium"
   >
-    <a routerLink="/" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Home</a>
-    <a routerLink="/blogs" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Press</a>
-    <a routerLink="/brands" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Brands</a>
-    <!--<a routerLink="/cyties" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Cyties</a>-->
-<!--
-    <a routerLink="/about-us" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">About us</a>-->
-    <a routerLink="/creators" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Creators</a>
-
-    <!--<a routerLink="/our-voice" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Our voice</a>-->
-    <a routerLink="/our-impact" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Our Impact</a>
-    <a routerLink="/our-team" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Our Team</a>
-    <a routerLink="/cyties" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Cyties</a>
-
+    <a routerLink="/" (click)="closeMenu()" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Home</a>
+    <a routerLink="/blogs" (click)="closeMenu()" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Press</a>
+    <a routerLink="/brands" (click)="closeMenu()" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Brands</a>
+    <a routerLink="/creators" (click)="closeMenu()" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Creators</a>
+    <a routerLink="/our-impact" (click)="closeMenu()" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Our Impact</a>
+    <a routerLink="/our-team" (click)="closeMenu()" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Our Team</a>
+    <a routerLink="/cities" (click)="closeMenu()" class="block hover:bg-gray-100 rounded px-3 py-2 transition-colors duration-200">Cities</a>
   </nav>
 </header>

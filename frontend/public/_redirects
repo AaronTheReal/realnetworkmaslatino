@@ -1,1 +1,6 @@
-/* /index.html 200
+# Página estática de share para LinkedIn (archivo real en /share/miami-grove-fc/index.html)
+/share/miami-grove-fc   /share/miami-grove-fc/index.html   200!
+
+# 🚫 NO agregar `/* /index.html 200`. Con SSR, la Edge Function de Netlify
+# (@netlify/angular-runtime) maneja TODAS las rutas. Un catch-all SPA aquí
+# interceptaría las requests antes de la Edge Function y rompería el SSR.

@@ -39,7 +39,7 @@ export const routes: Routes = [
       { path: 'brands', component: Brands },
       { path: 'creators', component: Creators },
       { path: 'restaurantes/:ciudad', component: Restaurantes },
-      { path: 'cyties', component: Cities },
+      { path: 'cities', component: Cities },
 
 
 

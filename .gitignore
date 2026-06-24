@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+/tmp/
+/out-tsc/
+/bazel-out/
+
+# Angular / build caches
+.angular/
+*.tsbuildinfo
+
+# Claude Code local data (worktrees, etc.)
+.claude/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Netlify CLI local state
+.netlify/

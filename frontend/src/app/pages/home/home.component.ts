@@ -20,7 +20,7 @@ import {HowBrands} from '../home/how-brands/how-brands';
 import {OurPartners} from '../home/our-partners/our-partners';
 import {ParterUs} from '../home/parter-us/parter-us'
 import { OurPartenrs } from "../about-us/our-partenrs/our-partenrs";
-
+import {PressRelease} from '../home/press-release/press-release';
 // 🔥 Declarar globals para TikTok, Instagram y Facebook (evita errores TS)
 declare global {
   interface Window {
@@ -52,7 +52,10 @@ register();
     NationalReach,
     HowBrands,
     OurPartners,
-    ParterUs, OurPartenrs],
+    ParterUs, 
+    OurPartenrs,
+    PressRelease
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

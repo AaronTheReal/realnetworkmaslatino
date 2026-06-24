@@ -1,0 +1,17 @@
+# Netlify config — SSR de Angular vía @netlify/angular-runtime (Edge Function)
+# El proyecto Angular vive en /frontend.
+
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "dist/realnetwork/browser"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/angular-runtime"
+
+# 🚫 NUNCA agregar un fallback SPA (`/* /index.html 200`) aquí ni en
+# public/_redirects. Interceptaría TODAS las requests antes de la Edge Function
+# y mataría el SSR de las noticias (blog/:slug).
