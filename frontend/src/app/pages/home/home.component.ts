@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { register } from 'swiper/element/bundle';
 import { SafePipe } from '../../../safe.pipe';
 import { HomeService, CarouselItem } from './../../services/home-service';
 import{ReachPower} from '../home/reach-power/reach-power'
@@ -42,7 +41,6 @@ declare global {
   }
 }
 
-register();
 @Component({
   selector: 'app-home',
   standalone: true,
